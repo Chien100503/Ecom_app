@@ -9,12 +9,12 @@ class ECheckBoxTheme {
       if (states.contains(MaterialState.selected)) {
         return Colors.white;
       } else {
-        return Colors.black;
+        return Colors.blue;
       }
     }),
     fillColor: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
-        return Colors.white;
+        return Colors.blue; // Change to a visible color in light mode
       } else {
         return Colors.transparent;
       }
