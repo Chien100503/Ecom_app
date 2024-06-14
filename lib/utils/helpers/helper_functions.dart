@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class EHelperFunctions {
+
   static Color? getColor(String value) {
     if (value == 'green') {
       return Colors.green;
@@ -54,7 +55,7 @@ class EHelperFunctions {
     },);
   }
 
-  static void navigaToScreen(BuildContext context, Widget screen) {
+  static void navigatorToScreen(BuildContext context, Widget screen) {
     Navigator.push(context, MaterialPageRoute(builder: (_) => screen));
   }
 

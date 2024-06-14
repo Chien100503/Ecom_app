@@ -14,19 +14,24 @@ class EColors {
       ]);
 
   // App basic colors
-  static const Color primaryColor = Color(0xFF4B68FF);
-  static const Color secondary = Color(0xFFFFE24B);
-  static const Color accent = Color(0xFFB0C7FF);
+  static const Color primaryColor = Color(0xFF543310);
+  static const Color secondary = Color(0xFF74512D);
+  static const Color accent = Color(0xFFAF8F6F);
+  static const Color thirdColor = Color(0xFFF8F4E1);
+  static const Color darkGrey = Color(0xff6c756d);
 
   // Text Colors
-  static const Color textPrimary = Color(0xFF333333);
+  static const Color textPrimary = Color(0xFF543310);
   static const Color textSecondary = Color(0xff6c756d);
   static const Color textAccent = Colors.white;
 
   // Background Colors
-  static const Color light = Color(0xfff6f6f6);
-  static const Color dark = Color(0xff272727);
+  static const Color light = Color(0xFFF8F4E1);
+  static const Color dark = Color(0xFF543310);
   static const Color primaryBg = Color(0xfff3f5ff);
+
+  static const Color cardLight = Color(0xffEFEFEF);
+  static const Color cardDark = Color(0xffEFEFEF);
 
   // Background containers color
   static const Color lightContainer = Color(0xfff6f6f6);

@@ -1,5 +1,7 @@
 class ETexts {
 
+  static const String viewAll = 'View all';
+
   //Onboarding texts
   static const String onBoardingTitle1 = 'Choose your product';
   static const String onBoardingTitle2 = 'Select Payment Method';
@@ -16,15 +18,15 @@ class ETexts {
   // Authentication headings text
   static const String loginTitle = 'Welcome back';
   static const String loginSubTitle = 'Discover Limitless Choice and Unmatched Convenience';
-  static const String signTitle = 'Let\'s create your account';
+  static const String signupTitle = 'Let\'s create your account';
   static const String forgetPasswordTitle = 'Forget password';
-  static const String forgetPasswordSubTitle = 'No worries, we got you covered';
-  static const String changePasswordTitle = 'Change Password';
-  static const String changePasswordSubTitle = 'Enter your new password below';
+  static const String forgetPasswordSubTitle = 'No worries! we got you covered Please re-enter your email to reset your password';
+  static const String changePasswordTitle = 'Password Rest Email Sent';
+  static const String changePasswordSubTitle = 'Please check your email messages and change your password. Remember your password!';
   static const String confirmEmail = 'Confirm Your Email';
-  static const String confirmEmailSubTitle = 'We have sent a confirmation link to your email';
+  static const String confirmEmailSubTitle = 'Congratulations! Yout Account Awaits: Verify Your Email to Start shopping and Experience a world of unrivaled Deals and Personalized Offers.';
   static const String emailNotReceivedMessage = 'Didn\'t receive the email?';
-  static const String yourAccountCreateTitle = 'Account Created';
+  static const String yourAccountCreateTitle = 'Your account successfully Created!';
   static const String yourAccountCreateSubTitle = 'Your account has been created successfully. Welcome aboard!';
 
   // Form field labels and messages
@@ -47,4 +49,8 @@ class ETexts {
   static const String verificationCode = 'Verification Code';
   static const String resendEmail = 'Resend Email';
   static const String resendEmailIn = 'Resend Email In';
+  static const String eContinue = 'Continue';
+
+  // text home screen
+  static const String popular = 'Popular Products';
 }
