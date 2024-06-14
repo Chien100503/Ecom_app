@@ -12,7 +12,7 @@ class ELocalStorage {
 
   final _storage = GetStorage();
 
-  //Generic method to save data
+  //Generic (chung) method to save data
   Future<void> saveData<T>(String key, T value) async {
     await _storage.write(key, value);
   }

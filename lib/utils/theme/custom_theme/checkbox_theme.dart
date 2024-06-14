@@ -1,3 +1,4 @@
+import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class ECheckBoxTheme {
@@ -9,14 +10,14 @@ class ECheckBoxTheme {
       if (states.contains(MaterialState.selected)) {
         return Colors.white;
       } else {
-        return Colors.blue;
+        return EColors.thirdColor;
       }
     }),
     fillColor: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
-        return Colors.blue; // Change to a visible color in light mode
+        return Colors.white; // Change to a visible color in light mode
       } else {
-        return Colors.transparent;
+        return EColors.primaryColor;
       }
     }),
   );
