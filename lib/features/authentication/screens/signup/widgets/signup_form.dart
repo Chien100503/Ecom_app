@@ -22,9 +22,9 @@ class SignupForm extends StatelessWidget {
                 child: TextFormField(
                   expands: false,
                   decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: const TextStyle(color: Colors.grey),
                     label: Text(ETexts.firstName, style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor),),
-                    prefixIcon: Icon(Iconsax.user),
+                    prefixIcon: const Icon(Iconsax.user),
                   ),
                 ),
               ),
@@ -35,9 +35,9 @@ class SignupForm extends StatelessWidget {
                 child: TextFormField(
                   expands: false,
                   decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: const TextStyle(color: Colors.grey),
                     label: Text(ETexts.lastName, style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor),),
-                    prefixIcon: Icon(Iconsax.user),
+                    prefixIcon: const Icon(Iconsax.user),
                   ),
                 ),
               ),
@@ -50,9 +50,9 @@ class SignupForm extends StatelessWidget {
           TextFormField(
             expands: false,
             decoration: InputDecoration(
-              labelStyle: TextStyle(color: Colors.grey),
+              labelStyle: const TextStyle(color: Colors.grey),
               label: Text(ETexts.userName, style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor),),
-              prefixIcon: Icon(Iconsax.user_edit),
+              prefixIcon: const Icon(Iconsax.user_edit),
             ),
           ),
           const SizedBox(
@@ -62,9 +62,9 @@ class SignupForm extends StatelessWidget {
           TextFormField(
             expands: false,
             decoration: InputDecoration(
-              labelStyle: TextStyle(color: Colors.grey),
+              labelStyle: const TextStyle(color: Colors.grey),
               label: Text(ETexts.email, style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor),),
-              prefixIcon: Icon(Iconsax.direct),
+              prefixIcon: const Icon(Iconsax.direct),
             ),
           ),
           const SizedBox(
@@ -75,9 +75,9 @@ class SignupForm extends StatelessWidget {
           TextFormField(
             expands: false,
             decoration: InputDecoration(
-              labelStyle: TextStyle(color: Colors.grey),
+              labelStyle: const TextStyle(color: Colors.grey),
               label: Text(ETexts.phoneNumber, style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor),),
-              prefixIcon: Icon(Iconsax.call),
+              prefixIcon: const Icon(Iconsax.call),
             ),
           ),
           const SizedBox(
@@ -88,10 +88,10 @@ class SignupForm extends StatelessWidget {
           TextFormField(
             expands: false,
             decoration: InputDecoration(
-                labelStyle: TextStyle(color: Colors.grey),
+                labelStyle: const TextStyle(color: Colors.grey),
                 label: Text(ETexts.password, style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor),),
-                prefixIcon: Icon(Iconsax.password_check),
-                suffixIcon: Icon(Iconsax.eye_slash)),
+                prefixIcon: const Icon(Iconsax.password_check),
+                suffixIcon: const Icon(Iconsax.eye_slash)),
           ),
           const SizedBox(
             height: ESizes.defaultBetweenSections,

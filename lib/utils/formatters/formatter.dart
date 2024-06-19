@@ -27,7 +27,7 @@ class EFormatter {
     digitsOnly = digitsOnly.substring(2);
 
     final formattedNumber = StringBuffer();
-    formattedNumber.write('(${countryCode})');
+    formattedNumber.write('($countryCode)');
 
     int i = 0;
     while (i < digitsOnly.length) {

@@ -47,4 +47,11 @@ class EImages {
   static const String product6 = 'assets/images/products/product6.png';
   static const String product7 = 'assets/images/products/product7.png';
   static const String product8 = 'assets/images/products/product8.png';
+
+  // Icon Brands
+  static const String iconCloth = 'assets/icons/brands/iconClothes.png';
+
+  //Brand logo
+  static const String diorLogo = 'assets/logos/dior.png';
+  static const String lvLogo = 'assets/logos/LV.png';
 }

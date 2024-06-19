@@ -1,4 +1,7 @@
 import 'package:ecom_app/features/shop/screens/home/home.dart';
+import 'package:ecom_app/features/shop/screens/settings/setting.dart';
+import 'package:ecom_app/features/shop/screens/store/store.dart';
+import 'package:ecom_app/features/shop/screens/wishList/wishlist.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -16,22 +19,34 @@ class NavigationMenu extends StatelessWidget {
 
     return Scaffold(
       bottomNavigationBar: Obx(
-        () => NavigationBar(
-          height: 70,
-          elevation: 5,
-          selectedIndex: controller.selectedIndex.value,
-          onDestinationSelected: (index) =>
-              controller.selectedIndex.value = index,
-          backgroundColor: darkMode ? Colors.black : Colors.white,
-          indicatorColor: darkMode
-              ? EColors.light.withOpacity(0.3)
-              : EColors.dark.withOpacity(0.1),
-          destinations: const [
-            NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
-            NavigationDestination(icon: Icon(Iconsax.shop), label: 'Store'),
-            NavigationDestination(icon: Icon(Iconsax.heart), label: 'Wishlist'),
-            NavigationDestination(icon: Icon(Iconsax.user), label: 'Profile'),
-          ],
+        () => Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: darkMode ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: NavigationBar(
+            height: 70,
+            elevation: 1,
+            selectedIndex: controller.selectedIndex.value,
+            onDestinationSelected: (index) =>
+                controller.selectedIndex.value = index,
+            backgroundColor: darkMode ? Colors.black : Colors.white,
+            indicatorColor: darkMode
+                ? EColors.light.withOpacity(0.3)
+                : EColors.dark.withOpacity(0.1),
+            destinations: const [
+              NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
+              NavigationDestination(icon: Icon(Iconsax.shop), label: 'Store'),
+              NavigationDestination(icon: Icon(Iconsax.heart), label: 'Wishlist'),
+              NavigationDestination(icon: Icon(Iconsax.user), label: 'Profile'),
+            ],
+          ),
         ),
       ),
       body: Obx(() {
@@ -61,15 +76,8 @@ class NavigationController extends GetxController {
 
   final screens = [
     const HomeScreen(),
-    Container(
-      color: Colors.white,
-      child: Text('1'),
-    ),
-    Container(
-      color: Colors.yellowAccent,
-    ),
-    Container(
-      color: Colors.blue,
-    )
+    const Store(),
+    const WishList(),
+    const Setting(),
   ];
 }

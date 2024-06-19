@@ -13,36 +13,35 @@ class ESearchContainer extends StatelessWidget {
     this.icon,
     this.showBackground = true,
     this.showBorder = true,
+    this.padding = const EdgeInsets.symmetric(horizontal: ESizes.defaultSpace),
   });
 
   final String text;
   final IconData? icon;
   final bool showBackground, showBorder;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
-
     final dark = EHelperFunctions.isDarkMode(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: ESizes.defaultSpace),
+      padding: padding,
       child: Container(
         width: EDeviceUtils.getScreenWidth(context),
         padding: const EdgeInsets.all(ESizes.md),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(ESizes.borderRadiusLg),
-            border: showBorder ? Border.all(color: EColors.dark): null),
+            border: showBorder ? Border.all(color: EColors.accent) : null),
         child: Row(
           children: [
-            Icon(
-              Iconsax.search_normal,
-              color: EColors.primaryColor,
-            ),
-            SizedBox(
-              width: ESizes.defaultBetweenItem,
-            ),
+            const Icon(Iconsax.search_normal, color: EColors.accent),
+            const SizedBox(width: ESizes.defaultBetweenItem),
             Text(
               text,
-              style: Theme.of(context).textTheme.bodySmall,
+              style: TextStyle(
+                  color: dark ? EColors.accent : EColors.primaryColor,
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w500),
             ),
           ],
         ),

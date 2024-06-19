@@ -1,4 +1,3 @@
-import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../common/widgets/image_text_widget/vertical_image_text.dart';

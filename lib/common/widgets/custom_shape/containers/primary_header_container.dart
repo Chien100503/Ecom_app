@@ -15,7 +15,6 @@ class EPrimaryHeaderContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return ECurvedEdgeWidget(
       child: SizedBox(
-        height: 350,
         child: Container(
           color: EColors.thirdColor,
           padding: const EdgeInsets.all(0),

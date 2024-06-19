@@ -3,7 +3,6 @@ import 'package:ecom_app/features/shop/screens/home/widget/home_appbar.dart';
 import 'package:ecom_app/features/shop/screens/home/widget/home_categories.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
-import 'package:ecom_app/utils/constants/texts_strings.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common/widgets/custom_shape/containers/primary_header_container.dart';
@@ -16,14 +15,14 @@ import 'widget/home_slider.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+
   @override
   Widget build(BuildContext context) {
-    final ScrollController _scrollController = ScrollController();
-
+    final ScrollController scrollController = ScrollController();
     return Scaffold(
       body: SingleChildScrollView(
-        controller: _scrollController,
-        physics: BouncingScrollPhysics(),
+        controller: scrollController,
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             const EPrimaryHeaderContainer(
@@ -53,6 +52,7 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: ESizes.defaultBetweenItem,)
                 ],
               ),
             ),
@@ -72,15 +72,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: ESizes.defaultBetweenItem),
                   // Popular text -view all
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(ETexts.popular,
-                          style: Theme.of(context).textTheme.headlineMedium),
-                      Text(ETexts.viewAll,
-                          style: Theme.of(context).textTheme.bodySmall),
-                    ],
-                  ),
+                  ESectionHeading(title: 'Popular products', onPressed: (){},),
                   const SizedBox(height: ESizes.defaultBetweenItem),
                   // EProductCardVertical()
                   EGridProductLayout(

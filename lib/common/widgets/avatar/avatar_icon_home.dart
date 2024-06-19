@@ -10,11 +10,11 @@ class AvatarIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
+    return const CircleAvatar(
+      backgroundColor: EColors.primaryColor,
       child: Image(
         image: AssetImage(EImages.avt),
       ),
-      backgroundColor: EColors.primaryColor,
     );
   }
 }

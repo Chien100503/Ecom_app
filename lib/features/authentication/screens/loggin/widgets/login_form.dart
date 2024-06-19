@@ -5,14 +5,13 @@ import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/texts_strings.dart';
 
 class ELoginForm extends StatelessWidget {
-   ELoginForm({
+   const ELoginForm({
     super.key,
   });
 
@@ -27,8 +26,8 @@ class ELoginForm extends StatelessWidget {
           children: [
             TextFormField(
               decoration: InputDecoration(
-                prefixIcon: Icon(Iconsax.direct_right),
-                labelStyle: TextStyle(color: Colors.grey),
+                prefixIcon: const Icon(Iconsax.direct_right),
+                labelStyle: const TextStyle(color: Colors.grey),
                 label: Text(ETexts.email,style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor),),
                 // labelText: ETexts.email,
               ),
@@ -38,10 +37,10 @@ class ELoginForm extends StatelessWidget {
             ),
             TextFormField(
               decoration: InputDecoration(
-                prefixIcon: Icon(Iconsax.password_check),
-                labelStyle: TextStyle(color: Colors.grey),
+                prefixIcon: const Icon(Iconsax.password_check),
+                labelStyle: const TextStyle(color: Colors.grey),
                 label: Text(ETexts.email,style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor),),
-                suffixIcon: Icon(Iconsax.eye_slash),
+                suffixIcon: const Icon(Iconsax.eye_slash),
               ),
             ),
             const SizedBox(
@@ -59,7 +58,7 @@ class ELoginForm extends StatelessWidget {
                 TextButton(
                   onPressed: () => Get.to(() => const ForgetPasswordScreen(),
                       transition: Transition.rightToLeftWithFade,
-                      duration: Duration(milliseconds: 500)
+                      duration: const Duration(milliseconds: 500)
                   ),
                   child: const Text(ETexts.forgetPassword,),
                 ),
@@ -73,7 +72,7 @@ class ELoginForm extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () => Get.to(() => const NavigationMenu(),
                     transition: Transition.zoom,
-                      duration: Duration(milliseconds: 500)
+                      duration: const Duration(milliseconds: 500)
                     ), child: const Text(ETexts.signIn))),
             const SizedBox(
               height: ESizes.defaultBetweenItem,
@@ -83,7 +82,7 @@ class ELoginForm extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => Get.to(() => const SignupScreen(),
                   transition: Transition.rightToLeftWithFade,
-                  duration: Duration(milliseconds: 500)
+                  duration: const Duration(milliseconds: 500)
                 ),
                 child: const Text(ETexts.createAccount),
               ),
