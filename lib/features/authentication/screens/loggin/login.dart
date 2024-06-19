@@ -4,7 +4,6 @@ import 'package:ecom_app/features/authentication/screens/loggin/widgets/login_di
 import 'package:ecom_app/features/authentication/screens/loggin/widgets/login_header.dart';
 import 'package:ecom_app/features/authentication/screens/loggin/widgets/login_social_button.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
-import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +14,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = EHelperFunctions.isDarkMode(context);
     return Scaffold(
       body: SingleChildScrollView(
         padding: ESpacingStyle.paddingWithAppBarHeight,
@@ -24,7 +22,7 @@ class LoginScreen extends StatelessWidget {
             // logo, title & sub-title
             const ELoginHeader(),
             // Form
-            ELoginForm(),
+            const ELoginForm(),
             const SizedBox(
               height: ESizes.defaultBetweenItem,
             ),

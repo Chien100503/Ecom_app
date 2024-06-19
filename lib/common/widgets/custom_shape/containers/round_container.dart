@@ -1,5 +1,6 @@
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
+import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class ERoundContainer extends StatelessWidget {
@@ -27,6 +28,8 @@ class ERoundContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = EHelperFunctions.isDarkMode(context);
+
     return Container(
       width: width,
       height: height,
@@ -35,7 +38,7 @@ class ERoundContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(radius),
-        border: showBorder ? Border.all(color: borderColor) : null
+        border: dark ? showBorder ? Border.all(color: EColors.thirdColor) : null : showBorder ? Border.all(color: EColors.primaryColor) :null
       ),
       child: child,
     );

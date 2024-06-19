@@ -1,6 +1,7 @@
 import 'package:ecom_app/common/widgets/avatar/avatar_icon_home.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../../common/widgets/products/cart/cart_menu_icon.dart';
@@ -28,6 +29,7 @@ class EHomeAppBar extends StatelessWidget {
         const AvatarIcon(),
 
         CartCounterIcon(
+          icons: Icon(Iconsax.shopping_bag),
           onPressed: () {},
           iconColor: EColors.primaryColor,
         ),

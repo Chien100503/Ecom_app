@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/constants/sizes.dart';
-
 class ESectionHeading extends StatelessWidget {
   const ESectionHeading({
     super.key,
@@ -20,6 +18,7 @@ class ESectionHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           title,
@@ -31,7 +30,7 @@ class ESectionHeading extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         if (showActionButton)
-          TextButton(onPressed: onPressed, child: Text(titleButton))
+          TextButton(onPressed: onPressed, child: Text(titleButton, style: Theme.of(context).textTheme.labelSmall,))
       ],
     );
   }

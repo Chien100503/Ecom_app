@@ -1,4 +1,3 @@
-import 'package:ecom_app/app.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:ecom_app/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';

@@ -68,7 +68,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                       onPressed: () => Get.off(
                           () => const ResetPasswordScreen(),
                           transition: Transition.rightToLeftWithFade,
-                          duration: Duration(milliseconds: 500)),
+                          duration: const Duration(milliseconds: 500)),
                       child: const Text('Submit'))),
             ],
           ),

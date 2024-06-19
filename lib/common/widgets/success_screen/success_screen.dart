@@ -2,7 +2,6 @@ import 'package:ecom_app/common/style/spacing_styles.dart';
 import 'package:ecom_app/features/authentication/screens/loggin/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 
 import '../../../utils/constants/sizes.dart';

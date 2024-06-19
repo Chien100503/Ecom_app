@@ -29,7 +29,7 @@ class OnBoardingController extends GetxController {
       currentPageIndex.value++;
       pageController.animateToPage(
         currentPageIndex.value,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     }

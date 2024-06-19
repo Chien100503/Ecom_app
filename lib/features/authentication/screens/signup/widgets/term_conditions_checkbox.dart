@@ -5,8 +5,8 @@ import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/texts_strings.dart';
 
-class termConditionsCheckbox extends StatelessWidget {
-  const termConditionsCheckbox({super.key});
+class ETermConditionsCheckbox extends StatelessWidget {
+  const ETermConditionsCheckbox({super.key});
 
 
   @override
@@ -26,7 +26,7 @@ class termConditionsCheckbox extends StatelessWidget {
               text: '${ETexts.iAgreeTo} ',
               style: Theme.of(context).textTheme.bodySmall),
           TextSpan(
-            text: '${ETexts.privacyPolicy}',
+            text: ETexts.privacyPolicy,
             style: Theme.of(context).textTheme.bodyMedium!.apply(
                 color: dark ? Colors.white : EColors.primaryColor,
                 decoration: TextDecoration.underline,
@@ -34,7 +34,7 @@ class termConditionsCheckbox extends StatelessWidget {
           ),
           TextSpan(text: ' and ', style: Theme.of(context).textTheme.bodySmall),
           TextSpan(
-            text: '${ETexts.termOfUse}',
+            text: ETexts.termOfUse,
             style: Theme.of(context).textTheme.bodyMedium!.apply(
                 color: dark ? Colors.white : EColors.primaryColor,
                 decoration: TextDecoration.underline,

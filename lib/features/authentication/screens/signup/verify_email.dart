@@ -19,22 +19,22 @@ class VerifyEmailScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () => Get.offAll(const LoginScreen()),
-              icon: Icon(CupertinoIcons.clear))
+              icon: const Icon(CupertinoIcons.clear))
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(ESizes.defaultSpace),
+          padding: const EdgeInsets.all(ESizes.defaultSpace),
           child: Column(
             children: [
               // Image
               Center(
                   child: Image(
-                image: AssetImage(EImages.verifyEmail),
+                image: const AssetImage(EImages.verifyEmail),
                 width: EHelperFunctions.screenWidth() * 0.6,
               )),
 
-              SizedBox(
+              const SizedBox(
                 height: ESizes.defaultBetweenSections,
               ),
               // Title and subtitle
@@ -75,17 +75,17 @@ class VerifyEmailScreen extends StatelessWidget {
                       onPressed: () => Get.to(
                         () => const LoginScreen(),
                         transition: Transition.rightToLeftWithFade,
-                        duration: Duration(milliseconds: 500),
+                        duration: const Duration(milliseconds: 500),
                       ),
                     ),
                   ),
                   child: const Text(ETexts.eContinue),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: ESizes.defaultBetweenItem,
               ),
-              TextButton(onPressed: () {}, child: Text(ETexts.resendEmail)),
+              TextButton(onPressed: () {}, child: const Text(ETexts.resendEmail)),
             ],
           ),
         ),

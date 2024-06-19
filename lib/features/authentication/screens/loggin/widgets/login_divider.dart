@@ -1,8 +1,5 @@
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../../../../utils/constants/texts_strings.dart';
 
 class EFormDivider extends StatelessWidget {
   const EFormDivider({

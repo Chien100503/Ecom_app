@@ -3,7 +3,6 @@ import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:ecom_app/utils/constants/texts_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../utils/helpers/helper_functions.dart';
 import '../loggin/login.dart';
@@ -17,13 +16,13 @@ class ResetPasswordScreen extends StatelessWidget {
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(ESizes.defaultSpace),
+          padding: const EdgeInsets.all(ESizes.defaultSpace),
           child: Column(
             children: [
               // Image
               Center(
                   child: Image(
-                image: AssetImage(EImages.resetPassword),
+                image: const AssetImage(EImages.resetPassword),
                 width: EHelperFunctions.screenWidth() * 0.6,
               )),
 

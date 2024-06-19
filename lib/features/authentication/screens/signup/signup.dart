@@ -4,7 +4,6 @@ import 'package:ecom_app/features/authentication/screens/signup/widgets/signup_f
 import 'package:ecom_app/features/authentication/screens/signup/widgets/term_conditions_checkbox.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:ecom_app/utils/constants/texts_strings.dart';
-import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +14,6 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = EHelperFunctions.isDarkMode(context);
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -37,7 +35,7 @@ class SignupScreen extends StatelessWidget {
               // Form
               const SignupForm(),
               // term & conditions Checkbox
-              const termConditionsCheckbox(),
+              const ETermConditionsCheckbox(),
 
               const SizedBox(
                 height: ESizes.defaultBetweenSections,
@@ -48,7 +46,7 @@ class SignupScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () => Get.to(() => const VerifyEmailScreen(),
                       transition: Transition.rightToLeftWithFade,
-                      duration: Duration(milliseconds: 500)),
+                      duration: const Duration(milliseconds: 500)),
                   child: const Text(ETexts.createAccount),
                 ),
               ),

@@ -1,8 +1,11 @@
 import 'package:ecom_app/common/style/box_shadow.dart';
 import 'package:ecom_app/common/widgets/custom_shape/containers/round_container.dart';
 import 'package:ecom_app/common/widgets/images/round_images.dart';
+import 'package:ecom_app/common/widgets/products/products_card/product_price.dart';
+import 'package:ecom_app/common/widgets/texts/bran_title_with_verify_icon.dart';
 import 'package:ecom_app/common/widgets/texts/product_title_text.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
+import 'package:ecom_app/utils/constants/enums.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
@@ -26,7 +29,7 @@ class EProductCardVertical extends StatelessWidget {
           decoration: BoxDecoration(
             boxShadow: [EBoxShadow.verticalProductBoxShadow],
             borderRadius: BorderRadius.circular(ESizes.productImageRadius),
-            color: dark ? EColors.darkGrey : Colors.white,
+            color: dark ? EColors.accent : Colors.white,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +37,7 @@ class EProductCardVertical extends StatelessWidget {
               ERoundContainer(
                 height: 180,
                 padding: const EdgeInsets.all(ESizes.sm),
-                bg: dark ? EColors.cardDark : EColors.cardLight,
+                bg: dark ? EColors.thirdColor : EColors.cardLight,
                 child: Stack(
                   children: [
                     const Padding(
@@ -91,28 +94,12 @@ class EProductCardVertical extends StatelessWidget {
                       title: 'Dior CD Icon Polo Shirt',
                       smallSize: true,
                     ),
+                    const EBrandTitleWithVerifyIcon(
+                        title: 'Dior',
+                        maxLines: 1,
+                        brandTextSize: TextSizes.small),
+                    const EProductPrice(price: '35,6'),
                     Row(
-                      children: [
-                        Text(
-                          'Dior',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                        const SizedBox(width: 5),
-                        const Icon(
-                          Iconsax.verify5,
-                          color: Colors.blue,
-                          size: ESizes.iconXs,
-                        )
-                      ],
-                    ),
-                    Text(
-                      '\$500',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Row(
@@ -125,20 +112,25 @@ class EProductCardVertical extends StatelessWidget {
                             SizedBox(width: 10),
                           ],
                         ),
-
                         Container(
                           height: 37,
                           width: 30,
                           decoration: const BoxDecoration(
                             color: EColors.dark,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 10,
+                                color: Colors.grey,
+                                offset: Offset(0, 4),
+                              )
+                            ],
                             borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(ESizes.cardRadiusMd),
+                              bottomRight:
+                                  Radius.circular(ESizes.productImageRadius),
                             ),
                           ),
-                          child: const Icon(
-                            Iconsax.add,
-                            color: EColors.thirdColor,
-                          ),
+                          child: const Icon(Iconsax.add,
+                              color: EColors.thirdColor),
                         )
                       ],
                     ),

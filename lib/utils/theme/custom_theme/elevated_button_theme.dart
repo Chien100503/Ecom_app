@@ -7,10 +7,10 @@ class EElevatedButtonTheme {
     style: ElevatedButton.styleFrom(
       elevation: 0,
       foregroundColor: Colors.white,
-      backgroundColor: Color(0xff543310),
+      backgroundColor: const Color(0xff543310),
       disabledBackgroundColor: Colors.grey,
       disabledForegroundColor: Colors.grey,
-      padding: EdgeInsets.symmetric(vertical: 18),
+      padding: const EdgeInsets.symmetric(vertical: 18),
       textStyle: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w600),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))
     )
@@ -20,10 +20,10 @@ class EElevatedButtonTheme {
       style: ElevatedButton.styleFrom(
           elevation: 0,
           foregroundColor: Colors.white,
-          backgroundColor: Color(0xff543310),
+          backgroundColor: const Color(0xff543310),
           disabledBackgroundColor: Colors.grey,
           disabledForegroundColor: Colors.grey,
-          padding: EdgeInsets.symmetric(vertical: 18),
+          padding: const EdgeInsets.symmetric(vertical: 18),
           textStyle: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w600),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))
       )

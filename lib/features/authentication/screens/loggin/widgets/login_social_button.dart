@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/images_strings.dart';
 import '../../../../../utils/constants/sizes.dart';
-import '../../../../../utils/helpers/helper_functions.dart';
 
 class ESocialButtons extends StatelessWidget {
   const ESocialButtons({
@@ -12,7 +11,6 @@ class ESocialButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = EHelperFunctions.isDarkMode(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -30,9 +28,7 @@ class ESocialButtons extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          width: ESizes.defaultBetweenItem,
-        ),
+        const SizedBox(width: ESizes.defaultBetweenItem),
         Container(
           decoration: BoxDecoration(
               border: Border.all(color: EColors.dark),

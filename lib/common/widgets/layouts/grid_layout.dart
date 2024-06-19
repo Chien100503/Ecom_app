@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/sizes.dart';
-import '../products/products_card/product_cards_vertical.dart';
 
 class EGridProductLayout extends StatelessWidget {
   const EGridProductLayout({
@@ -18,7 +17,7 @@ class EGridProductLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      physics: ClampingScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       padding: EdgeInsets.zero,
       shrinkWrap: true,
       itemCount: itemCount,
