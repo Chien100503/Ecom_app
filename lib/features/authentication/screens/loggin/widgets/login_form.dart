@@ -71,7 +71,7 @@ class ELoginForm extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                     onPressed: () => Get.to(() => const NavigationMenu(),
-                    transition: Transition.zoom,
+                    transition: Transition.fadeIn,
                       duration: const Duration(milliseconds: 500)
                     ), child: const Text(ETexts.signIn))),
             const SizedBox(

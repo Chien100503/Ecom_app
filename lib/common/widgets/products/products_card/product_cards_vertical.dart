@@ -4,12 +4,14 @@ import 'package:ecom_app/common/widgets/images/round_images.dart';
 import 'package:ecom_app/common/widgets/products/products_card/product_price.dart';
 import 'package:ecom_app/common/widgets/texts/bran_title_with_verify_icon.dart';
 import 'package:ecom_app/common/widgets/texts/product_title_text.dart';
+import 'package:ecom_app/features/shop/screens/product_details/product_detail.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/enums.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class EProductCardVertical extends StatelessWidget {
@@ -20,7 +22,11 @@ class EProductCardVertical extends StatelessWidget {
     final dark = EHelperFunctions.isDarkMode(context);
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(
+        () => const ProductDetail(),
+        transition: Transition.fadeIn,
+        duration: const Duration(milliseconds: 500),
+      ),
       child: Padding(
         padding: const EdgeInsets.only(bottom: 30),
         child: Container(

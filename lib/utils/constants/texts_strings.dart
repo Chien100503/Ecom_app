@@ -53,4 +53,6 @@ class ETexts {
 
   // text home screen
   static const String popular = 'Popular Products';
+  // text review screen
+  static const String review = 'PVerified reviews and ratings from and come from users who use your category';
 }

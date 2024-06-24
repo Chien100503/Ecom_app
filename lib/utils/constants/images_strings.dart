@@ -48,6 +48,11 @@ class EImages {
   static const String product7 = 'assets/images/products/product7.png';
   static const String product8 = 'assets/images/products/product8.png';
 
+  static const String productDiorBlue = 'assets/images/products/dior_CD_Polo_blue.png';
+  static const String productDiorBlack = 'assets/images/products/dior_CD_Polo_black.png';
+  static const String productDiorWhite = 'assets/images/products/dior_CD_Polo_white.png';
+  static const String productDiorGreen = 'assets/images/products/dior_CD_Polo_green.png';
+
   // Icon Brands
   static const String iconCloth = 'assets/icons/brands/iconClothes.png';
 
