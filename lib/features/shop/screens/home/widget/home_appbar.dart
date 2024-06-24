@@ -29,7 +29,7 @@ class EHomeAppBar extends StatelessWidget {
         const AvatarIcon(),
 
         CartCounterIcon(
-          icons: Icon(Iconsax.shopping_bag),
+          icons: const Icon(Iconsax.shopping_bag),
           onPressed: () {},
           iconColor: EColors.primaryColor,
         ),

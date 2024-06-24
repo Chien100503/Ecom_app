@@ -16,6 +16,7 @@ class ETabBar extends StatelessWidget implements PreferredSizeWidget{
     return Material(
       color: dark ? Colors.black : Colors.white,
       child: TabBar(
+        tabAlignment: TabAlignment.center,
         overlayColor: const WidgetStatePropertyAll(EColors.thirdColor),
         isScrollable: true,
         unselectedLabelColor: Colors.blueGrey,
@@ -25,7 +26,6 @@ class ETabBar extends StatelessWidget implements PreferredSizeWidget{
       ),
     );
   }
-
   @override
   // TODO: implement preferredSize
   Size get preferredSize => Size.fromHeight(EDeviceUtils.getAppBarHeight());

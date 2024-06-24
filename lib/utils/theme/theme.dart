@@ -3,7 +3,7 @@ import 'package:ecom_app/utils/theme/custom_theme/bottom_sheet_theme.dart';
 import 'package:ecom_app/utils/theme/custom_theme/checkbox_theme.dart';
 import 'package:ecom_app/utils/theme/custom_theme/chip_theme.dart';
 import 'package:ecom_app/utils/theme/custom_theme/outlined_button_theme.dart';
-import 'package:ecom_app/utils/theme/custom_theme/textField_theme.dart';
+import 'package:ecom_app/utils/theme/custom_theme/text_field_theme.dart';
 import 'package:ecom_app/utils/theme/custom_theme/text_theme.dart';
 import 'package:flutter/material.dart';
 

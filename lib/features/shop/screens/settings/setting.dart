@@ -2,9 +2,13 @@ import 'package:ecom_app/common/widgets/appbar/appbar.dart';
 import 'package:ecom_app/common/widgets/custom_shape/containers/primary_header_container.dart';
 import 'package:ecom_app/common/widgets/list_title/setting_menu_title.dart';
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
+import 'package:ecom_app/features/authentication/screens/loggin/login.dart';
+import 'package:ecom_app/features/shop/screens/profile/profile.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
+import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../common/widgets/list_title/user_profile.dart';
@@ -14,6 +18,7 @@ class Setting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = EHelperFunctions.isDarkMode(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -33,7 +38,13 @@ class Setting extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: ESizes.defaultBetweenItem),
-                  const EUserProfile(),
+                  EUserProfile(
+                    onPressed: () => Get.to(
+                      () => const Profile(),
+                      transition: Transition.cupertinoDialog,
+                      duration: const Duration(milliseconds: 500),
+                    ),
+                  ),
                   const SizedBox(height: 30),
                 ],
               ),
@@ -42,37 +53,54 @@ class Setting extends StatelessWidget {
               padding: const EdgeInsets.all(ESizes.defaultSpace),
               child: Column(
                 children: [
-                  ESectionHeading(
+                  const ESectionHeading(
+                    showActionButton: false,
                     title: 'Account setting',
-                    onPressed: () {},
                   ),
+                  const SizedBox(height: ESizes.defaultBetweenItem),
                   ESettingMenuTitle(
                     onTap: () {},
                     title: 'Instant payment',
                     subTitle:
                         'E-Wallet, credit cards & instant debit registered',
-                    icon: const Icon(Iconsax.safe_home, size: 30),
+                    icon: Icon(
+                      Iconsax.safe_home,
+                      size: 30,
+                      color: dark ? EColors.thirdColor : EColors.primaryColor,
+                    ),
                   ),
                   const Divider(),
                   ESettingMenuTitle(
                     onTap: () {},
                     title: 'Bank account',
                     subTitle: 'Withdraw balance to registered bank account',
-                    icon: const Icon(Iconsax.copy, size: 30),
+                    icon: Icon(
+                      Iconsax.copy,
+                      size: 30,
+                      color: dark ? EColors.thirdColor : EColors.primaryColor,
+                    ),
                   ),
                   const Divider(),
                   ESettingMenuTitle(
                     onTap: () {},
                     title: 'Notification',
                     subTitle: 'Set any kind of notification message',
-                    icon: const Icon(Iconsax.notification, size: 30),
+                    icon: Icon(
+                      Iconsax.notification,
+                      size: 30,
+                      color: dark ? EColors.thirdColor : EColors.primaryColor,
+                    ),
                   ),
                   const Divider(),
                   ESettingMenuTitle(
                     onTap: () {},
                     title: 'Address list',
                     subTitle: 'Set shopping delivery address',
-                    icon: const Icon(Iconsax.safe_home, size: 30),
+                    icon: Icon(
+                      Iconsax.safe_home,
+                      size: 30,
+                      color: dark ? EColors.thirdColor : EColors.primaryColor,
+                    ),
                   ),
                   const Divider(),
                   ESettingMenuTitle(
@@ -80,20 +108,47 @@ class Setting extends StatelessWidget {
                     title: 'Account security',
                     subTitle:
                         'E-Wallet, credit cards & instant debit registered',
-                    icon: const Icon(Iconsax.safe_home, size: 30),
+                    icon: Icon(
+                      Iconsax.safe_home,
+                      size: 30,
+                      color: dark ? EColors.thirdColor : EColors.primaryColor,
+                    ),
                   ),
                   const Divider(),
                   ESettingMenuTitle(
                     onTap: () {},
                     title: 'Account Privacy',
                     subTitle: 'Manage date usage and connected account',
-                    icon: const Icon(Iconsax.security_card, size: 30),
+                    icon: Icon(
+                      Iconsax.security_card,
+                      size: 30,
+                      color: dark ? EColors.thirdColor : EColors.primaryColor,
+                    ),
                   ),
-                  const SizedBox(height: ESizes.defaultBetweenSections * 2,),
+                  const Divider(),
+                  const ESectionHeading(
+                    title: 'App setting',
+                    showActionButton: false,
+                  ),
+                  const SizedBox(height: ESizes.defaultBetweenItem),
+                  ESettingMenuTitle(
+                    onTap: () {},
+                    title: 'Load data',
+                    subTitle: 'Upload data to your Cloud Firebase',
+                    icon: Icon(
+                      Iconsax.document_upload,
+                      size: 30,
+                      color: dark ? EColors.thirdColor : EColors.primaryColor,
+                    ),
+                  ),
+                  const SizedBox(height: ESizes.defaultBetweenSections * 2),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => Get.to(() => const LoginScreen(),
+                        transition: Transition.downToUp,
+                        duration: Duration(milliseconds: 400)
+                      ),
                       child: const Text('Logout',
                           style: TextStyle(color: EColors.thirdColor)),
                     ),

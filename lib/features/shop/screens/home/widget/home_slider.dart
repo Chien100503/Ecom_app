@@ -42,11 +42,12 @@ class ESlider extends StatelessWidget {
                   height: 7,
                   width: 25,
                   decoration: BoxDecoration(
-                      color: controller.carousalCurrentIndex.value == i
-                          ? EColors.primaryColor
-                          : Colors.grey,
-                      borderRadius: BorderRadius.circular(100)),
-                )
+                    color: controller.carousalCurrentIndex.value == i
+                        ? EColors.accent
+                        : Colors.grey,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
             ],
           ),
         )

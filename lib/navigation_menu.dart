@@ -26,7 +26,7 @@ class NavigationMenu extends StatelessWidget {
                 color: darkMode ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
                 spreadRadius: 5,
                 blurRadius: 7,
-                offset: Offset(0, 3),
+                offset: const Offset(0, 3),
               ),
             ],
           ),
@@ -51,7 +51,7 @@ class NavigationMenu extends StatelessWidget {
       ),
       body: Obx(() {
         return PageTransitionSwitcher(
-          duration: const Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 700),
           transitionBuilder: (
             Widget child,
             Animation<double> primaryAnimation,
@@ -60,7 +60,7 @@ class NavigationMenu extends StatelessWidget {
             return SharedAxisTransition(
               animation: primaryAnimation,
               secondaryAnimation: secondaryAnimation,
-              transitionType: SharedAxisTransitionType.vertical,
+              transitionType: SharedAxisTransitionType.scaled,
               child: child,
             );
           },
