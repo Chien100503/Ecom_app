@@ -1,4 +1,5 @@
 import 'package:ecom_app/utils/constants/sizes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ERoundImages extends StatelessWidget {
@@ -14,7 +15,8 @@ class ERoundImages extends StatelessWidget {
       this.padding,
       this.isNetworkImage = false,
       this.onPressed,
-      this.radius = ESizes.md});
+      this.radius = ESizes.md, this.boxShadow,
+      });
 
   final double? width, height;
   final String imageUrl;
@@ -26,6 +28,7 @@ class ERoundImages extends StatelessWidget {
   final bool isNetworkImage;
   final VoidCallback? onPressed;
   final double radius;
+  final BoxShadow? boxShadow;
 
   @override
   Widget build(BuildContext context) {

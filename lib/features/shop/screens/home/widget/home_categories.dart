@@ -1,4 +1,6 @@
+import 'package:ecom_app/features/shop/screens/sub_categories/sub_categories.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../common/widgets/image_text_widget/vertical_image_text.dart';
 import '../../../../../utils/constants/images_strings.dart';
@@ -20,7 +22,10 @@ class EHomeCategories extends StatelessWidget {
           return VerticalImageText(
             title: 'Shoes',
             textColor: Colors.black,
-            onTap: () {},
+            onTap: () => Get.to(() => const SubCategoryScreen(),
+              transition: Transition.fadeIn,
+              duration: const Duration(milliseconds: 400)
+            ),
             image: EImages.shoesIcon,
           );
         },

@@ -22,24 +22,24 @@ class EOverallRating extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ERatingProcessIndicator(
-                value: 0.9,
-                text: '5',
+                value: 1,
+                text: '5'
               ),
               ERatingProcessIndicator(
-                value: 0.7,
-                text: '4',
+                value: 0.8,
+                text: '4'
               ),
               ERatingProcessIndicator(
-                value: 0.5,
-                text: '3',
+                value: 0.6,
+                text: '3'
               ),
               ERatingProcessIndicator(
-                value: 0.3,
-                text: '2',
+                value: 0.4,
+                text: '2'
               ),
               ERatingProcessIndicator(
-                value: 0.1,
-                text: '1',
+                value: 0.2,
+                text: '1'
               ),
             ],
           ),

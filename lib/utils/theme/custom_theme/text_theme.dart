@@ -29,10 +29,10 @@ class ETextTheme {
     headlineSmall: const TextStyle().copyWith(fontSize: 18.0, fontWeight: FontWeight.w600, color: EColors.thirdColor),
 
     titleLarge: const TextStyle().copyWith(fontSize: 16.0, fontWeight: FontWeight.w600, color: EColors.thirdColor),
-    titleMedium: const TextStyle().copyWith(fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.white),
+    titleMedium: const TextStyle().copyWith(fontSize: 16.0, fontWeight: FontWeight.w500, color: EColors.thirdColor),
     titleSmall: const TextStyle().copyWith(fontSize: 16.0, fontWeight: FontWeight.w400, color: Colors.white),
 
-    bodyLarge: const TextStyle().copyWith(fontSize: 14.0, fontWeight: FontWeight.w500, color: Colors.white),
+    bodyLarge: const TextStyle().copyWith(fontSize: 15.0, fontWeight: FontWeight.w600, color: EColors.thirdColor),
     bodyMedium: const TextStyle().copyWith(fontSize: 13.0, fontWeight: FontWeight.normal, color: Colors.white),
     bodySmall: const TextStyle().copyWith(fontSize: 12.0, fontWeight: FontWeight.w500, color: EColors.thirdColor),
 

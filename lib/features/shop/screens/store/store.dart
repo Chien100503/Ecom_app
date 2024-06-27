@@ -4,11 +4,14 @@ import 'package:ecom_app/common/widgets/layouts/grid_layout.dart';
 import 'package:ecom_app/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:ecom_app/common/widgets/tabbar/tabbar.dart';
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
+import 'package:ecom_app/features/shop/screens/all_brands/all_brand.dart';
+import 'package:ecom_app/features/shop/screens/all_brands/widget/brand_product.dart';
 import 'package:ecom_app/features/shop/screens/store/widget/brand_card.dart';
 import 'package:ecom_app/features/shop/screens/store/widget/categories_tab.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../utils/constants/images_strings.dart';
@@ -60,18 +63,21 @@ class Store extends StatelessWidget {
                         const SizedBox(height: ESizes.defaultBetweenSections),
                         ESectionHeading(
                           title: 'Featured Brands',
-                          onPressed: () {},
+                          onPressed: () => Get.to(() => const AllBrandScreen(),
+                              transition: Transition.fadeIn,
+                              duration: const Duration(milliseconds: 400)),
                         ),
                         const SizedBox(height: ESizes.defaultBetweenItem / 1.5),
                         EGridProductLayout(
                           mainAxisEvent: 70,
                           itemCount: 4,
                           itemBuilder: (_, index) {
-                            return const EBrandCard(
+                            return EBrandCard(
                               height: 56,
                               width: 56,
                               showBorder: true,
                               image: EImages.iconCloth,
+                              onTap: () => Get.to(() => const EBrandProductScreen()),
                             );
                           },
                         ),

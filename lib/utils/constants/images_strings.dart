@@ -59,4 +59,7 @@ class EImages {
   //Brand logo
   static const String diorLogo = 'assets/logos/dior.png';
   static const String lvLogo = 'assets/logos/LV.png';
+  static const String paypal = 'assets/images/paypal.png';
+  static const String successAnimate = 'assets/images/success.json';
+
 }

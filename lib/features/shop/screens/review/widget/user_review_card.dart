@@ -3,7 +3,6 @@ import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:see_more/see_more_widget.dart';
 
 import '../../../../../utils/constants/colors.dart';
@@ -22,12 +21,12 @@ class UserReviewCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                CircleAvatar(backgroundImage: AssetImage(EImages.avt),),
-                SizedBox(width: ESizes.defaultBetweenItem,),
+                const CircleAvatar(backgroundImage: AssetImage(EImages.avt),),
+                const SizedBox(width: ESizes.defaultBetweenItem,),
                 Text('Username2', style: Theme.of(context).textTheme.titleLarge,)
               ],
             ),
-            IconButton(onPressed: (){}, icon: const Icon(Icons.more_vert)),
+            IconButton(onPressed: (){}, icon: Icon(Icons.more_vert, color: dark ? EColors.thirdColor : EColors.primaryColor,)),
           ],
         ),
         Row(
