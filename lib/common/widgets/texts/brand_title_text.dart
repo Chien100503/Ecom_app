@@ -5,17 +5,17 @@ class EBrandTitleText extends StatelessWidget {
   const EBrandTitleText({
     super.key,
     required this.title,
-    required this.maxLines,
+    this.maxLines,
     this.color,
     this.textAlign,
-    required this.brandTextSize,
+    this.brandTextSize,
   });
 
   final String title;
-  final int maxLines;
+  final int? maxLines;
   final Color? color;
   final TextAlign? textAlign;
-  final TextSizes brandTextSize;
+  final TextSizes? brandTextSize;
 
   @override
   Widget build(BuildContext context) {

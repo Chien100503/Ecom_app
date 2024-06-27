@@ -1,9 +1,11 @@
 import 'package:ecom_app/common/widgets/products/products_card/product_cards_vertical.dart';
+import 'package:ecom_app/features/shop/screens/all_product/all_product.dart';
 import 'package:ecom_app/features/shop/screens/home/widget/home_appbar.dart';
 import 'package:ecom_app/features/shop/screens/home/widget/home_categories.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../common/widgets/custom_shape/containers/primary_header_container.dart';
 import '../../../../common/widgets/custom_shape/containers/search_container.dart';
@@ -14,7 +16,6 @@ import 'widget/home_slider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: ESizes.defaultBetweenItem,)
+                  SizedBox(height: ESizes.defaultBetweenItem)
                 ],
               ),
             ),
@@ -72,7 +73,12 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: ESizes.defaultBetweenItem),
                   // Popular text -view all
-                  ESectionHeading(title: 'Popular products', onPressed: (){},),
+                  ESectionHeading(
+                    title: 'Popular products',
+                    onPressed: () => Get.to(() => const AllProductScreen(),
+                        transition: Transition.fadeIn,
+                        duration: const Duration(milliseconds: 400)),
+                  ),
                   const SizedBox(height: ESizes.defaultBetweenItem),
                   // EProductCardVertical()
                   EGridProductLayout(

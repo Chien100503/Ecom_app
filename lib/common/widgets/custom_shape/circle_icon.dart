@@ -17,7 +17,7 @@ class ECircleIcon extends StatelessWidget {
   final IconData icon;
   final Color? color;
   final Color? bg;
-  final Border border;
+  final Border? border;
   final VoidCallback? onPressed;
 
   @override
@@ -35,7 +35,7 @@ class ECircleIcon extends StatelessWidget {
       ),
       child: IconButton(
         onPressed: onPressed,
-        icon: Icon(icon, size: size, color: color,),
+        icon: Center(child: Icon(icon, size: size, color: color,)),
       ),
     );
   }

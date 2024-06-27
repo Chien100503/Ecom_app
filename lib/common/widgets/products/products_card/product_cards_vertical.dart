@@ -20,7 +20,6 @@ class EProductCardVertical extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
-
     return GestureDetector(
       onTap: () => Get.to(
         () => const ProductDetail(),
@@ -41,7 +40,7 @@ class EProductCardVertical extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ERoundContainer(
-                height: 180,
+                height: 178,
                 padding: const EdgeInsets.all(ESizes.sm),
                 bg: dark ? EColors.thirdColor : EColors.cardLight,
                 child: Stack(

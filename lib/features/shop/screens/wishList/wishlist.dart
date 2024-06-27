@@ -1,6 +1,6 @@
 import 'package:ecom_app/common/widgets/appbar/appbar.dart';
 import 'package:ecom_app/common/widgets/layouts/grid_layout.dart';
-import 'package:ecom_app/features/shop/screens/home/home.dart';
+import 'package:ecom_app/features/checkout/cart/cart.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,8 +20,11 @@ class WishList extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () => Get.to(const HomeScreen()),
-            icon: const Icon(Iconsax.add),
+            onPressed: () => Get.to(const CartScreen(),
+              transition: Transition.fadeIn,
+              duration: const Duration(milliseconds: 400)
+            ),
+            icon: const Icon(Iconsax.shopping_cart),
           ),
         ],
       ),

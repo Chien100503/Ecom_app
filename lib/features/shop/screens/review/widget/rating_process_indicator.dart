@@ -1,4 +1,5 @@
 import 'package:ecom_app/utils/device/device_utility.dart';
+import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../utils/constants/colors.dart';
@@ -15,6 +16,7 @@ class ERatingProcessIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = EHelperFunctions.isDarkMode(context);
     return Row(
       children: [
         Expanded(flex: 1, child: Text(text)),
@@ -30,7 +32,7 @@ class ERatingProcessIndicator extends StatelessWidget {
               value: value,
               minHeight: 10,
               backgroundColor: Colors.grey,
-              valueColor: const AlwaysStoppedAnimation(EColors.primaryColor),
+              valueColor: AlwaysStoppedAnimation(dark ? EColors.thirdColor : EColors.accent),
             ),
           ),
         ),

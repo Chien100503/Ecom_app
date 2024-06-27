@@ -13,14 +13,14 @@ class EBrandTitleWithVerifyIcon extends StatelessWidget {
     this.textColor,
     this.iconColor,
     this.textAlign,
-    required this.brandTextSize,
+    this.brandTextSize,
   });
 
   final String title;
   final int maxLines;
   final Color? textColor, iconColor;
   final TextAlign? textAlign;
-  final TextSizes brandTextSize;
+  final TextSizes? brandTextSize;
 
   @override
   Widget build(BuildContext context) {
