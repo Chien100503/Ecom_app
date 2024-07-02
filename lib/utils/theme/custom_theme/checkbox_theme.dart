@@ -8,16 +8,16 @@ class ECheckBoxTheme {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     checkColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return Colors.white;
-      } else {
         return EColors.thirdColor;
+      } else {
+        return EColors.primaryColor;
       }
     }),
     fillColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return Colors.white; // Change to a visible color in light mode
+        return EColors.primaryColor; // Change to a visible color in light mode
       } else {
-        return EColors.primaryColor;
+        return EColors.thirdColor;
       }
     }),
   );
@@ -26,16 +26,16 @@ class ECheckBoxTheme {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     checkColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return Colors.white;
+        return EColors.primaryColor;
       } else {
-        return Colors.black;
+        return EColors.thirdColor;
       }
     }),
     fillColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return Colors.white;
+        return EColors.thirdColor;
       } else {
-        return Colors.transparent;
+        return EColors.primaryColor;
       }
     }),
   );

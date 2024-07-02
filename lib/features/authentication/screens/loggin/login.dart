@@ -23,6 +23,7 @@ class LoginScreen extends StatelessWidget {
             const ELoginHeader(),
             // Form
             const ELoginForm(),
+
             const SizedBox(
               height: ESizes.defaultBetweenItem,
             ),

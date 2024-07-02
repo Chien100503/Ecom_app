@@ -62,4 +62,7 @@ class EImages {
   static const String paypal = 'assets/images/paypal.png';
   static const String successAnimate = 'assets/images/success.json';
 
+  // Loader
+  static const String loaderAnimation = 'assets/images/loader.json';
+
 }

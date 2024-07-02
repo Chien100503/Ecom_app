@@ -1,5 +1,8 @@
+import 'package:ecom_app/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
+import 'package:ecom_app/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../utils/constants/colors.dart';
@@ -12,7 +15,9 @@ class SignupForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
+    final controller = Get.put(SignupController());
     return Form(
+      key: controller.signupFormKey,
       child: Column(
         children: [
           Row(
@@ -20,10 +25,18 @@ class SignupForm extends StatelessWidget {
               // first name & last name
               Expanded(
                 child: TextFormField(
+                  controller: controller.firstName,
+                  validator: (value) =>
+                      EValidation.validateEmptyText('First name', value),
                   expands: false,
                   decoration: InputDecoration(
                     labelStyle: const TextStyle(color: Colors.grey),
-                    label: Text(ETexts.firstName, style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor),),
+                    label: Text(
+                      ETexts.firstName,
+                      style: TextStyle(
+                          color:
+                              dark ? EColors.thirdColor : EColors.primaryColor),
+                    ),
                     prefixIcon: const Icon(Iconsax.user),
                   ),
                 ),
@@ -33,10 +46,18 @@ class SignupForm extends StatelessWidget {
               ),
               Expanded(
                 child: TextFormField(
+                  controller: controller.lastName,
+                  validator: (value) =>
+                      EValidation.validateEmptyText('Last name', value),
                   expands: false,
                   decoration: InputDecoration(
                     labelStyle: const TextStyle(color: Colors.grey),
-                    label: Text(ETexts.lastName, style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor),),
+                    label: Text(
+                      ETexts.lastName,
+                      style: TextStyle(
+                          color:
+                              dark ? EColors.thirdColor : EColors.primaryColor),
+                    ),
                     prefixIcon: const Icon(Iconsax.user),
                   ),
                 ),
@@ -48,10 +69,17 @@ class SignupForm extends StatelessWidget {
           ),
           // username
           TextFormField(
+            controller: controller.username,
+            validator: (value) =>
+                EValidation.validateEmptyText('Username', value),
             expands: false,
             decoration: InputDecoration(
               labelStyle: const TextStyle(color: Colors.grey),
-              label: Text(ETexts.userName, style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor),),
+              label: Text(
+                ETexts.userName,
+                style: TextStyle(
+                    color: dark ? EColors.thirdColor : EColors.primaryColor),
+              ),
               prefixIcon: const Icon(Iconsax.user_edit),
             ),
           ),
@@ -60,10 +88,16 @@ class SignupForm extends StatelessWidget {
           ),
           // email
           TextFormField(
+            controller: controller.email,
+            validator: (value) => EValidation.validateEmail(value),
             expands: false,
             decoration: InputDecoration(
               labelStyle: const TextStyle(color: Colors.grey),
-              label: Text(ETexts.email, style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor),),
+              label: Text(
+                ETexts.email,
+                style: TextStyle(
+                    color: dark ? EColors.thirdColor : EColors.primaryColor),
+              ),
               prefixIcon: const Icon(Iconsax.direct),
             ),
           ),
@@ -73,10 +107,16 @@ class SignupForm extends StatelessWidget {
 
           // phone
           TextFormField(
+            controller: controller.phoneNumber,
+            validator: (value) => EValidation.validatePhoneNumber(value),
             expands: false,
             decoration: InputDecoration(
               labelStyle: const TextStyle(color: Colors.grey),
-              label: Text(ETexts.phoneNumber, style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor),),
+              label: Text(
+                ETexts.phoneNumber,
+                style: TextStyle(
+                    color: dark ? EColors.thirdColor : EColors.primaryColor),
+              ),
               prefixIcon: const Icon(Iconsax.call),
             ),
           ),
@@ -85,16 +125,35 @@ class SignupForm extends StatelessWidget {
           ),
 
           // password
-          TextFormField(
-            expands: false,
-            decoration: InputDecoration(
-                labelStyle: const TextStyle(color: Colors.grey),
-                label: Text(ETexts.password, style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor),),
-                prefixIcon: const Icon(Iconsax.password_check),
-                suffixIcon: const Icon(Iconsax.eye_slash)),
+          Obx(
+            ()=> TextFormField(
+              obscureText: controller.hidePassword.value,
+              controller: controller.password,
+              validator: (value) => EValidation.validatePassword(value),
+              expands: false,
+              decoration: InputDecoration(
+                  labelStyle: const TextStyle(color: Colors.grey),
+                  label: Text(
+                    ETexts.password,
+                    style: TextStyle(
+                        color: dark ? EColors.thirdColor : EColors.primaryColor),
+                  ),
+                  prefixIcon: const Icon(Iconsax.password_check),
+                  suffixIcon: IconButton(
+                      onPressed: () =>
+                          controller.hidePassword.value =
+                          !controller.hidePassword.value,
+                      icon: Icon(controller.hidePassword.value ? Iconsax.eye_slash : Iconsax.eye))),
+            ),
           ),
-          const SizedBox(
-            height: ESizes.defaultBetweenSections,
+          const SizedBox(height: ESizes.defaultBetweenSections),
+          // Button create account
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () => controller.signup(),
+              child: const Text(ETexts.createAccount),
+            ),
           ),
         ],
       ),
