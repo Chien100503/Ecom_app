@@ -1,5 +1,4 @@
-import 'package:ecom_app/common/widgets/success_screen/success_screen.dart';
-import 'package:ecom_app/features/authentication/screens/loggin/login.dart';
+import 'package:ecom_app/data/repositories/authentication/respositories_authentication.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:ecom_app/utils/constants/texts_strings.dart';
@@ -8,17 +7,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/verify_controller/verify_controller.dart';
+
 class VerifyEmailScreen extends StatelessWidget {
-  const VerifyEmailScreen({super.key});
+  const VerifyEmailScreen({super.key, this.email});
+
+  final String? email;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(VerifyController());
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-              onPressed: () => Get.offAll(const LoginScreen()),
+              onPressed: () => RepositoriesAuthentication.instance.logout(),
               icon: const Icon(CupertinoIcons.clear))
         ],
       ),
@@ -47,7 +52,7 @@ class VerifyEmailScreen extends StatelessWidget {
                 height: ESizes.defaultBetweenItem,
               ),
               Text(
-                'Support: chienhx03@.dev@gmail.com',
+                email ?? '',
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
@@ -67,25 +72,17 @@ class VerifyEmailScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () => Get.to(
-                    () => SuccessScreen(
-                      image: EImages.success,
-                      title: ETexts.yourAccountCreateTitle,
-                      subTitle: ETexts.yourAccountCreateSubTitle,
-                      onPressed: () => Get.to(
-                        () => const LoginScreen(),
-                        transition: Transition.rightToLeftWithFade,
-                        duration: const Duration(milliseconds: 500),
-                      ),
-                    ),
-                  ),
+                  onPressed: () => controller.checkEmailVerifyStatus(),
                   child: const Text(ETexts.eContinue),
                 ),
               ),
               const SizedBox(
                 height: ESizes.defaultBetweenItem,
               ),
-              TextButton(onPressed: () {}, child: const Text(ETexts.resendEmail)),
+              TextButton(
+                onPressed: () => controller.sendEmailVerify(),
+                child: const Text(ETexts.resendEmail),
+              ),
             ],
           ),
         ),

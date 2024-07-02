@@ -1,5 +1,4 @@
 import 'package:ecom_app/features/authentication/screens/loggin/widgets/login_social_button.dart';
-import 'package:ecom_app/features/authentication/screens/signup/verify_email.dart';
 import 'package:ecom_app/features/authentication/screens/signup/widgets/signup_form.dart';
 import 'package:ecom_app/features/authentication/screens/signup/widgets/term_conditions_checkbox.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
@@ -7,6 +6,7 @@ import 'package:ecom_app/utils/constants/texts_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../common/widgets/appbar/appbar.dart';
 import '../loggin/widgets/login_divider.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -15,7 +15,7 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const EAppBar(showBackArrow: true),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(ESizes.defaultSpace),
@@ -35,24 +35,10 @@ class SignupScreen extends StatelessWidget {
               // Form
               const SignupForm(),
               // term & conditions Checkbox
+              const SizedBox(height: ESizes.defaultBetweenSections),
               const ETermConditionsCheckbox(),
 
-              const SizedBox(
-                height: ESizes.defaultBetweenSections,
-              ),
-              // Button create account
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () => Get.to(() => const VerifyEmailScreen(),
-                      transition: Transition.rightToLeftWithFade,
-                      duration: const Duration(milliseconds: 500)),
-                  child: const Text(ETexts.createAccount),
-                ),
-              ),
-              const SizedBox(
-                height: ESizes.defaultBetweenItem,
-              ),
+              const SizedBox(height: ESizes.defaultBetweenItem),
               // Divider
               EFormDivider(
                 dividerText: ETexts.orSignUpWith.capitalize!,

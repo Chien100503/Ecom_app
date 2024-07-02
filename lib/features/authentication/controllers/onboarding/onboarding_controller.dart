@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-import '../screens/loggin/login.dart';
+import '../../screens/loggin/login.dart';
 
 class OnBoardingController extends GetxController {
   static OnBoardingController get instance => Get.find();
@@ -22,10 +24,17 @@ class OnBoardingController extends GetxController {
   // Jump current index & jump to next page
   void nextPage() {
     if (currentPageIndex.value == 2) {
+      final storage = GetStorage();
+
+      if(kDebugMode) {
+        print('============= Next button======');
+        print(storage.read('isFirstTime'));
+      }
+
+      storage.write('isFirstTime', false);
+
       Get.offAll(const LoginScreen());
     } else {
-      // int page = currentPageIndex.value;
-      // pageController.jumpToPage(page);
       currentPageIndex.value++;
       pageController.animateToPage(
         currentPageIndex.value,

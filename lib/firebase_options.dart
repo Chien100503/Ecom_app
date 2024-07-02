@@ -66,6 +66,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1007057671082',
     projectId: 'ecommerceapp-a863b',
     storageBucket: 'ecommerceapp-a863b.appspot.com',
+    androidClientId: '1007057671082-p7q3llt5nspm2c8d7va7i5oigdlcbe52.apps.googleusercontent.com',
+    iosClientId: '1007057671082-3opm7fnsqu1c4gktsd1cbfl1m90vcvjp.apps.googleusercontent.com',
     iosBundleId: 'com.example.ecomApp',
   );
 
@@ -77,4 +79,5 @@ class DefaultFirebaseOptions {
     authDomain: 'ecommerceapp-a863b.firebaseapp.com',
     storageBucket: 'ecommerceapp-a863b.appspot.com',
   );
+
 }
