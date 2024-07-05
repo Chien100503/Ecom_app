@@ -31,12 +31,15 @@ class EProfileMenu extends StatelessWidget {
               child: Text(title),
             ),
             Expanded(
-                flex: 5,
+                flex: 9,
                 child:
-                    Text(subName, style: Theme.of(context).textTheme.titleLarge)),
+                    Text(subName, style: Theme.of(context).textTheme.titleMedium)),
+            const SizedBox(width: 10,),
             Expanded(
-              child: Icon(icon,
-                    color: dark ? EColors.thirdColor : EColors.primaryColor),
+              child: IconButton(
+                onPressed: onPressed,
+                icon: Icon(icon,color: dark ? EColors.thirdColor : EColors.primaryColor),
+              ),
               ),
           ],
         ),

@@ -2,7 +2,6 @@ import 'package:ecom_app/features/authentication/controllers/signup/signup_contr
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';

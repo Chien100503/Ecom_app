@@ -1,4 +1,5 @@
 import 'package:ecom_app/bindings/general_bindings.dart';
+import 'package:ecom_app/routes/app_routes.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
       theme: EAppTheme.lightTheme,
       darkTheme: EAppTheme.darkTheme,
       initialBinding: GeneralBindings(),
+      getPages: AppRoutes.pages,
       home: const Scaffold(backgroundColor: EColors.primaryColor, body: Center(child: CircularProgressIndicator(color: EColors.thirdColor,),),),
     );
   }

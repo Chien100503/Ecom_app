@@ -5,10 +5,9 @@ import 'package:ecom_app/common/widgets/success_screen/success_screen.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:ecom_app/utils/constants/texts_strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
-import '../../../../data/repositories/authentication/respositories_authentication.dart';
+import '../../../../data/repositories/authentication/repositories_authentication.dart';
 
 class VerifyController extends GetxController {
   static VerifyController get instance => Get.find();
@@ -26,6 +25,7 @@ class VerifyController extends GetxController {
       ECustomSnackBar.showSuccess(
           title: 'Email rent',
           message: 'Please check your inbox and verify your email');
+      await RepositoriesAuthentication.instance.screenRedirect();
     } catch (e) {
       ECustomSnackBar.showError(title: 'Oh Snap', message: e.toString());
     }

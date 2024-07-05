@@ -2,7 +2,6 @@ import 'package:ecom_app/common/widgets/appbar/appbar.dart';
 import 'package:ecom_app/common/widgets/custom_shape/containers/primary_header_container.dart';
 import 'package:ecom_app/common/widgets/list_title/setting_menu_title.dart';
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
-import 'package:ecom_app/features/authentication/screens/loggin/login.dart';
 import 'package:ecom_app/features/checkout/cart/cart.dart';
 import 'package:ecom_app/features/checkout/order/order.dart';
 import 'package:ecom_app/features/personalization/screens/addresses/address.dart';
@@ -15,13 +14,17 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../common/widgets/list_title/user_profile.dart';
+import '../../../../data/repositories/authentication/repositories_authentication.dart';
+import '../../../personalization/controllers/user_controller.dart';
 
 class Setting extends StatelessWidget {
   const Setting({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
+    final controller = Get.put(UserController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -64,8 +67,7 @@ class Setting extends StatelessWidget {
                   ESettingMenuTitle(
                     onTap: () => Get.to(() => const AddressScreen(),
                         transition: Transition.downToUp,
-                        duration: const Duration(milliseconds: 400)
-                    ),
+                        duration: const Duration(milliseconds: 400)),
                     title: 'My address',
                     subTitle: 'Set shopping delivery address',
                     icon: Icon(
@@ -78,8 +80,7 @@ class Setting extends StatelessWidget {
                   ESettingMenuTitle(
                     onTap: () => Get.to(() => const OrderScreen(),
                         transition: Transition.downToUp,
-                        duration: const Duration(milliseconds: 400)
-                    ),
+                        duration: const Duration(milliseconds: 400)),
                     title: 'My Orders',
                     subTitle: 'Set shopping delivery address',
                     icon: Icon(
@@ -92,8 +93,7 @@ class Setting extends StatelessWidget {
                   ESettingMenuTitle(
                     onTap: () => Get.to(() => const CartScreen(),
                         transition: Transition.downToUp,
-                        duration: const Duration(milliseconds: 400)
-                    ),
+                        duration: const Duration(milliseconds: 400)),
                     title: 'My cart',
                     subTitle: 'Withdraw balance to registered bank account',
                     icon: Icon(
@@ -125,18 +125,6 @@ class Setting extends StatelessWidget {
                     ),
                   ),
                   const Divider(),
-                  // ESettingMenuTitle(
-                  //   onTap: () {},
-                  //   title: 'Instant payment',
-                  //   subTitle:
-                  //   'E-Wallet, credit cards & instant debit registered',
-                  //   icon: Icon(
-                  //     Iconsax.safe_home,
-                  //     size: 30,
-                  //     color: dark ? EColors.thirdColor : EColors.primaryColor,
-                  //   ),
-                  // ),
-                  // const Divider(),
                   ESettingMenuTitle(
                     onTap: () {},
                     title: 'Account security',
@@ -148,17 +136,6 @@ class Setting extends StatelessWidget {
                       color: dark ? EColors.thirdColor : EColors.primaryColor,
                     ),
                   ),
-                  // const Divider(),
-                  // ESettingMenuTitle(
-                  //   onTap: () {},
-                  //   title: 'Account Privacy',
-                  //   subTitle: 'Manage date usage and connected account',
-                  //   icon: Icon(
-                  //     Iconsax.security_card,
-                  //     size: 30,
-                  //     color: dark ? EColors.thirdColor : EColors.primaryColor,
-                  //   ),
-                  // ),
                   const Divider(),
                   const ESectionHeading(
                     title: 'App setting',
@@ -179,12 +156,14 @@ class Setting extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () => Get.to(() => const LoginScreen(),
-                        transition: Transition.downToUp,
-                        duration: const Duration(milliseconds: 400)
+                      onPressed: () =>
+                          RepositoriesAuthentication.instance.logout(),
+                      child: const Text(
+                        'Logout',
+                        style: TextStyle(
+                          color: EColors.thirdColor,
+                        ),
                       ),
-                      child: const Text('Logout',
-                          style: TextStyle(color: EColors.thirdColor)),
                     ),
                   )
                 ],

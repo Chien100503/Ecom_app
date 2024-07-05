@@ -1,4 +1,5 @@
-import 'package:ecom_app/data/repositories/authentication/respositories_authentication.dart';
+import 'package:ecom_app/data/repositories/authentication/repositories_authentication.dart';
+import 'package:ecom_app/features/personalization/controllers/user_controller.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:ecom_app/utils/popups/full_screen_loader.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,12 +18,14 @@ class LoginController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
 
+  final userController = Get.put(UserController());
+
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
   @override
   void onInit() {
-    email.text = localStorage.read('REMEMBER_EMAIL') ?? '';
-    password.text = localStorage.read('REMEMBER_PASSWORD') ?? '';
+    email.text = localStorage.read('REMEMBER_EMAIL');
+    password.text = localStorage.read('REMEMBER_PASSWORD');
     super.onInit();
   }
 
@@ -62,8 +65,6 @@ class LoginController extends GetxController {
       // Redirect
       RepositoriesAuthentication.instance.screenRedirect();
 
-
-
       ECustomSnackBar.showSuccess(
         title: 'Login Successful',
         message: 'Welcome to my app',
@@ -74,6 +75,33 @@ class LoginController extends GetxController {
       EFullScreenLoader.stopLoading();
       ECustomSnackBar.showError(title: 'Oh Snap', message: e.toString());
 
+    }
+  }
+
+  Future<void> googleSignIn() async {
+    try {
+      //Loader start
+      EFullScreenLoader.openLoadingDialog('Logging you in...', EImages.loaderAnimation);
+
+      // Check internet
+      final isConnected = await NetworkManager.instance.isConnected();
+      if(!isConnected) {
+        EFullScreenLoader.stopLoading();
+        return;
+      }
+
+      // Google authentication
+      final userCredentials = await RepositoriesAuthentication.instance.signInWithGoogle();
+
+      // Save user record
+      await userController.saveUserRecord(userCredentials);
+
+      // Remove loading
+      EFullScreenLoader.stopLoading();
+
+      RepositoriesAuthentication.instance.screenRedirect();
+    } catch (e) {
+      ECustomSnackBar.showError(title: 'Oh Snap', message: e.toString());
     }
   }
 }
