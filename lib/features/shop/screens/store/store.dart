@@ -4,6 +4,7 @@ import 'package:ecom_app/common/widgets/layouts/grid_layout.dart';
 import 'package:ecom_app/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:ecom_app/common/widgets/tabbar/tabbar.dart';
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
+import 'package:ecom_app/features/shop/controllers/categories_controller.dart';
 import 'package:ecom_app/features/shop/screens/all_brands/all_brand.dart';
 import 'package:ecom_app/features/shop/screens/all_brands/widget/brand_product.dart';
 import 'package:ecom_app/features/shop/screens/store/widget/brand_card.dart';
@@ -23,12 +24,16 @@ class Store extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
+    final categories = CategoriesController.instance.featuredCategories;
     return DefaultTabController(
-      length: 5,
+      length: categories.length,
       child: Scaffold(
         appBar: EAppBar(
           title:
-              Text('Store', style: Theme.of(context).textTheme.headlineMedium),
+          Text('Store', style: Theme
+              .of(context)
+              .textTheme
+              .headlineMedium),
           actions: [
             CartCounterIcon(
               icons: const Icon(Iconsax.shopping_bag),
@@ -63,9 +68,10 @@ class Store extends StatelessWidget {
                         const SizedBox(height: ESizes.defaultBetweenSections),
                         ESectionHeading(
                           title: 'Featured Brands',
-                          onPressed: () => Get.to(() => const AllBrandScreen(),
-                              transition: Transition.fadeIn,
-                              duration: const Duration(milliseconds: 400)),
+                          onPressed: () =>
+                              Get.to(() => const AllBrandScreen(),
+                                  transition: Transition.fadeIn,
+                                  duration: const Duration(milliseconds: 400)),
                         ),
                         const SizedBox(height: ESizes.defaultBetweenItem / 1.5),
                         EGridProductLayout(
@@ -77,7 +83,8 @@ class Store extends StatelessWidget {
                               width: 56,
                               showBorder: true,
                               image: EImages.iconCloth,
-                              onTap: () => Get.to(() => const EBrandProductScreen()),
+                              onTap: () =>
+                                  Get.to(() => const EBrandProductScreen()),
                             );
                           },
                         ),
@@ -85,26 +92,15 @@ class Store extends StatelessWidget {
                     ),
                   ),
                 ),
-                bottom: const ETabBar(
-                  tabs: [
-                    Tab(child: Text('Accessory')),
-                    Tab(child: Text('Fancy')),
-                    Tab(child: Text('Clothes')),
-                    Tab(child: Text('Shoes')),
-                    Tab(child: Text('Sport')),
-                  ],
+                bottom: ETabBar(
+                    tabs: categories.map((categories) =>
+                        Tab(child: Text(categories.name))).toList(),
                 ),
               ),
             ];
           },
-          body: const TabBarView(
-            children: [
-              ECategoryTab(),
-              ECategoryTab(),
-              ECategoryTab(),
-              ECategoryTab(),
-              ECategoryTab(),
-            ],
+          body: TabBarView(
+            children: categories.map((categories) => ECategoryTab(categoryModels: categories)).toList(),
           ),
         ),
       ),

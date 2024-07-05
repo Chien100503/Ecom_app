@@ -1,12 +1,16 @@
 import 'package:ecom_app/common/widgets/appbar/appbar.dart';
 import 'package:ecom_app/common/widgets/images/circle_images.dart';
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
+import 'package:ecom_app/features/personalization/controllers/user_controller.dart';
+import 'package:ecom_app/features/shop/screens/profile/widget/change_name.dart';
+import 'package:ecom_app/features/shop/screens/profile/widget/change_phone_number.dart';
 import 'package:ecom_app/features/shop/screens/profile/widget/profile_menu.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class Profile extends StatelessWidget {
@@ -15,6 +19,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
+    final controller = UserController.instance;
     return Scaffold(
       appBar: EAppBar(
         showBackArrow: true,
@@ -34,11 +39,16 @@ class Profile extends StatelessWidget {
                 child: Center(
                   child: Stack(
                     children: [
-                      const ECircleImage(
-                        height: 160,
-                        width: 160,
-                        image: EImages.avt,
-                      ),
+                      Obx(() {
+                        final networkImage = controller.user.value.profilePicture;
+                        final image = networkImage.isNotEmpty ? networkImage : EImages.avt;
+                        return ECircleImage(
+                          height: 160,
+                          width: 160,
+                          image: image,
+                          isNetworkImage: networkImage.isNotEmpty
+                        );
+                      }),
                       Positioned(
                         bottom: 0,
                         right: 0,
@@ -51,12 +61,12 @@ class Profile extends StatelessWidget {
                                   : EColors.primaryColor.withOpacity(0.4),
                               borderRadius: BorderRadius.circular(100)),
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: () => controller.uploadProfilePicture(),
                             icon: Icon(
                               Iconsax.edit,
                               color: dark
-                                  ? EColors.thirdColor
-                                  : EColors.primaryColor,
+                                  ? Colors.white
+                                  : Colors.white,
                             ),
                           ),
                         ),
@@ -78,12 +88,12 @@ class Profile extends StatelessWidget {
                 showActionButton: false,
               ),
               EProfileMenu(
-                subName: '_username',
+                subName: controller.user.value.fullName,
                 title: 'Name',
-                onPressed: () {},
+                onPressed: () => Get.to(() => const ChangeName()),
               ),
               EProfileMenu(
-                subName: 'user_name',
+                subName: controller.user.value.username,
                 title: 'Username',
                 onPressed: () {},
               ),
@@ -106,18 +116,18 @@ class Profile extends StatelessWidget {
               EProfileMenu(
                 title: 'USER ID',
                 icon: Iconsax.copy,
-                subName: '123',
+                subName: controller.user.value.id,
                 onPressed: () {},
               ),
               EProfileMenu(
                 title: 'E-mail',
-                subName: 'username@gmail.com',
+                subName: controller.user.value.email,
                 onPressed: () {},
               ),
               EProfileMenu(
                 title: 'Phone',
-                subName: '0123456789',
-                onPressed: () {},
+                subName: controller.user.value.phoneNumber,
+                onPressed: () => Get.to(() => const ChangePhoneNumber()),
               ),
               EProfileMenu(
                 title: 'Gender',
@@ -140,7 +150,7 @@ class Profile extends StatelessWidget {
               Center(
                 child: TextButton(
                   child: const Text('Close account', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: Colors.redAccent),),
-                  onPressed: (){},
+                  onPressed: () => controller.deleteAccountWarningPopup(),
                 ),
               )
             ],

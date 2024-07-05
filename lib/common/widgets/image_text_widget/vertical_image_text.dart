@@ -1,3 +1,4 @@
+import 'package:ecom_app/common/widgets/images/circle_images.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/colors.dart';
@@ -12,11 +13,17 @@ class VerticalImageText extends StatelessWidget {
     this.textColor = EColors.light,
     this.backgroundColor,
     this.onTap,
+    this.isNetworkImage = true,
+    this.width = 56,
+    this.height = 56,
+    this.padding = ESizes.sm,
   });
 
+  final double width, height, padding;
   final String title, image;
   final Color textColor;
   final Color? backgroundColor;
+  final bool isNetworkImage;
   final void Function()? onTap;
 
   @override
@@ -28,27 +35,15 @@ class VerticalImageText extends StatelessWidget {
         padding: const EdgeInsets.only(right: ESizes.defaultBetweenItem),
         child: Column(
           children: [
-            Container(
-              width: 56,
-              height: 56,
-              padding: const EdgeInsets.all(ESizes.sm),
-              decoration: BoxDecoration(
-                  color:
-                  backgroundColor ?? (dark ? EColors.accent : Colors.white),
-                  borderRadius: BorderRadius.circular(100)),
-              child: Center(
-                child: Image(
-                  image: AssetImage(image),
-                  fit: BoxFit.cover,
-                  color: (dark ? Colors.white : EColors.dark),
-                ),
-              ),
+            ECircleImage(
+              image: image,
+              boxFit: BoxFit.fitWidth,
+              isNetworkImage: isNetworkImage,
+              bg: dark ? EColors.thirdColor : Colors.white,
+              overlayColor: dark ? EColors.thirdColor : EColors.primaryColor,
             ),
-
             // Text
-            const SizedBox(
-              height: ESizes.defaultBetweenItem / 2,
-            ),
+            const SizedBox(height: ESizes.defaultBetweenItem / 2),
             Text(
               title,
               style: Theme.of(context)

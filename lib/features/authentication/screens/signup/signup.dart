@@ -23,14 +23,10 @@ class SignupScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // title
-              Text(
-                ETexts.signupTitle,
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
+              Text(ETexts.signupTitle,
+                  style: Theme.of(context).textTheme.headlineMedium),
 
-              const SizedBox(
-                height: ESizes.defaultBetweenSections,
-              ),
+              const SizedBox(height: ESizes.defaultBetweenSections),
 
               // Form
               const SignupForm(),
@@ -40,9 +36,7 @@ class SignupScreen extends StatelessWidget {
 
               const SizedBox(height: ESizes.defaultBetweenItem),
               // Divider
-              EFormDivider(
-                dividerText: ETexts.orSignUpWith.capitalize!,
-              ),
+              EFormDivider(dividerText: ETexts.orSignUpWith.capitalize!),
               const SizedBox(
                 height: ESizes.defaultBetweenItem,
               ),

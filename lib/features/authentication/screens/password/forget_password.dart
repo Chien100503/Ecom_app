@@ -1,6 +1,7 @@
-import 'package:ecom_app/features/authentication/screens/password/reset_password.dart';
+import 'package:ecom_app/features/authentication/controllers/forget_password/forget_password.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
+import 'package:ecom_app/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -15,6 +16,7 @@ class ForgetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
+    final controller = Get.put(ForgetPasswordController());
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -48,15 +50,20 @@ class ForgetPasswordScreen extends StatelessWidget {
               const SizedBox(
                 height: ESizes.defaultBetweenSections,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                  label: Text(
-                    ETexts.email,
-                    style: TextStyle(
-                        color:
-                            dark ? EColors.thirdColor : EColors.primaryColor),
+              Form(
+                key: controller.forgetPasswordFormKey,
+                child: TextFormField(
+                  controller: controller.email,
+                  validator: EValidation.validateEmail,
+                  decoration: InputDecoration(
+                    label: Text(
+                      ETexts.email,
+                      style: TextStyle(
+                          color:
+                              dark ? EColors.thirdColor : EColors.primaryColor),
+                    ),
+                    prefixIcon: const Icon(Iconsax.direct_right),
                   ),
-                  prefixIcon: const Icon(Iconsax.direct_right),
                 ),
               ),
               const SizedBox(
@@ -65,10 +72,7 @@ class ForgetPasswordScreen extends StatelessWidget {
               SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                      onPressed: () => Get.off(
-                          () => const ResetPasswordScreen(),
-                          transition: Transition.rightToLeftWithFade,
-                          duration: const Duration(milliseconds: 500)),
+                      onPressed: () => controller.sendPasswordResetEmail(),
                       child: const Text('Submit'))),
             ],
           ),

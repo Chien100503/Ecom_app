@@ -21,20 +21,20 @@ class EHomeAppBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 10),
-            child: Image(image: AssetImage(EImages.logo)),
+            padding: EdgeInsets.only(top: 20, left: 0),
+            child: Image(image: AssetImage(EImages.logo), height: 100),
           ),
         ],
       ),
       actions: [
-        // Avt
+        // Avatar icon
         const AvatarIcon(),
-
+        // Avatar icon
         CartCounterIcon(
           icons: const Icon(Iconsax.shopping_bag),
           onPressed: () => Get.to(
             () => const CartScreen(),
-            transition: Transition.upToDown,
+            transition: Transition.rightToLeftWithFade,
             duration: const Duration(milliseconds: 400),
           ),
           iconColor: EColors.primaryColor,

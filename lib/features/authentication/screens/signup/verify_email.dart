@@ -1,4 +1,4 @@
-import 'package:ecom_app/data/repositories/authentication/respositories_authentication.dart';
+import 'package:ecom_app/data/repositories/authentication/repositories_authentication.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:ecom_app/utils/constants/texts_strings.dart';

@@ -1,9 +1,10 @@
+import 'package:ecom_app/features/personalization/controllers/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../features/shop/screens/profile/profile.dart';
-import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/images_strings.dart';
+import '../images/circle_images.dart';
 
 class AvatarIcon extends StatelessWidget {
   const AvatarIcon({
@@ -12,18 +13,23 @@ class AvatarIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
     return GestureDetector(
       onTap: () => Get.to(
         () => const Profile(),
         transition: Transition.rightToLeftWithFade,
         duration: const Duration(milliseconds: 400),
       ),
-      child: const CircleAvatar(
-        backgroundColor: EColors.primaryColor,
-        child: Image(
-          image: AssetImage(EImages.avt),
-        ),
-      ),
+      child: Obx(() {
+        final networkImage = controller.user.value.profilePicture;
+        final image = networkImage.isNotEmpty ? networkImage : EImages.avt;
+        return ECircleImage(
+            height: 100,
+            width: 100,
+            image: image,
+            isNetworkImage: networkImage.isNotEmpty
+        );
+      }),
     );
   }
 }

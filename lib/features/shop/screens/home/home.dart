@@ -61,16 +61,7 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: Column(
                 children: [
-                  const ESlider(
-                    banners: [
-                      EImages.banner3,
-                      EImages.banner4,
-                      EImages.banner2,
-                      EImages.banner5,
-                      EImages.banner1,
-                      EImages.banner6,
-                    ],
-                  ),
+                  const ESlider(),
                   const SizedBox(height: ESizes.defaultBetweenItem),
                   // Popular text -view all
                   ESectionHeading(

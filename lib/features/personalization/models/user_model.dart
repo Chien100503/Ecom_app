@@ -33,7 +33,7 @@ class UserModel {
     String lastName = nameParts.length > 1 ? nameParts[1].toLowerCase() : "";
 
     String camelCaseUsername = '$firstName$lastName';
-    String usernameWithPrefix = 'cwt $camelCaseUsername';
+    String usernameWithPrefix = 'cwt_$camelCaseUsername';
     return usernameWithPrefix;
   }
 
@@ -46,6 +46,8 @@ class UserModel {
       phoneNumber: '',
       profilePicture: '');
 
+
+  // Convert model to json structure for storing data in firebase
   Map<String, dynamic> toJson() {
     return {
       'firstName': firstName,
