@@ -26,7 +26,7 @@ class AppRoutes {
     GetPage(name: Routes.order, page: () => const OrderScreen()),
     GetPage(name: Routes.cart, page: () => const CartScreen()),
     GetPage(name: Routes.productReviews, page: () => const ReviewAndRating()),
-    GetPage(name: Routes.productDetail, page: () => const ProductDetail()),
+    // GetPage(name: Routes.productDetail, page: () => const ProductDetail()),
     GetPage(name: Routes.signIn, page: () => const LoginScreen()),
     GetPage(name: Routes.signup, page: () => const SignupScreen()),
     GetPage(name: Routes.verifyEmail, page: () => const VerifyEmailScreen()),

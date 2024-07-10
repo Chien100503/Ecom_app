@@ -1,17 +1,18 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ecom_app/common/widgets/products/products_card/product_cards_vertical.dart';
+import 'package:ecom_app/common/widgets/shimmer/vertical_product_card_shimmer.dart';
+import 'package:ecom_app/features/shop/controllers/product_controller.dart';
 import 'package:ecom_app/features/shop/screens/all_product/all_product.dart';
 import 'package:ecom_app/features/shop/screens/home/widget/home_appbar.dart';
 import 'package:ecom_app/features/shop/screens/home/widget/home_categories.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../../common/widgets/custom_shape/containers/primary_header_container.dart';
 import '../../../../common/widgets/custom_shape/containers/search_container.dart';
 import '../../../../common/widgets/layouts/grid_layout.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
-import '../../../../utils/constants/images_strings.dart';
 import 'widget/home_slider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,11 +20,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController scrollController = ScrollController();
+    final controller = Get.put(ProductController());
+
     return Scaffold(
       body: SingleChildScrollView(
-        controller: scrollController,
-        // physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             const EPrimaryHeaderContainer(
@@ -47,7 +47,6 @@ class HomeScreen extends StatelessWidget {
                           textColor: EColors.textPrimary,
                         ),
                         SizedBox(height: ESizes.defaultBetweenItem),
-
                         // Categories
                         EHomeCategories()
                       ],
@@ -71,11 +70,18 @@ class HomeScreen extends StatelessWidget {
                         duration: const Duration(milliseconds: 400)),
                   ),
                   const SizedBox(height: ESizes.defaultBetweenItem),
-                  // EProductCardVertical()
-                  EGridProductLayout(
-                    itemBuilder: (_, index) => const EProductCardVertical(),
-                    itemCount: 6,
-                  )
+                  Obx(() {
+                    if (controller.isLoad.value) return const EVerticalProductCardShimmer();
+                    if (controller.featuredProducts.isEmpty) {
+                      return const Center(
+                        child: Text('Data not found'),
+                      );
+                    }
+                    return EGridProductLayout(
+                      itemBuilder: (_, index) =>  EProductCardVertical(product: controller.featuredProducts[index],),
+                      itemCount: 4,
+                    );
+                  })
                 ],
               ),
             ),

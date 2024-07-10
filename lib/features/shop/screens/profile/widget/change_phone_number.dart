@@ -28,7 +28,7 @@ class _ChangePhoneNumberState extends State<ChangePhoneNumber> {
           padding: const EdgeInsets.all(ESizes.defaultSpace),
           child: Column(
             children: [
-              Text('Please enter your phone in the boxes below',
+              Text('Please enter your phone number in the boxes below',
                   style: Theme.of(context).textTheme.titleMedium),
               const SizedBox(height: ESizes.defaultBetweenSections),
               Form(
@@ -37,10 +37,10 @@ class _ChangePhoneNumberState extends State<ChangePhoneNumber> {
                     children: [
                       TextFormField(
                         controller: controller.phoneNumber,
-                        validator: (value) => EValidation.validateEmptyText('Phone', value),
+                        validator: EValidation.validatePhoneNumber,
                         expands: false,
                         decoration: const InputDecoration(
-                            labelText: 'First name', prefixIcon: Icon(Iconsax.user)
+                            labelText: 'Phone number', prefixIcon: Icon(Iconsax.call)
                         ),
                       ),
                       const SizedBox(height: ESizes.defaultBetweenSections),

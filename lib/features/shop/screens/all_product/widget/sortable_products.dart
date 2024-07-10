@@ -1,3 +1,4 @@
+import 'package:ecom_app/features/shop/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -28,7 +29,7 @@ class ESortableProducts extends StatelessWidget {
         const SizedBox(height: ESizes.defaultBetweenSections),
         EGridProductLayout(
           itemCount: 7,
-          itemBuilder: (context, index) => const EProductCardVertical(),
+          itemBuilder: (context, index) => EProductCardVertical(product: ProductModel.empty(),),
         )
       ],
     );

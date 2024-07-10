@@ -50,7 +50,7 @@ class UpdateNameController extends GetxController {
         return;
       }
 
-      Map<String, dynamic> name = {'First name': firstName.text.trim(), 'Last Name': lastName.text.trim()};
+      Map<String, dynamic> name = {'firstName': firstName.text.trim(), 'lastName': lastName.text.trim()};
       await userRepository.updateSingleField(name);
 
       // Update the Rx user value

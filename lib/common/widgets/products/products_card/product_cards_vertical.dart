@@ -1,28 +1,35 @@
-import 'package:ecom_app/common/style/box_shadow.dart';
-import 'package:ecom_app/common/widgets/custom_shape/containers/round_container.dart';
-import 'package:ecom_app/common/widgets/images/round_images.dart';
-import 'package:ecom_app/common/widgets/products/products_card/product_price.dart';
-import 'package:ecom_app/common/widgets/texts/bran_title_with_verify_icon.dart';
-import 'package:ecom_app/common/widgets/texts/product_title_text.dart';
-import 'package:ecom_app/features/shop/screens/product_details/product_detail.dart';
-import 'package:ecom_app/utils/constants/colors.dart';
-import 'package:ecom_app/utils/constants/enums.dart';
-import 'package:ecom_app/utils/constants/images_strings.dart';
-import 'package:ecom_app/utils/constants/sizes.dart';
-import 'package:ecom_app/utils/helpers/helper_functions.dart';
+import 'package:ecom_app/features/shop/screens/review/widget/rating_bar_star.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ecom_app/features/shop/models/product_model.dart';
+import 'package:ecom_app/features/shop/controllers/product_controller.dart';
+import 'package:ecom_app/utils/constants/colors.dart';
+import 'package:ecom_app/utils/constants/sizes.dart';
+import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../features/shop/screens/product_details/product_detail.dart';
+import '../../../../utils/constants/enums.dart';
+import '../../../style/box_shadow.dart';
+import '../../custom_shape/containers/round_container.dart';
+import '../../images/round_images.dart';
+import '../../texts/bran_title_with_verify_icon.dart';
+import '../../texts/product_title_text.dart';
+
 class EProductCardVertical extends StatelessWidget {
-  const EProductCardVertical({super.key});
+  const EProductCardVertical({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+    final salePercentage = controller.calculateSalePercentage(product.price, product.salePrice);
     final dark = EHelperFunctions.isDarkMode(context);
+
     return GestureDetector(
       onTap: () => Get.to(
-        () => const ProductDetail(),
+            () => ProductDetail(product: product),
         transition: Transition.fadeIn,
         duration: const Duration(milliseconds: 500),
       ),
@@ -45,13 +52,12 @@ class EProductCardVertical extends StatelessWidget {
                 bg: dark ? EColors.thirdColor : EColors.cardLight,
                 child: Stack(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(top: 30),
-                      child: ERoundImages(
-                        imageUrl: EImages.product1,
-                        bg: Colors.transparent,
-                        applyImageRadius: true,
-                      ),
+                    ERoundImages(
+                      boxFit: BoxFit.cover,
+                      imageUrl: product.thumbnail,
+                      bg: Colors.transparent,
+                      applyImageRadius: true,
+                      isNetworkImage: true,
                     ),
                     ERoundContainer(
                       radius: ESizes.sm,
@@ -59,15 +65,13 @@ class EProductCardVertical extends StatelessWidget {
                           horizontal: ESizes.sm, vertical: ESizes.xs),
                       bg: EColors.accent,
                       child: Text(
-                        '20%',
+                        '${controller.calculateSalePercentage(product.price, product.salePrice)}%',
                         style: Theme.of(context)
                             .textTheme
                             .labelLarge!
                             .apply(color: EColors.thirdColor),
                       ),
                     ),
-
-                    // Wishlist button
                     Positioned(
                       top: 0,
                       right: 0,
@@ -86,6 +90,24 @@ class EProductCardVertical extends StatelessWidget {
                         ),
                       ),
                     ),
+                    Positioned(
+                      top: 45,
+                      right: 0,
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: dark ? EColors.primaryColor.withOpacity(0.3) : EColors.accent),
+                        child: const Center(
+                          child: Icon(
+                            Iconsax.add,
+                            color: EColors.primaryColor,
+                            size: 28,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -95,50 +117,29 @@ class EProductCardVertical extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const EProductTitleText(
-                      title: 'Dior CD Icon Polo Shirt',
+                    EProductTitleText(
+                      title: product.title,
                       smallSize: true,
                     ),
-                    const EBrandTitleWithVerifyIcon(
-                        title: 'Dior',
-                        maxLines: 1,
-                        brandTextSize: TextSizes.small),
-                    const EProductPrice(price: '35,6'),
+                    EBrandTitleWithVerifyIcon(
+                      title: product.brand?.name ?? '',
+                      maxLines: 1,
+                      brandTextSize: TextSizes.small,
+                    ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Row(
-                          children: [
-                            Icon(Iconsax.star1, color: Color(0xffEDB310)),
-                            Icon(Iconsax.star1, color: Color(0xffEDB310)),
-                            Icon(Iconsax.star1, color: Color(0xffEDB310)),
-                            Icon(Iconsax.star1, color: Color(0xffEDB310)),
-                            Icon(Icons.star_half, color: Color(0xffEDB310)),
-                            SizedBox(width: 10),
-                          ],
+                        Text(
+                          '\$${product.price}',
+                            style: const TextStyle(decoration: TextDecoration.lineThrough, color: Colors.red)
                         ),
-                        Container(
-                          height: 37,
-                          width: 30,
-                          decoration: const BoxDecoration(
-                            color: EColors.dark,
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 10,
-                                color: Colors.grey,
-                                offset: Offset(0, 4),
-                              )
-                            ],
-                            borderRadius: BorderRadius.only(
-                              bottomRight:
-                                  Radius.circular(ESizes.productImageRadius),
-                            ),
-                          ),
-                          child: const Icon(Iconsax.add,
-                              color: EColors.thirdColor),
-                        )
+                        const SizedBox(width: ESizes.defaultBetweenItem),
+                        Text(
+                          '\$${product.salePrice}',
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
                       ],
                     ),
+                    const ERatingStar(rating: 4.0),
                   ],
                 ),
               ),

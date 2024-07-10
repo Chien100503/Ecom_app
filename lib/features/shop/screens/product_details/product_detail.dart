@@ -1,4 +1,5 @@
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
+import 'package:ecom_app/features/shop/models/product_model.dart';
 import 'package:ecom_app/features/shop/screens/product_details/widget/bottom_navigation_detail.dart';
 import 'package:ecom_app/features/shop/screens/product_details/widget/brand_product.dart';
 import 'package:ecom_app/features/shop/screens/product_details/widget/description.dart';
@@ -14,8 +15,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductDetail extends StatelessWidget {
-  const ProductDetail({super.key});
+  const ProductDetail({super.key, required this.product});
 
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);

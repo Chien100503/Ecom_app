@@ -16,6 +16,7 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../common/widgets/list_title/user_profile.dart';
 import '../../../../data/repositories/authentication/repositories_authentication.dart';
 import '../../../personalization/controllers/user_controller.dart';
+import 'demo.dart';
 
 class Setting extends StatelessWidget {
   const Setting({super.key});
@@ -24,7 +25,6 @@ class Setting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
-    final controller = Get.put(UserController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -104,7 +104,9 @@ class Setting extends StatelessWidget {
                   ),
                   const Divider(),
                   ESettingMenuTitle(
-                    onTap: () {},
+                    onTap: () => Get.to(() => const ProductListScreen(),
+                        transition: Transition.downToUp,
+                        duration: const Duration(milliseconds: 400)),
                     title: 'Bank account',
                     subTitle: 'Withdraw balance to registered bank account',
                     icon: Icon(

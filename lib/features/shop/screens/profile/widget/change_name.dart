@@ -14,7 +14,7 @@ class ChangeName extends StatelessWidget {
     final controller = Get.put(UpdateNameController());
     return Scaffold(
       appBar: const EAppBar(
-        title: Text('ChangeName'),
+        title: Text('Change Name'),
         showBackArrow: true,
       ),
       body: SingleChildScrollView(
