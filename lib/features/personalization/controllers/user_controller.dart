@@ -67,8 +67,7 @@ class UserController extends GetxController {
           final user = UserModel(
             id: userCredentials.user!.uid,
             firstName: nameParts[0],
-            lastName:
-            nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
+            lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
             username: username,
             email: userCredentials.user!.email ?? '',
             phoneNumber: userCredentials.user!.phoneNumber ?? '',
@@ -183,7 +182,7 @@ class UserController extends GetxController {
             'Users/Images/Profile', image);
 
         // update user image record
-        Map<String, dynamic> json = {'ProfilePicture': imageUrl};
+        Map<String, dynamic> json = {'profilePicture': imageUrl};
         await userRepository.updateSingleField(json);
 
         user.value.profilePicture = imageUrl;

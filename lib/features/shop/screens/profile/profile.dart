@@ -1,6 +1,7 @@
 import 'package:ecom_app/common/widgets/appbar/appbar.dart';
 import 'package:ecom_app/common/widgets/images/circle_images.dart';
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
+import 'package:ecom_app/features/personalization/controllers/update_name_controller.dart';
 import 'package:ecom_app/features/personalization/controllers/user_controller.dart';
 import 'package:ecom_app/features/shop/screens/profile/widget/change_name.dart';
 import 'package:ecom_app/features/shop/screens/profile/widget/change_phone_number.dart';
@@ -89,6 +90,7 @@ class Profile extends StatelessWidget {
               ),
               EProfileMenu(
                 subName: controller.user.value.fullName,
+                // subName: controller.user.value.fullName,
                 title: 'Name',
                 onPressed: () => Get.to(() => const ChangeName()),
               ),

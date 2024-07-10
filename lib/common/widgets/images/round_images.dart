@@ -40,7 +40,7 @@ class ERoundImages extends StatelessWidget {
         padding: padding,
         decoration: BoxDecoration(
           border: border,
-          color: bg,
+          // color: bg,
           borderRadius: BorderRadius.circular(radius),
         ),
         child: ClipRRect(

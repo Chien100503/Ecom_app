@@ -1,0 +1,195 @@
+{
+  "__collections__": {
+    "Banners": {
+      "9ZcoQFFatihTnUNGz4xI": {
+        "Active": true,
+        "TargetScreen": "/store",
+        "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/ecommerceapp-a863b.appspot.com/o/bannne%2Fbanner6.jpg?alt=media&token=8f57238c-28ec-4c3c-a8b8-0f017676535a",
+        "__collections__": {}
+      },
+      "OxoZblGL3paPLl6fsxGh": { "TargetScreen": "/store", "Active": true, "ImageUrl": "https://res.cloudinary.com/dwvcgmkvo/image/upload/v1720166634/banner6_ypyzwf.jpg", "__collections__": {} },
+      "rmIbsdQZzsZuWxoqalj5": {
+        "Active": true,
+        "TargetScreen": "/store",
+        "ImageUrl": "https://firebasestorage.googleapis.com/v0/b/ecommerceapp-a863b.appspot.com/o/bannne%2Fbanner5.jpg?alt=media&token=ffd0fe9d-e3c5-4e83-8a0f-d5239668b427",
+        "__collections__": {}
+      }
+    },
+    "Categories": {
+      "1": {
+        "IsFeatured": true,
+        "ParentId": null,
+        "Name": "Clothes",
+        "Image": "https://res.cloudinary.com/dwvcgmkvo/image/upload/v1720173836/ecom_app/categories%20_icon/tailor-dummy_aspkse.png",
+        "__collections__": {}
+      },
+      "2": {
+        "IsFeatured": true,
+        "ParentId": null,
+        "Name": "Shoes",
+        "Image": "https://res.cloudinary.com/dwvcgmkvo/image/upload/v1720411309/ecom_app/categories%20_icon/shoes_twuoxt.png",
+        "__collections__": {}
+      },
+      "3": {
+        "IsFeatured": true,
+        "ParentId": null,
+        "Name": "glasses",
+        "Image": "https://res.cloudinary.com/dwvcgmkvo/image/upload/v1720411187/ecom_app/categories%20_icon/glassese_vhycrx.png",
+        "__collections__": {}
+      },
+      "4": {
+        "ParentId": null,
+        "IsFeatured": true,
+        "Name": "Cosmetics",
+        "Image": "https://res.cloudinary.com/dwvcgmkvo/image/upload/v1720411683/ecom_app/categories%20_icon/cosmetics_cm4ztn.png",
+        "__collections__": {}
+      },
+      "5": {
+        "ParentId": null,
+        "Image": "https://res.cloudinary.com/dwvcgmkvo/image/upload/v1720411856/ecom_app/categories%20_icon/hat_jo6nhq.png",
+        "IsFeatured": true,
+        "Name": "Hat",
+        "__collections__": {}
+      }
+    },
+    "Products": {
+      "001": {
+        "CategoryId": "1",
+        "ProductVariations": [
+          { "Description": "This is a product ....", "Price": 123, "AttributeValues": { "Size": "32", "Color": "Green" }, "Id": "1", "SalePrice": 12, "Image": "", "SKU": "", "Stock": 25 },
+          { "Desciption": "", "AttributeValus": { "Sized": "32", "Color": "Black" }, "Price": 123, "SalePrice": 0, "Id": "2", "Image": "", "SKU": "", "Stock": 0 }
+        ],
+        "Description": "Blue Nike sports shoes",
+        "ProductAttributes": [
+          { "Values": ["Green", "Blue", "Black"], "Name": "Color" },
+          { "Values": ["28", "29", "30", "31", "32", "33"], "Name": "Size" }
+        ],
+        "Images": ["", "", "", ""],
+        "ProductType": "ProductType.variable",
+        "Title": "Blue Nike sports shoes",
+        "Thumbnail": "https://res.cloudinary.com/dwvcgmkvo/image/upload/v1720409578/ecom_app/product/product4_qicenv.png",
+        "IsFeatured": true,
+        "Brand": { "Id": "1", "Image": "", "ProductsCount": 256, "IsFeatured": true },
+        "Price": 123,
+        "SalePrice": 30,
+        "SKU": "ABR441",
+        "Stock": "10",
+        "__collections__": {}
+      },
+      "002": {
+        "CategoryId": "2",
+        "ProductVariations": [
+          { "Description": "Another product ....", "Price": 150, "AttributeValues": { "Size": "M", "Color": "Red" }, "Id": "3", "SalePrice": 20, "Image": "", "SKU": "12345", "Stock": 10 },
+          { "Description": "Another variation ....", "AttributeValues": { "Size": "L", "Color": "Blue" }, "Price": 150, "SalePrice": 15, "Id": "4", "Image": "", "SKU": "12346", "Stock": 5 }
+        ],
+        "Description": "Red Adidas sports shirt",
+        "ProductAttributes": [
+          { "Values": ["Red", "Blue"], "Name": "Color" },
+          { "Values": ["S", "M", "L"], "Name": "Size" }
+        ],
+        "Images": ["", "", "", ""],
+        "ProductType": "ProductType.variable",
+        "Title": "Red Adidas sports shirt",
+        "Thumbnail": "https://res.cloudinary.com/dwvcgmkvo/image/upload/v1720409578/ecom_app/product/product2_qicenv.png",
+        "IsFeatured": false,
+        "Brand": { "Id": "2", "Image": "", "ProductsCount": 100, "IsFeatured": false },
+        "Price": 150,
+        "SalePrice": 25,
+        "SKU": "BGR552",
+        "Stock": "20",
+        "__collections__": {}
+      },
+      "004": {
+        "CategoryId": "4",
+        "ProductVariations": [
+          { "Description": "Stylish product ....", "Price": 180, "AttributeValues": { "Size": "38", "Color": "Black" }, "Id": "7", "SalePrice": 30, "Image": "", "SKU": "78901", "Stock": 20 },
+          { "Description": "Stylish variation ....", "AttributeValues": { "Size": "40", "Color": "White" }, "Price": 180, "SalePrice": 20, "Id": "8", "Image": "", "SKU": "78902", "Stock": 5 }
+        ],
+        "Description": "Black Reebok shoes",
+        "ProductAttributes": [
+          { "Values": ["Black", "White"], "Name": "Color" },
+          { "Values": ["36", "38", "40"], "Name": "Size" }
+        ],
+        "Images": ["", "", "", ""],
+        "ProductType": "ProductType.variable",
+        "Title": "Black Reebok shoes",
+        "Thumbnail": "https://res.cloudinary.com/dwvcgmkvo/image/upload/v1720409578/ecom_app/product/product1_qicenv.png",
+        "IsFeatured": false,
+        "Brand": { "Id": "4", "Image": "", "ProductsCount": 50, "IsFeatured": false },
+        "Price": 180,
+        "SalePrice": 35,
+        "SKU": "EFG774",
+        "Stock": "15",
+        "__collections__": {}
+      },
+      "005": {
+        "CategoryId": "5",
+        "ProductVariations": [
+          { "Description": "Elegant product ....", "Price": 250, "AttributeValues": { "Size": "10", "Color": "Silver" }, "Id": "9", "SalePrice": 70, "Image": "", "SKU": "", "Stock": 10 },
+          { "Description": "", "AttributeValues": { "Size": "12", "Color": "Gold" }, "Price": 250, "SalePrice": 60, "Id": "10", "Image": "", "SKU": "", "Stock": 8 }
+        ],
+        "Description": "Silver Omega watch",
+        "ProductAttributes": [
+          { "Values": ["Silver", "Gold"], "Name": "Color" },
+          { "Values": ["8", "10", "12"], "Name": "Size" }
+        ],
+        "Images": ["", "", "", ""],
+        "ProductType": "ProductType.variable",
+        "Title": "Silver Omega watch",
+        "Thumbnail": "https://res.cloudinary.com/dwvcgmkvo/image/upload/v1720409578/ecom_app/product/product5_qicenv.png",
+        "IsFeatured": true,
+        "Brand": { "Id": "5", "Image": "", "ProductsCount": 300, "IsFeatured": true },
+        "Price": 250,
+        "SalePrice": 80,
+        "SKU": "HIJ885",
+        "Stock": "12",
+        "collections": {}
+      },
+      "006": {
+        "CategoryId": "6",
+        "ProductVariations": [
+          { "Description": "Casual product ....", "Price": 100, "AttributeValues": { "Size": "M", "Color": "Blue" }, "Id": "11", "SalePrice": 20, "Image": "", "SKU": "45678", "Stock": 25 },
+          { "Description": "Casual variation ....", "AttributeValues": { "Size": "L", "Color": "Red" }, "Price": 100, "SalePrice": 15, "Id": "12", "Image": "", "SKU": "45679", "Stock": 10 }
+        ],
+        "Description": "Blue Levi's jeans",
+        "ProductAttributes": [
+          { "Values": ["Blue", "Red"], "Name": "Color" },
+          { "Values": ["S", "M", "L"], "Name": "Size" }
+        ],
+        "Images": ["", "", "", ""],
+        "ProductType": "ProductType.variable",
+        "Title": "Blue Levi's jeans",
+        "Thumbnail": "https://res.cloudinary.com/dwvcgmkvo/image/upload/v1720409578/ecom_app/product/product6_qicenv.png",
+        "IsFeatured": false,
+        "Brand": { "Id": "6", "Image": "", "ProductsCount": 200, "IsFeatured": false },
+        "Price": 100,
+        "SalePrice": 25,
+        "SKU": "KLM996",
+        "Stock": "20",
+        "__collections__": {}
+      }
+    },
+    "Users": {
+      "5GmSvxb9llWzbfj3Ox9bvkIOgKT2": {
+        "firstName": "chienhihi",
+        "lastName": "hiih",
+        "profilePicture": "",
+        "email": "chien93182@donga.edu.vn",
+        "username": "chienhihi",
+        "phone": "098098998",
+        "ProfilePicture": "https://firebasestorage.googleapis.com/v0/b/ecommerceapp-a863b.appspot.com/o/Users%2FImages%2FProfile%2Fscaled_avatar-gau-1.jpg?alt=media&token=939e0c37-e6cb-42f1-8cbe-b356a5340ff9",
+        "__collections__": {}
+      },
+      "HKj9gf9lppZ5zYWZdfIjuxAtY0l2": {
+        "firstName": "Chien",
+        "lastName": "Ho Xuan",
+        "profilePicture": "https://lh3.googleusercontent.com/a/ACg8ocLenBtd1g5v2jHpGZmkQSUfEFfiFz3BomORdapZBJl0PwOglQs=s96-c",
+        "phone": "",
+        "email": "chienhx03.dev@gmail.com",
+        "username": "cwt_chienho",
+        "ProfilePicture": "https://firebasestorage.googleapis.com/v0/b/ecommerceapp-a863b.appspot.com/o/Users%2FImages%2FProfile%2Fscaled_avatar-gau-1.jpg?alt=media&token=5464f082-1d3d-484e-80a8-ea178cd5a61c",
+        "__collections__": {}
+      }
+    }
+  }
+}
