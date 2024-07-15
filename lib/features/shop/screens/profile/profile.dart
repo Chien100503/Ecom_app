@@ -3,6 +3,8 @@ import 'package:ecom_app/common/widgets/images/circle_images.dart';
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
 import 'package:ecom_app/features/personalization/controllers/update_name_controller.dart';
 import 'package:ecom_app/features/personalization/controllers/user_controller.dart';
+import 'package:ecom_app/features/shop/screens/profile/widget/change_birth_year.dart';
+import 'package:ecom_app/features/shop/screens/profile/widget/change_gender.dart';
 import 'package:ecom_app/features/shop/screens/profile/widget/change_name.dart';
 import 'package:ecom_app/features/shop/screens/profile/widget/change_phone_number.dart';
 import 'package:ecom_app/features/shop/screens/profile/widget/profile_menu.dart';
@@ -133,13 +135,13 @@ class Profile extends StatelessWidget {
               ),
               EProfileMenu(
                 title: 'Gender',
-                subName: 'Male',
-                onPressed: () {},
+                subName: controller.user.value.gender,
+                onPressed: () => Get.to(() => const GenderSelectionScreen()),
               ),
               EProfileMenu(
                 title: 'Birthday',
-                subName: '10-05-2003',
-                onPressed: () {},
+                subName: controller.user.value.birthYear.toString(),
+                onPressed: () => Get.to(() => BirthYearSelectionScreen()),
               ),
               const SizedBox(height: 10),
               Divider(

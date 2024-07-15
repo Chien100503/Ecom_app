@@ -5,12 +5,13 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class EHelperFunctions {
-
   static Color? getColor(String value) {
     if (value == 'green') {
       return Colors.green;
     } else if (value == 'red') {
       return Colors.red;
+    } else if (value == 'aquatic') {
+      return const Color(0xff00ffff);
     } else if (value == 'blue') {
       return Colors.blue;
     } else if (value == 'yellow') {
@@ -35,24 +36,25 @@ class EHelperFunctions {
   }
 
   static void showSnackBar(String message) {
-    ScaffoldMessenger.of(Get.context!).showSnackBar(
-        SnackBar(content: Text(message))
-    );
+    ScaffoldMessenger.of(Get.context!)
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 
   static void showAlert(String title, String message) {
-    showDialog(context: Get.context!, builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(title),
-        content: Text(message),
-        actions: [
-          TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Ok')
-          ),
-        ],
-      );
-    },);
+    showDialog(
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Ok')),
+          ],
+        );
+      },
+    );
   }
 
   static void navigatorToScreen(BuildContext context, Widget screen) {
@@ -83,7 +85,8 @@ class EHelperFunctions {
     return MediaQuery.of(Get.context!).size.width;
   }
 
-  static String getFormattedDate(DateTime date, {String format = 'dd-MMM-yyyy'}) {
+  static String getFormattedDate(DateTime date,
+      {String format = 'dd-MMM-yyyy'}) {
     return DateFormat(format).format(date);
   }
 
@@ -94,7 +97,8 @@ class EHelperFunctions {
   static List<Widget> wrapWidgets(List<Widget> widgets, int rowSize) {
     final wrappedList = <Widget>[];
     for (var i = 0; i < widgets.length; i += rowSize) {
-      final rowChildren = widgets.sublist(i, i + rowSize > widgets.length ? widgets.length : i = rowSize);
+      final rowChildren = widgets.sublist(
+          i, i + rowSize > widgets.length ? widgets.length : i = rowSize);
       wrappedList.add(Row(children: rowChildren));
     }
     return wrappedList;

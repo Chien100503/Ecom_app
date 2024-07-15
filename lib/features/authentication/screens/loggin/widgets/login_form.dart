@@ -20,11 +20,12 @@ class ELoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
     final controller = Get.put(LoginController());
+
     return Form(
       key: controller.loginFormKey,
       child: Padding(
         padding:
-            const EdgeInsets.symmetric(vertical: ESizes.defaultBetweenSections),
+        const EdgeInsets.symmetric(vertical: ESizes.defaultBetweenSections),
         child: Column(
           children: [
             TextFormField(
@@ -38,14 +39,13 @@ class ELoginForm extends StatelessWidget {
                   style: TextStyle(
                       color: dark ? EColors.thirdColor : EColors.primaryColor),
                 ),
-                // labelText: ETexts.email,
               ),
             ),
             const SizedBox(
               height: ESizes.inputBetweenFields,
             ),
             Obx(
-              () => TextFormField(
+                  () => TextFormField(
                 validator: (value) =>
                     EValidation.validateEmptyText('Password', value),
                 controller: controller.password,
@@ -54,14 +54,14 @@ class ELoginForm extends StatelessWidget {
                   prefixIcon: const Icon(Iconsax.password_check),
                   labelStyle: const TextStyle(color: Colors.grey),
                   label: Text(
-                    ETexts.email,
+                    ETexts.password, // Corrected label to ETexts.password
                     style: TextStyle(
                       color: dark ? EColors.thirdColor : EColors.primaryColor,
                     ),
                   ),
                   suffixIcon: IconButton(
                     onPressed: () => controller.hidePassword.value =
-                        !controller.hidePassword.value,
+                    !controller.hidePassword.value,
                     icon: Icon(controller.hidePassword.value
                         ? Iconsax.eye_slash
                         : Iconsax.eye),
@@ -79,10 +79,10 @@ class ELoginForm extends StatelessWidget {
                       width: 24,
                       height: 24,
                       child: Obx(
-                        () => Checkbox(
+                            () => Checkbox(
                           value: controller.remember.value,
                           onChanged: (value) => controller.remember.value =
-                              !controller.remember.value,
+                          !controller.remember.value,
                         ),
                       ),
                     ),

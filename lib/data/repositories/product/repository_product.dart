@@ -14,9 +14,23 @@ class RepositoryProduct extends GetxController {
   Future<List<ProductModel>> getFeaturedProducts() async {
     try {
       print('Querying Firestore for featured products...');
-      final snapshot = await _db.collection("Products").where('IsFeatured', isEqualTo: true).limit(6).get();
+      final snapshot = await _db.collection("Products").where('IsFeatured', isEqualTo: true).get();
       print('Firestore query returned ${snapshot.docs.length} documents');
       return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+    } on FirebaseException catch (e) {
+      print('FirebaseException: $e');
+      throw EFirebaseException(e.code).message;
+    } catch (e) {
+      print('Exception: $e');
+      throw e.toString();
+    }
+  }
+
+  Future<List<ProductModel>> fetchProductsByQuery(Query query) async {
+    try {
+      final querySnapshot = await query.get();
+      final List<ProductModel> productList = querySnapshot.docs.map((doc) => ProductModel.fromQuerySnapshot(doc)).toList();
+      return productList;
     } on FirebaseException catch (e) {
       print('FirebaseException: $e');
       throw EFirebaseException(e.code).message;

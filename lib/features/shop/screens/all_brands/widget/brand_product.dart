@@ -27,7 +27,7 @@ class EBrandProductScreen extends StatelessWidget {
                   height: 80,
                   width: 80),
               SizedBox(height: ESizes.defaultBetweenSections),
-              ESortableProducts(),
+              ESortableProducts(products: [],),
             ],
           ),
         ),

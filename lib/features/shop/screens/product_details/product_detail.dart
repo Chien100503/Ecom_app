@@ -1,25 +1,33 @@
+import 'package:ecom_app/common/widgets/images/circle_images.dart';
+import 'package:ecom_app/common/widgets/products/products_card/product_price.dart';
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
+import 'package:ecom_app/features/shop/controllers/product/product_controller.dart';
 import 'package:ecom_app/features/shop/models/product_model.dart';
 import 'package:ecom_app/features/shop/screens/product_details/widget/bottom_navigation_detail.dart';
-import 'package:ecom_app/features/shop/screens/product_details/widget/brand_product.dart';
 import 'package:ecom_app/features/shop/screens/product_details/widget/description.dart';
-import 'package:ecom_app/features/shop/screens/product_details/widget/option_color.dart';
-import 'package:ecom_app/features/shop/screens/product_details/widget/option_size.dart';
+import 'package:ecom_app/features/shop/screens/product_details/widget/product_attributes.dart';
 import 'package:ecom_app/features/shop/screens/product_details/widget/product_image_slider.dart';
 import 'package:ecom_app/features/shop/screens/product_details/widget/rate_and_share.dart';
 import 'package:ecom_app/features/shop/screens/review/review_and_rating.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
+import 'package:ecom_app/utils/constants/enums.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
+
+import '../../../../common/widgets/texts/product_title_text.dart';
 
 class ProductDetail extends StatelessWidget {
   const ProductDetail({super.key, required this.product});
 
   final ProductModel product;
+
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+    final salePercentage = controller.calculateSalePercentage(product.price, product.salePrice);
     final dark = EHelperFunctions.isDarkMode(context);
     return Scaffold(
       bottomNavigationBar: const EBottomNavigationDetail(),
@@ -28,7 +36,7 @@ class ProductDetail extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // image product - slider
-            const EProductImageSlider(),
+            EProductImageSlider(product: product),
             // Rate and share
             const ERateAndShare(),
             // Sale and price
@@ -48,23 +56,28 @@ class ProductDetail extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Center(
-                      child: Text('10%',
+                      child: Text('$salePercentage%',
                           style: Theme.of(context).textTheme.labelSmall),
                     ),
                   ),
-                  const SizedBox(
-                    width: 20,
+                  const SizedBox(width: ESizes.defaultBetweenItem),
+                  Text(
+                    '\$${product.price}',
+                    style: const TextStyle(
+                        decoration: TextDecoration.lineThrough,
+                        color: Colors.red,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16),
                   ),
-                  // Price
-                  Text('\$268.35 - 289.23',
-                      style: Theme.of(context).textTheme.bodyLarge)
+                  const SizedBox(width: ESizes.defaultSpace),
+                  EProductPrice(price: controller.getProductPrice(product)),
                 ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(
                   left: ESizes.defaultSpace, right: ESizes.defaultSpace),
-              child: Text('• Dior CD Icon Polo Shirt',
+              child: Text('• ${product.title}',
                   style: Theme.of(context).textTheme.bodyLarge),
             ),
             const SizedBox(
@@ -81,15 +94,43 @@ class ProductDetail extends StatelessWidget {
                 children: [
                   Text('Status: ',
                       style: Theme.of(context).textTheme.titleLarge),
-                  Text('In stock', style: Theme.of(context).textTheme.bodyLarge)
+                  Text(controller.getProductStockStatus(product.stock), style: Theme.of(context).textTheme.bodyLarge)
                 ],
               ),
             ),
-            const EBrandProduct(),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: ESizes.defaultSpace,
+                right: ESizes.defaultSpace,
+                bottom: ESizes.defaultSpace,
+              ),
+              child: Row(
+                children: [
+                  ECircleImage(image: product.brand != null ? product.brand!.image : '', isNetworkImage: true, bg: EColors.thirdColor,),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(product.brand != null ? product.brand!.name : '', style: Theme.of(context).textTheme.bodyLarge,),
+                        const Icon(Iconsax.verify5, size: 20, color: Colors.blueAccent,)
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
+            Padding(
+              padding: const EdgeInsets.only(
+                left: ESizes.defaultSpace,
+                right: ESizes.defaultSpace,
+                bottom: ESizes.defaultSpace,
+              ),
+              child: EProductAttributes(product: product),
+            ),
             // Options
-            const EOptionColor(),
-            const EOptionSize(),
+            if(product.productType == ProductType.variable.toString())
 
             Padding(
               padding: const EdgeInsets.only(
@@ -105,7 +146,8 @@ class ProductDetail extends StatelessWidget {
                 ),
               ),
             ),
-            const EDescription(),
+            EDescription(description: product.description ?? '',),
+
             Divider(
                 thickness: 1,
                 color: dark ? EColors.thirdColor : EColors.primaryColor),

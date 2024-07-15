@@ -36,7 +36,6 @@ class EHomeCategories extends StatelessWidget {
       return SizedBox(
         height: 100,
         child: ListView.builder(
-
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           itemCount: controller.featuredCategories.length,

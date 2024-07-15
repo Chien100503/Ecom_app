@@ -2,7 +2,7 @@ import 'package:ecom_app/features/shop/screens/review/widget/rating_bar_star.dar
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ecom_app/features/shop/models/product_model.dart';
-import 'package:ecom_app/features/shop/controllers/product_controller.dart';
+import 'package:ecom_app/features/shop/controllers/product/product_controller.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
@@ -34,7 +34,7 @@ class EProductCardVertical extends StatelessWidget {
         duration: const Duration(milliseconds: 500),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 30),
+        padding: const EdgeInsets.only(bottom: 20),
         child: Container(
           width: 200,
           padding: const EdgeInsets.all(1),
@@ -52,12 +52,14 @@ class EProductCardVertical extends StatelessWidget {
                 bg: dark ? EColors.thirdColor : EColors.cardLight,
                 child: Stack(
                   children: [
-                    ERoundImages(
-                      boxFit: BoxFit.cover,
-                      imageUrl: product.thumbnail,
-                      bg: Colors.transparent,
-                      applyImageRadius: true,
-                      isNetworkImage: true,
+                    Center(
+                      child: ERoundImages(
+                        boxFit: BoxFit.cover,
+                        imageUrl: product.thumbnail,
+                        bg: Colors.transparent,
+                        applyImageRadius: true,
+                        isNetworkImage: true,
+                      ),
                     ),
                     ERoundContainer(
                       radius: ESizes.sm,

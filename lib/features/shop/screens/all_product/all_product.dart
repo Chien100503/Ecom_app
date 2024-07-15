@@ -1,25 +1,58 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecom_app/common/widgets/appbar/appbar.dart';
+import 'package:ecom_app/common/widgets/shimmer/vertical_product_card_shimmer.dart';
+import 'package:ecom_app/features/shop/controllers/product/all_product_controller.dart';
 import 'package:ecom_app/features/shop/screens/all_product/widget/sortable_products.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../models/product_model.dart';
 
 class AllProductScreen extends StatelessWidget {
-  const AllProductScreen({super.key});
+  const AllProductScreen({
+    super.key,
+    required this.title,
+    this.query,
+    this.futureMethod,
+  });
+
+  final String title;
+  final Query? query;
+  final Future<List<ProductModel>>? futureMethod;
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final controller = Get.put(AllProductController());
+    return Scaffold(
       appBar: EAppBar(
-        title: Text('Popular product'),
+        title: Text(title, style: Theme.of(context).textTheme.titleLarge),
         showBackArrow: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(ESizes.defaultSpace),
-          child: ESortableProducts(),
+          padding: const EdgeInsets.all(ESizes.defaultSpace),
+          child: FutureBuilder(
+              future: futureMethod ?? controller.fetchProductsByQuery(query),
+              builder: (context, snapshot) {
+                const loader = EVerticalProductCardShimmer();
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return loader;
+                }
+                if (!snapshot.hasData ||
+                    snapshot.data == null ||
+                    snapshot.data!.isEmpty) {
+                  return const Center(child: Text('Data not found!'));
+                }
+                if (snapshot.hasError) {
+                  return const Center(child: Text('Something went wrong!'));
+                }
+                final products = snapshot.data!;
+
+                return ESortableProducts(products: products);
+              }),
         ),
       ),
     );
   }
 }
-
