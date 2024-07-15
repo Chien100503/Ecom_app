@@ -7,9 +7,10 @@ import '../../../../../utils/constants/colors.dart';
 
 class EDescription extends StatelessWidget {
   const EDescription({
-    super.key,
+    super.key, required this.description,
   });
 
+  final String description;
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
@@ -27,7 +28,7 @@ class EDescription extends StatelessWidget {
           ),
           const SizedBox(height: ESizes.defaultBetweenItem / 1.5),
           SeeMoreWidget(
-            "The polo shirt is a timeless and relaxed piece. Crafted in green cotton piqué, it is embellished with a tonal CD Icon embroidery on the front. The style has a regular fit and will pair easily with any jeans.",
+            description,
             textStyle: TextStyle(
               fontSize: 16,
               color: dark ? Colors.white : Colors.black,

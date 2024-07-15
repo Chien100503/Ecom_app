@@ -39,7 +39,7 @@ class VerticalImageText extends StatelessWidget {
               image: image,
               boxFit: BoxFit.fitWidth,
               isNetworkImage: isNetworkImage,
-              bg: dark ? EColors.thirdColor : Colors.white,
+              bg: dark ? Colors.black : Colors.white,
               overlayColor: dark ? EColors.thirdColor : EColors.primaryColor,
             ),
             // Text

@@ -22,14 +22,22 @@ class ProductController extends GetxController {
       isLoad.value = true;
       // Fetch products
       final products = await productRepository.getFeaturedProducts();
-      print('Products fetched: ${products.length}');
       // assign products
       featuredProducts.assignAll(products);
-
     } catch (e) {
       ECustomSnackBar.showError(title: 'Oh Snap!', message: e.toString());
     } finally {
       isLoad.value = false;
+    }
+  }
+
+  Future<List<ProductModel>> fetchAllFeaturedProducts() async {
+    try {
+      final product = await productRepository.getFeaturedProducts();
+      return product;
+    } catch (e) {
+      ECustomSnackBar.showError(title: 'Oh Snap!', message: e.toString());
+      return [];
     }
   }
 

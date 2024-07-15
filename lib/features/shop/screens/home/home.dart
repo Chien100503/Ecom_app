@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ecom_app/common/widgets/products/products_card/product_cards_vertical.dart';
 import 'package:ecom_app/common/widgets/shimmer/vertical_product_card_shimmer.dart';
-import 'package:ecom_app/features/shop/controllers/product_controller.dart';
+import 'package:ecom_app/features/shop/controllers/product/product_controller.dart';
 import 'package:ecom_app/features/shop/screens/all_product/all_product.dart';
 import 'package:ecom_app/features/shop/screens/home/widget/home_appbar.dart';
 import 'package:ecom_app/features/shop/screens/home/widget/home_categories.dart';
@@ -65,21 +66,33 @@ class HomeScreen extends StatelessWidget {
                   // Popular text -view all
                   ESectionHeading(
                     title: 'Popular products',
-                    onPressed: () => Get.to(() => const AllProductScreen(),
+                    onPressed: () => Get.to(
+                        () => AllProductScreen(
+                              title: 'Popular Products',
+                              query: FirebaseFirestore.instance
+                                  .collection('Products')
+                                  .where('IsFeatured', isEqualTo: true)
+                                  .limit(6),
+                              futureMethod:
+                                  controller.fetchAllFeaturedProducts(),
+                            ),
                         transition: Transition.fadeIn,
                         duration: const Duration(milliseconds: 400)),
                   ),
                   const SizedBox(height: ESizes.defaultBetweenItem),
                   Obx(() {
-                    if (controller.isLoad.value) return const EVerticalProductCardShimmer();
+                    if (controller.isLoad.value)
+                      return const EVerticalProductCardShimmer();
                     if (controller.featuredProducts.isEmpty) {
                       return const Center(
                         child: Text('Data not found'),
                       );
                     }
                     return EGridProductLayout(
-                      itemBuilder: (_, index) =>  EProductCardVertical(product: controller.featuredProducts[index],),
-                      itemCount: 4,
+                      itemBuilder: (_, index) => EProductCardVertical(
+                        product: controller.featuredProducts[index],
+                      ),
+                      itemCount: controller.featuredProducts.length,
                     );
                   })
                 ],
