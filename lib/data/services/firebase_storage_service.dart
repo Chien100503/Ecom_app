@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../features/shop/models/product_model.dart';
 
 class EFirebaseStorageService extends GetxController {
   static EFirebaseStorageService get instance => Get.find();
@@ -56,5 +59,15 @@ class EFirebaseStorageService extends GetxController {
         throw 'Something went wrong, please try again';
       }
     }
+  }
+
+  Future<void> addProduct(ProductModel product) async {
+    await FirebaseFirestore.instance.collection('Products').add({
+      'Title': product.title,
+      'TitleLower': product.title.toLowerCase(), // Store title in lowercase
+      'Price': product.price,
+      'Thumbnail': product.thumbnail,
+      // Add other fields as necessary
+    });
   }
 }

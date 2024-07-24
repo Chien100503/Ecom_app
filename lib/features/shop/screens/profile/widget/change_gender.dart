@@ -1,7 +1,6 @@
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../personalization/controllers/update_gender_controller.dart';
 
@@ -13,8 +12,8 @@ class GenderSelectionScreen extends StatelessWidget {
     final controller = Get.put(UpdateGenderController());
 
     return Scaffold(
-      appBar: EAppBar(
-        title: const Text('Select Gender'),
+      appBar: const EAppBar(
+        title: Text('Select Gender'),
         showBackArrow: true,
       ),
       body: Padding(
@@ -28,7 +27,7 @@ class GenderSelectionScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
             ),
-            SizedBox(height: ESizes.defaultBetweenSections),
+            const SizedBox(height: ESizes.defaultBetweenSections),
             Obx(() => ListTile(
               title: const Row(
                 children: [
@@ -71,7 +70,7 @@ class GenderSelectionScreen extends StatelessWidget {
                 ],
               ),
               leading: Radio<String>(
-                overlayColor: WidgetStatePropertyAll(Colors.red),
+                overlayColor: const WidgetStatePropertyAll(Colors.red),
                 value: 'Other',
                 groupValue: controller.selectedGender.value,
                 onChanged: (value) {

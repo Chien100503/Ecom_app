@@ -59,12 +59,10 @@ class UpdateNameController extends GetxController {
 
       // Remove loader
       EFullScreenLoader.stopLoading();
-  
       ECustomSnackBar.showSuccess(title: 'Great!', message: 'Name change successful!');
       Get.off(() => const Profile());
     } catch(e) {
       EFullScreenLoader.stopLoading();
-
       ECustomSnackBar.showError(title: 'Oh Snap', message: e.toString());
     }
   }

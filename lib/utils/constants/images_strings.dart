@@ -28,7 +28,7 @@ class EImages {
   static const String electronicsIcon = 'assets/images/categories/phone.png';
 
   // avt
-  static const String avt = 'assets/images/avt_cry.png';
+  static const String avt = 'assets/images/avt_cry.gif';
 
   // Banner
   static const String banner1 = 'assets/images/banner/banner1.jpg';
@@ -64,5 +64,7 @@ class EImages {
 
   // Loader
   static const String loaderAnimation = 'assets/images/loader.json';
+  static const String loaderAnimationOne = 'assets/images/animate.json';
+  static const String emptyAnimation = 'assets/images/empty.json';
 
 }

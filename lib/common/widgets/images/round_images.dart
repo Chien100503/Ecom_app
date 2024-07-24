@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecom_app/common/widgets/shimmer/shimmer.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ERoundImages extends StatelessWidget {

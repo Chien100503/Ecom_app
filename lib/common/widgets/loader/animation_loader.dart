@@ -25,8 +25,7 @@ class EAnimationLoader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Lottie.asset(
-            animation,
-            width: MediaQuery.of(context).size.width * 0.8,
+            animation, height: 200, width: 200
           ),
           const SizedBox(height: ESizes.defaultSpace),
           Text(

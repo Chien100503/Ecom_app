@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../../../../personalization/controllers/update_birth_controller.dart';
 
 class BirthYearSelectionScreen extends StatefulWidget {
+  const BirthYearSelectionScreen({super.key});
+
   @override
   _BirthYearSelectionScreenState createState() => _BirthYearSelectionScreenState();
 }
@@ -15,7 +17,7 @@ class _BirthYearSelectionScreenState extends State<BirthYearSelectionScreen> {
     final updateBirthdayController = Get.put(UpdateBirthdayController());
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Birth Year'),
+        title: const Text('Select Birth Year'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -23,7 +25,7 @@ class _BirthYearSelectionScreenState extends State<BirthYearSelectionScreen> {
           children: [
             TextField(
               controller: birthYearController,
-              decoration: InputDecoration(labelText: 'Birth Year'),
+              decoration: const InputDecoration(labelText: 'Birth Year'),
               readOnly: true,
               onTap: () async {
                 DateTime? pickedDate = await showDatePicker(
@@ -53,7 +55,7 @@ class _BirthYearSelectionScreenState extends State<BirthYearSelectionScreen> {
                 }
               },
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 if (birthYearController.text.isNotEmpty) {
@@ -61,7 +63,7 @@ class _BirthYearSelectionScreenState extends State<BirthYearSelectionScreen> {
                   updateBirthdayController.updateBirthYear(birthYear);
                 }
               },
-              child: Text('Save'),
+              child: const Text('Save'),
             ),
           ],
         ),

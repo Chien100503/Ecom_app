@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecom_app/common/widgets/products/favorite_icon/favorite_icon.dart';
 import 'package:ecom_app/features/shop/controllers/product/images_controller.dart';
 import 'package:ecom_app/features/shop/models/product_model.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
@@ -10,7 +11,6 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../../common/widgets/custom_shape/curved_edges/curved_edge_widget.dart';
 import '../../../../../common/widgets/images/round_images.dart';
-import '../../../../../utils/constants/images_strings.dart';
 import '../../../../../utils/constants/sizes.dart';
 
 class EProductImageSlider extends StatelessWidget {
@@ -35,16 +35,21 @@ class EProductImageSlider extends StatelessWidget {
                 padding: const EdgeInsets.all(ESizes.productImageRadius * 2),
                 child: Center(
                   child: Obx(
-                    () {
+                        () {
                       final image = controller.selectedProductImages.value;
+                      final initialIndex = images.indexOf(image);
                       return GestureDetector(
-                        onTap: () => controller.showEnlargedImage(image),
-                        child: CachedNetworkImage(
-                          imageUrl: image,
-                          progressIndicatorBuilder: (_, __, downloadProgress) =>
-                              CircularProgressIndicator(
-                                  value: downloadProgress.progress,
-                                  color: EColors.primaryColor),
+                        onTap: () => controller.showEnlargedImage(images, initialIndex),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: CachedNetworkImage(
+                            imageUrl: image,
+                            progressIndicatorBuilder: (_, __, downloadProgress) =>
+                                CircularProgressIndicator(
+                                    value: downloadProgress.progress,
+                                    color: EColors.primaryColor),
+                          ),
                         ),
                       );
                     },
@@ -67,7 +72,7 @@ class EProductImageSlider extends StatelessWidget {
                     width: ESizes.defaultBetweenItem,
                   ),
                   itemBuilder: (_, index) => Obx(
-                    () {
+                        () {
                       final imageSelected =
                           controller.selectedProductImages.value ==
                               images[index];
@@ -100,13 +105,7 @@ class EProductImageSlider extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100),
                     color: Colors.grey.withOpacity(0.3),
                   ),
-                  child: const Center(
-                    child: Icon(
-                      Iconsax.heart5,
-                      color: Colors.red,
-                      size: 28,
-                    ),
-                  ),
+                  child: EFavoriteIcon(productId: product.id),
                 ),
               ],
             )

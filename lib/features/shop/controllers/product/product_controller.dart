@@ -1,4 +1,4 @@
-import 'package:ecom_app/common/widgets/loader/loader.dart';
+import  'package:ecom_app/common/widgets/loader/loader.dart';
 import 'package:ecom_app/data/repositories/product/repository_product.dart';
 import 'package:ecom_app/features/shop/models/product_model.dart';
 import 'package:ecom_app/utils/constants/enums.dart';
@@ -71,7 +71,7 @@ class ProductController extends GetxController {
 
   // calculate discount percentage
   String? calculateSalePercentage(double originPrice, double salePrice) {
-    if(salePrice == null || salePrice <= 0.0) return null;
+    if(salePrice <= 0.0) return null;
     if(originPrice <= 0) return null;
 
     double percentage = ((originPrice - salePrice) / originPrice) * 100;
