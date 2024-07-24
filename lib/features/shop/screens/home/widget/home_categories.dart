@@ -1,17 +1,19 @@
-import 'package:ecom_app/common/widgets/shimmer/shimmer.dart';
+
 import 'package:ecom_app/common/widgets/shimmer/shimmer_categories.dart';
 import 'package:ecom_app/features/shop/controllers/categories_controller.dart';
+import 'package:ecom_app/features/shop/models/product_model.dart';
 import 'package:ecom_app/features/shop/screens/sub_categories/sub_categories.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../common/widgets/image_text_widget/vertical_image_text.dart';
-import '../../../../../utils/constants/images_strings.dart';
 
 class EHomeCategories extends StatelessWidget {
   const EHomeCategories({
-    super.key,
+    super.key, this.product,
   });
+
+  final ProductModel? product;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,6 @@ class EHomeCategories extends StatelessWidget {
       if (controller.isLoad.value) return const EShimmerCategories();
 
       if (controller.featuredCategories.isEmpty) {
-        print('hihii ${controller.featuredCategories}');
         return Center(
           child: Text(
             'No data found',
@@ -32,7 +33,6 @@ class EHomeCategories extends StatelessWidget {
           ),
         );
       }
-
       return SizedBox(
         height: 100,
         child: ListView.builder(
@@ -43,11 +43,12 @@ class EHomeCategories extends StatelessWidget {
             final category = controller.featuredCategories[index];
             return VerticalImageText(
               title: category.name,
-              textColor: Colors.black,
-              onTap: () => Get.to(() => const SubCategoryScreen(),
-                  transition: Transition.fadeIn,
-                  duration: const Duration(milliseconds: 400)),
               image: category.image,
+              textColor: Colors.black,
+              onTap: () => Get.to(() => SubCategoryScreen(category: category,),
+                  transition: Transition.fadeIn,
+                  duration: const Duration(milliseconds: 400),
+              ),
             );
           },
         ),

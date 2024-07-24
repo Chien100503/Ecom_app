@@ -8,6 +8,8 @@ class EHelperFunctions {
   static Color? getColor(String value) {
     if (value == 'green') {
       return Colors.green;
+    } else if (value == 'beige') {
+      return const Color(0xfffaebd7);
     } else if (value == 'red') {
       return Colors.red;
     } else if (value == 'aquatic') {

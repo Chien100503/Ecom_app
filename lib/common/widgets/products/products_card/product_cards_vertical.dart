@@ -1,3 +1,4 @@
+import 'package:ecom_app/common/widgets/products/favorite_icon/favorite_icon.dart';
 import 'package:ecom_app/features/shop/screens/review/widget/rating_bar_star.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,17 +25,18 @@ class EProductCardVertical extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = ProductController.instance;
-    final salePercentage = controller.calculateSalePercentage(product.price, product.salePrice);
+    final salePercentage =
+        controller.calculateSalePercentage(product.price, product.salePrice);
     final dark = EHelperFunctions.isDarkMode(context);
 
     return GestureDetector(
       onTap: () => Get.to(
-            () => ProductDetail(product: product),
+        () => ProductDetail(product: product),
         transition: Transition.fadeIn,
         duration: const Duration(milliseconds: 500),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 20),
+        padding: const EdgeInsets.only(bottom: 26),
         child: Container(
           width: 200,
           padding: const EdgeInsets.all(1),
@@ -74,41 +76,10 @@ class EProductCardVertical extends StatelessWidget {
                             .apply(color: EColors.thirdColor),
                       ),
                     ),
-                    Positioned(
+                     Positioned(
                       top: 0,
                       right: 0,
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: Colors.grey.withOpacity(0.3)),
-                        child: const Center(
-                          child: Icon(
-                            Iconsax.heart5,
-                            color: Colors.red,
-                            size: 28,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 45,
-                      right: 0,
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: dark ? EColors.primaryColor.withOpacity(0.3) : EColors.accent),
-                        child: const Center(
-                          child: Icon(
-                            Iconsax.add,
-                            color: EColors.primaryColor,
-                            size: 28,
-                          ),
-                        ),
-                      ),
+                      child: EFavoriteIcon(productId: product.id),
                     ),
                   ],
                 ),
@@ -130,10 +101,10 @@ class EProductCardVertical extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Text(
-                          '\$${product.price}',
-                            style: const TextStyle(decoration: TextDecoration.lineThrough, color: Colors.red)
-                        ),
+                        Text('\$${product.price}',
+                            style: const TextStyle(
+                                decoration: TextDecoration.lineThrough,
+                                color: Colors.red)),
                         const SizedBox(width: ESizes.defaultBetweenItem),
                         Text(
                           '\$${product.salePrice}',
@@ -141,7 +112,32 @@ class EProductCardVertical extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const ERatingStar(rating: 4.0),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const ERatingStar(rating: 4.5),
+                        Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.only(
+                              bottomRight: Radius.circular(15),
+                              topLeft: Radius.circular(100),
+                            ),
+                            color: dark ? EColors.thirdColor : EColors.accent,
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.only(top: 10, left: 10),
+                            child: Icon(
+                              Iconsax.add,
+                              color: EColors.primaryColor,
+                              size: 28,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),

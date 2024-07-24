@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecom_app/common/widgets/shimmer/shimmer.dart';
 import 'package:ecom_app/features/shop/controllers/banner_controller.dart';
-import 'package:ecom_app/features/shop/controllers/home_controller.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';

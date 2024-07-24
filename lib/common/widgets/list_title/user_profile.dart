@@ -1,5 +1,4 @@
 import 'package:ecom_app/common/widgets/shimmer/shimmer.dart';
-import 'package:ecom_app/features/shop/controllers/product/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';

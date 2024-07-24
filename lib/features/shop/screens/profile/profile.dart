@@ -1,7 +1,10 @@
+import 'package:flutter/services.dart'; // Add this import
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:ecom_app/common/widgets/appbar/appbar.dart';
 import 'package:ecom_app/common/widgets/images/circle_images.dart';
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
-import 'package:ecom_app/features/personalization/controllers/update_name_controller.dart';
 import 'package:ecom_app/features/personalization/controllers/user_controller.dart';
 import 'package:ecom_app/features/shop/screens/profile/widget/change_birth_year.dart';
 import 'package:ecom_app/features/shop/screens/profile/widget/change_gender.dart';
@@ -12,17 +15,36 @@ import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
-class Profile extends StatelessWidget {
+import '../../../../common/widgets/loader/loader.dart';
+
+class Profile extends StatefulWidget {
   const Profile({super.key});
+
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  final controller = UserController.instance;
+  IconData _copyIcon = Iconsax.copy;
+
+  void _copyToClipboard(String text) {
+    Clipboard.setData(ClipboardData(text: text));
+    setState(() {
+      _copyIcon = Icons.check; // Change icon to check
+    });
+    ECustomSnackBar.showSuccess(title: 'Nice!', message: 'USER ID has been copied to clipboard');
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        _copyIcon = Iconsax.copy; // Revert icon back after delay
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
-    final controller = UserController.instance;
     return Scaffold(
       appBar: EAppBar(
         showBackArrow: true,
@@ -46,10 +68,10 @@ class Profile extends StatelessWidget {
                         final networkImage = controller.user.value.profilePicture;
                         final image = networkImage.isNotEmpty ? networkImage : EImages.avt;
                         return ECircleImage(
-                          height: 160,
-                          width: 160,
-                          image: image,
-                          isNetworkImage: networkImage.isNotEmpty
+                            height: 160,
+                            width: 160,
+                            image: image,
+                            isNetworkImage: networkImage.isNotEmpty
                         );
                       }),
                       Positioned(
@@ -67,9 +89,7 @@ class Profile extends StatelessWidget {
                             onPressed: () => controller.uploadProfilePicture(),
                             icon: Icon(
                               Iconsax.edit,
-                              color: dark
-                                  ? Colors.white
-                                  : Colors.white,
+                              color: dark ? Colors.white : Colors.white,
                             ),
                           ),
                         ),
@@ -92,7 +112,6 @@ class Profile extends StatelessWidget {
               ),
               EProfileMenu(
                 subName: controller.user.value.fullName,
-                // subName: controller.user.value.fullName,
                 title: 'Name',
                 onPressed: () => Get.to(() => const ChangeName()),
               ),
@@ -101,27 +120,23 @@ class Profile extends StatelessWidget {
                 title: 'Username',
                 onPressed: () {},
               ),
-              const SizedBox(
-                height: 10
-              ),
+              const SizedBox(height: 10),
               Divider(
                 color: dark ? EColors.thirdColor : EColors.primaryColor,
                 thickness: 2,
                 indent: 60,
                 endIndent: 60,
               ),
-              const SizedBox(
-                  height: 10
-              ),
+              const SizedBox(height: 10),
               const ESectionHeading(
                 title: 'Personal information',
                 showActionButton: false,
               ),
               EProfileMenu(
                 title: 'USER ID',
-                icon: Iconsax.copy,
+                icon: _copyIcon,
                 subName: controller.user.value.id,
-                onPressed: () {},
+                onPressed: () => _copyToClipboard(controller.user.value.id),
               ),
               EProfileMenu(
                 title: 'E-mail',
@@ -141,7 +156,7 @@ class Profile extends StatelessWidget {
               EProfileMenu(
                 title: 'Birthday',
                 subName: controller.user.value.birthYear.toString(),
-                onPressed: () => Get.to(() => BirthYearSelectionScreen()),
+                onPressed: () => Get.to(() => const BirthYearSelectionScreen()),
               ),
               const SizedBox(height: 10),
               Divider(

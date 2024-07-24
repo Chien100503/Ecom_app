@@ -4,6 +4,7 @@ import 'package:ecom_app/common/widgets/shimmer/vertical_product_card_shimmer.da
 import 'package:ecom_app/features/shop/controllers/product/all_product_controller.dart';
 import 'package:ecom_app/features/shop/screens/all_product/widget/sortable_products.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
+import 'package:ecom_app/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,17 +37,10 @@ class AllProductScreen extends StatelessWidget {
               future: futureMethod ?? controller.fetchProductsByQuery(query),
               builder: (context, snapshot) {
                 const loader = EVerticalProductCardShimmer();
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return loader;
-                }
-                if (!snapshot.hasData ||
-                    snapshot.data == null ||
-                    snapshot.data!.isEmpty) {
-                  return const Center(child: Text('Data not found!'));
-                }
-                if (snapshot.hasError) {
-                  return const Center(child: Text('Something went wrong!'));
-                }
+                final widget = CloudHelperFunctions.checkMultiRecordState(snapshot: snapshot, loader: loader);
+
+                if (widget != null) return widget;
+
                 final products = snapshot.data!;
 
                 return ESortableProducts(products: products);

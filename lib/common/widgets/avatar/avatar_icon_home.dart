@@ -1,4 +1,5 @@
 import 'package:ecom_app/features/personalization/controllers/user_controller.dart';
+import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,9 +25,8 @@ class AvatarIcon extends StatelessWidget {
         final networkImage = controller.user.value.profilePicture;
         final image = networkImage.isNotEmpty ? networkImage : EImages.avt;
         return ECircleImage(
-            height: 100,
-            width: 100,
             image: image,
+            boxFit: BoxFit.fill,
             isNetworkImage: networkImage.isNotEmpty
         );
       }),

@@ -6,7 +6,6 @@ import 'package:ecom_app/features/checkout/order/order.dart';
 import 'package:ecom_app/features/checkout/payment/payment.dart';
 import 'package:ecom_app/features/personalization/screens/addresses/address.dart';
 import 'package:ecom_app/features/shop/screens/home/home.dart';
-import 'package:ecom_app/features/shop/screens/product_details/product_detail.dart';
 import 'package:ecom_app/features/shop/screens/profile/profile.dart';
 import 'package:ecom_app/features/shop/screens/review/review_and_rating.dart';
 import 'package:ecom_app/features/shop/screens/settings/setting.dart';

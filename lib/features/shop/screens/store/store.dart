@@ -2,9 +2,11 @@ import 'package:ecom_app/common/widgets/appbar/appbar.dart';
 import 'package:ecom_app/common/widgets/custom_shape/containers/search_container.dart';
 import 'package:ecom_app/common/widgets/layouts/grid_layout.dart';
 import 'package:ecom_app/common/widgets/products/cart/cart_menu_icon.dart';
+import 'package:ecom_app/common/widgets/shimmer/shimmer_brand.dart';
 import 'package:ecom_app/common/widgets/tabbar/tabbar.dart';
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
 import 'package:ecom_app/features/shop/controllers/categories_controller.dart';
+import 'package:ecom_app/features/shop/controllers/product/brand_controller.dart';
 import 'package:ecom_app/features/shop/screens/all_brands/all_brand.dart';
 import 'package:ecom_app/features/shop/screens/all_brands/widget/brand_product.dart';
 import 'package:ecom_app/features/shop/screens/store/widget/brand_card.dart';
@@ -15,7 +17,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../../utils/constants/images_strings.dart';
 import '../../../../utils/constants/sizes.dart';
 
 class Store extends StatelessWidget {
@@ -25,6 +26,7 @@ class Store extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
     final categories = CategoriesController.instance.featuredCategories;
+    final brandController = Get.put(BrandController());
     return DefaultTabController(
       length: categories.length,
       child: Scaffold(
@@ -74,20 +76,29 @@ class Store extends StatelessWidget {
                                   duration: const Duration(milliseconds: 400)),
                         ),
                         const SizedBox(height: ESizes.defaultBetweenItem / 1.5),
-                        EGridProductLayout(
-                          mainAxisEvent: 70,
-                          itemCount: 4,
-                          itemBuilder: (_, index) {
-                            return EBrandCard(
-                              height: 56,
-                              width: 56,
-                              showBorder: true,
-                              image: EImages.iconCloth,
-                              onTap: () =>
-                                  Get.to(() => const EBrandProductScreen()),
+                        Obx(() {
+                          if (brandController.isLoad.value) return const ShimmerBrand();
+                          if (brandController.featuredBrands.isEmpty) {
+                            return const Center(
+                              child: Text('Data not found!'),
                             );
-                          },
-                        ),
+                          }
+                          return EGridProductLayout(
+                            mainAxisEvent: 70,
+                            itemCount: brandController.featuredBrands.length,
+                            itemBuilder: (_, index) {
+                              final brand = brandController.featuredBrands[index];
+                              return EBrandCard(
+                                brand: brand,
+                                height: 56,
+                                width: 56,
+                                showBorder: true,
+                                onTap: () =>
+                                    Get.to(() => EBrandProductScreen(brand: brand,)),
+                              );
+                            },
+                          );
+                        })
                       ],
                     ),
                   ),
@@ -100,7 +111,7 @@ class Store extends StatelessWidget {
             ];
           },
           body: TabBarView(
-            children: categories.map((categories) => ECategoryTab(categoryModels: categories)).toList(),
+            children: categories.map((category) => ECategoryTab(category: category)).toList(),
           ),
         ),
       ),

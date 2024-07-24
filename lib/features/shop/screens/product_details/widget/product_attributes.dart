@@ -27,14 +27,14 @@ class EProductAttributes extends StatelessWidget {
         children: [
           if (controller.selectVariation.value.id.isNotEmpty)
             ERoundContainer(
-              padding: EdgeInsets.all(ESizes.md),
+              padding: const EdgeInsets.all(ESizes.md),
               bg: dark ? EColors.primaryColor : EColors.thirdColor,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      ESectionHeading(
+                      const ESectionHeading(
                           title: 'Variation', showActionButton: false),
                       const SizedBox(width: ESizes.defaultBetweenItem),
                       Column(
@@ -42,8 +42,8 @@ class EProductAttributes extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              EProductTitleText(title: 'Price:', smallSize: true),
-                              SizedBox(width: ESizes.defaultBetweenItem),
+                              const EProductTitleText(title: 'Price:', smallSize: true),
+                              const SizedBox(width: ESizes.defaultBetweenItem),
                               if (controller.selectVariation.value.price > 0)
                                 Text(
                                   '\$${controller.selectVariation.value.price}%',
@@ -54,15 +54,15 @@ class EProductAttributes extends StatelessWidget {
                                       decoration:
                                       TextDecoration.lineThrough, color: Colors.red),
                                 ),
-                              SizedBox(width: ESizes.defaultBetweenItem),
+                              const SizedBox(width: ESizes.defaultBetweenItem),
                               EProductPrice(price: controller.getVariationPrice()),
                             ],
                           ),
                           Row(
                             children: [
-                              EProductTitleText(
+                              const EProductTitleText(
                                   title: 'Status:', smallSize: true),
-                              SizedBox(width: ESizes.defaultBetweenItem),
+                              const SizedBox(width: ESizes.defaultBetweenItem),
                               Text(
                                 controller.variationStockStatus.value,
                                 style: Theme.of(context).textTheme.bodyLarge,
@@ -129,24 +129,6 @@ class EProductAttributes extends StatelessWidget {
 
   List<Widget> _buildDescriptionParts(String description) {
     List<String> descriptionParts = description.split(',');
-
-    return descriptionParts.map((part) {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text('• '),
-          Expanded(
-            child: EProductTitleText(
-              title: '${_capitalize(part.trim())}.', // Viết hoa chữ cái đầu và loại bỏ khoảng trắng thừa
-              smallSize: true,
-            ),
-          ),
-        ],
-      );
-    }).toList();
-  }
-  List<Widget> _buildDescriptionTitle(String description) {
-    List<String> descriptionParts = description.split(' - ');
 
     return descriptionParts.map((part) {
       return Row(

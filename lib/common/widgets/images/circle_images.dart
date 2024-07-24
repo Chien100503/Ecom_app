@@ -7,14 +7,15 @@ import '../../../utils/constants/sizes.dart';
 class ECircleImage extends StatelessWidget {
   const ECircleImage(
       {super.key,
-        this.width = 56,
-        this.height = 56,
-        this.padding = ESizes.sm,
+      this.width = 56,
+      this.height = 56,
+      this.padding = ESizes.sm,
       this.boxFit = BoxFit.cover,
       required this.image,
       this.isNetworkImage = false,
       this.overlayColor,
-      this.bg});
+      this.bg,
+      this.border});
 
   final double height, width, padding;
   final BoxFit? boxFit;
@@ -22,6 +23,7 @@ class ECircleImage extends StatelessWidget {
   final bool isNetworkImage;
   final Color? overlayColor;
   final Color? bg;
+  final Border? border;
 
   @override
   Widget build(BuildContext context) {
@@ -30,25 +32,25 @@ class ECircleImage extends StatelessWidget {
       height: height,
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100),
-        color: bg
-      ),
+          borderRadius: BorderRadius.circular(100), color: bg, border: border),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(100),
         child: Center(
-          child: isNetworkImage ?
-              CachedNetworkImage (
-                fit: boxFit,
-                color: overlayColor,
-                imageUrl: image,
-                progressIndicatorBuilder: (context, url, downloadProgress) => const EShimmerEffect(width: 55, height: 55, radius: 15),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-              ) : Image(
-              fit: boxFit,
-              color: overlayColor,
-              image: isNetworkImage
-                  ? NetworkImage(image)
-                  : AssetImage(image) as ImageProvider),
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  fit: boxFit,
+                  color: overlayColor,
+                  imageUrl: image,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      const EShimmerEffect(width: 55, height: 55, radius: 15),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                )
+              : Image(
+                  fit: boxFit,
+                  color: overlayColor,
+                  image: isNetworkImage
+                      ? NetworkImage(image)
+                      : AssetImage(image) as ImageProvider),
         ),
       ),
     );

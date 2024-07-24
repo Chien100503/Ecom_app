@@ -4,6 +4,7 @@ import 'package:ecom_app/features/authentication/screens/onboarding/onboarding.d
 import 'package:ecom_app/features/authentication/screens/signup/verify_email.dart';
 import 'package:ecom_app/navigation_menu.dart';
 import 'package:ecom_app/utils/exceptions/firebase_exception.dart';
+import 'package:ecom_app/utils/local_storage/storage_utility.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -33,6 +34,7 @@ class RepositoriesAuthentication extends GetxController {
     final user = _auth.currentUser;
     if (user != null) {
       if (user.emailVerified) {
+        await ELocalStorage.init(user.uid);
         Get.offAll(() => const NavigationMenu());
       } else {
         Get.offAll(

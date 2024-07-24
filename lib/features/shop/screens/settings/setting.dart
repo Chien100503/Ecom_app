@@ -15,8 +15,6 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../common/widgets/list_title/user_profile.dart';
 import '../../../../data/repositories/authentication/repositories_authentication.dart';
-import '../../../personalization/controllers/user_controller.dart';
-import 'demo.dart';
 
 class Setting extends StatelessWidget {
   const Setting({super.key});
@@ -71,7 +69,7 @@ class Setting extends StatelessWidget {
                     title: 'My address',
                     subTitle: 'Set shopping delivery address',
                     icon: Icon(
-                      Iconsax.safe_home,
+                      Iconsax.location,
                       size: 30,
                       color: dark ? EColors.thirdColor : EColors.primaryColor,
                     ),
@@ -84,7 +82,7 @@ class Setting extends StatelessWidget {
                     title: 'My Orders',
                     subTitle: 'Set shopping delivery address',
                     icon: Icon(
-                      Iconsax.safe_home,
+                      Iconsax.smart_car4,
                       size: 30,
                       color: dark ? EColors.thirdColor : EColors.primaryColor,
                     ),
@@ -104,9 +102,7 @@ class Setting extends StatelessWidget {
                   ),
                   const Divider(),
                   ESettingMenuTitle(
-                    onTap: () => Get.to(() => const ProductListScreen(),
-                        transition: Transition.downToUp,
-                        duration: const Duration(milliseconds: 400)),
+                    onTap: () {},
                     title: 'Bank account',
                     subTitle: 'Withdraw balance to registered bank account',
                     icon: Icon(

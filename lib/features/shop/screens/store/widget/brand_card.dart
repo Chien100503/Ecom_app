@@ -1,4 +1,5 @@
 import 'package:ecom_app/common/widgets/texts/bran_title_with_verify_icon.dart';
+import 'package:ecom_app/features/shop/models/brand_model.dart';
 import 'package:ecom_app/utils/constants/enums.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +12,13 @@ class EBrandCard extends StatelessWidget {
   const EBrandCard({
     super.key,
     required this.showBorder,
-    this.onTap,
-    required this.image, required this.height, required this.width,
+    this.onTap, required this.height, required this.width, required this.brand
   });
 
   final double height, width;
-  final String image;
   final bool showBorder;
   final void Function()? onTap;
+  final BrandModel brand;
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +35,8 @@ class EBrandCard extends StatelessWidget {
             ECircleImage(
               height: height,
               width: width,
-              image: image,
-              isNetworkImage: false,
+              image: brand.image,
+              isNetworkImage: true,
               bg: Colors.transparent,
               overlayColor: dark ? Colors.white : Colors.black,
             ),
@@ -46,12 +46,12 @@ class EBrandCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const EBrandTitleWithVerifyIcon(
-                    title: 'Doir',
+                  EBrandTitleWithVerifyIcon(
+                    title: brand.name,
                     brandTextSize: TextSizes.medium,
                   ),
                   Text(
-                    '123 product',
+                    '${brand.productsCount ?? 0} product',
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
                 ],
