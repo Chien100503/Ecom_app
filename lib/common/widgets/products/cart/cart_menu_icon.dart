@@ -1,4 +1,6 @@
+import 'package:ecom_app/features/shop/controllers/product/cart_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/helpers/helper_functions.dart';
@@ -18,6 +20,7 @@ class CartCounterIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
+    final controller = Get.put(CartController());
 
     return Stack(
       children: [
@@ -37,12 +40,14 @@ class CartCounterIcon extends StatelessWidget {
               borderRadius: BorderRadius.circular(100),
             ),
             child: Center(
-              child: Text(
-                '2',
-                style: TextStyle(
-                  color: dark ? Colors.white : Colors.white,
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.normal,
+              child: Obx(
+                    () => Text(
+                  controller.noOfCartItems.value.toString(),
+                  style: TextStyle(
+                    color: dark ? Colors.white : Colors.white,
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
               ),
             ),
@@ -52,3 +57,4 @@ class CartCounterIcon extends StatelessWidget {
     );
   }
 }
+

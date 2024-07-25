@@ -1,5 +1,3 @@
-import 'package:ecom_app/features/shop/screens/wishList/wishlist.dart';
-import 'package:ecom_app/navigation_menu.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +55,11 @@ class ECustomSnackBar {
     );
   }
 
-  static customToast({required message, onTap, note}) {
+  static customToast({
+    required String message,
+    VoidCallback? onTap,
+    String note = '',
+  }) {
     ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(
       elevation: 0,
       duration: const Duration(seconds: 2),
@@ -72,12 +74,23 @@ class ECustomSnackBar {
               : EColors.thirdColor,
         ),
         child: Center(
-          child: Column(children: [
-            Text(message, style: Theme.of(Get.context!).textTheme.labelLarge),
-            TextButton(onPressed: onTap, child: Text(note))
-          ]),
+          child: Column(
+            mainAxisSize: MainAxisSize.min, // Để tránh Overflow nếu nội dung dài
+            children: [
+              Text(
+                message,
+                style: Theme.of(Get.context!).textTheme.labelLarge,
+              ),
+              if (note.isNotEmpty) // Chỉ hiển thị TextButton nếu note không rỗng
+                TextButton(
+                  onPressed: onTap,
+                  child: Text(note),
+                ),
+            ],
+          ),
         ),
       ),
     ));
   }
+
 }

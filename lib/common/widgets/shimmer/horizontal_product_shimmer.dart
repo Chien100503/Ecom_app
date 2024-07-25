@@ -9,7 +9,7 @@ class EHorizontalProductShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: ESizes.defaultBetweenSections),
+      margin: const EdgeInsets.only(bottom: ESizes.defaultBetweenSections),
       height: 120,
       child: ListView.separated(
         itemCount: itemCount,

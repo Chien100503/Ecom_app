@@ -2,12 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecom_app/common/widgets/loader/animation_loader.dart';
 import 'package:ecom_app/features/shop/screens/product_details/product_detail.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
-import 'package:ecom_app/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/features/shop/models/product_model.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key, this.query = '', this.product});

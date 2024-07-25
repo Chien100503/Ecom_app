@@ -6,7 +6,6 @@ import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../../common/widgets/custom_shape/curved_edges/curved_edge_widget.dart';

@@ -118,7 +118,7 @@ class EProductCardsHorizontal extends StatelessWidget {
                         Container(
                           decoration: BoxDecoration(
                             color: dark ? EColors.thirdColor : EColors.accent,
-                            borderRadius: BorderRadius.all(Radius.circular(100))
+                            borderRadius: const BorderRadius.all(Radius.circular(100))
                           ),
                           child: SizedBox(
                             width: ESizes.iconLg * 1.2,

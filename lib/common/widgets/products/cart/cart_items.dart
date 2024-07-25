@@ -1,5 +1,7 @@
 import 'package:ecom_app/common/widgets/products/cart/product_quantity.dart';
+import 'package:ecom_app/features/shop/controllers/product/cart_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../utils/constants/sizes.dart';
 import '../products_card/product_price.dart';
@@ -15,32 +17,43 @@ class ECartItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: 2,
-      separatorBuilder: (_, __) =>
-          const SizedBox(height: ESizes.defaultBetweenSections),
-      itemBuilder: (_, index) => Column(
-        children: [
-          const ECartItem(),
-          if (showAddRemoveButton) const SizedBox(height: ESizes.defaultBetweenItem),
-          if (showAddRemoveButton)
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
+    final cartController = CartController.instance;
+    return Obx(
+      () => ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: cartController.cartItems.length,
+          separatorBuilder: (_, __) =>
+              const SizedBox(height: ESizes.defaultBetweenSections),
+          itemBuilder: (_, index) => Obx(() {
+                final item = cartController.cartItems[index];
+                return Column(
                   children: [
-                    SizedBox(width: 70),
-                    EProductQuantityWithAddRemoveButton(),
+                    ECartItem(cartItem: item),
+                    if (showAddRemoveButton)
+                      const SizedBox(height: ESizes.defaultBetweenItem),
+                    if (showAddRemoveButton)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              const SizedBox(width: 70),
+                              EProductQuantityWithAddRemoveButton(
+                                quantity: item.quantity,
+                                add: () => cartController.addOneToCart(item),
+                                remove: () =>
+                                    cartController.removeOneFromCart(item),
+                              ),
+                            ],
+                          ),
+                          EProductPrice(price: (item.price * item.quantity).toStringAsFixed(1)),
+                        ],
+                      )
                   ],
-                ),
-                EProductPrice(price: '100')
-              ],
-            )
-        ],
-      ),
+                );
+              })),
     );
   }
 }

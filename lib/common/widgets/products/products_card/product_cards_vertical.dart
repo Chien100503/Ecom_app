@@ -7,7 +7,6 @@ import 'package:ecom_app/features/shop/controllers/product/product_controller.da
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../../../features/shop/screens/product_details/product_detail.dart';
 import '../../../../utils/constants/enums.dart';
@@ -16,6 +15,7 @@ import '../../custom_shape/containers/round_container.dart';
 import '../../images/round_images.dart';
 import '../../texts/bran_title_with_verify_icon.dart';
 import '../../texts/product_title_text.dart';
+import '../cart/product_card_add_to_cart_button.dart';
 
 class EProductCardVertical extends StatelessWidget {
   const EProductCardVertical({super.key, required this.product});
@@ -25,8 +25,8 @@ class EProductCardVertical extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = ProductController.instance;
-    final salePercentage =
-        controller.calculateSalePercentage(product.price, product.salePrice);
+    // final salePercentage =
+    //     controller.calculateSalePercentage(product.price, product.salePrice);
     final dark = EHelperFunctions.isDarkMode(context);
 
     return GestureDetector(
@@ -112,30 +112,12 @@ class EProductCardVertical extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
+                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const ERatingStar(rating: 4.5),
-                        Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
-                              bottomRight: Radius.circular(15),
-                              topLeft: Radius.circular(100),
-                            ),
-                            color: dark ? EColors.thirdColor : EColors.accent,
-                          ),
-                          child: const Padding(
-                            padding: EdgeInsets.only(top: 10, left: 10),
-                            child: Icon(
-                              Iconsax.add,
-                              color: EColors.primaryColor,
-                              size: 28,
-                            ),
-                          ),
-                        ),
+                        ProductCardAddToCartButton(product: product,),
                       ],
                     )
                   ],
@@ -148,3 +130,5 @@ class EProductCardVertical extends StatelessWidget {
     );
   }
 }
+
+
