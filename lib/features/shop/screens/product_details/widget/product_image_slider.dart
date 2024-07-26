@@ -20,7 +20,9 @@ class EProductImageSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
-    final controller = Get.put(ImagesController());
+    final controller = Get.put(ImagesController()); // Use Get.find to get the existing instance
+
+    // Ensure the controller has been properly initialized before calling it
     final images = controller.getAllProductImages(product);
 
     return ECurvedEdgeWidget(
@@ -73,21 +75,17 @@ class EProductImageSlider extends StatelessWidget {
                   itemBuilder: (_, index) => Obx(
                         () {
                       final imageSelected =
-                          controller.selectedProductImages.value ==
-                              images[index];
+                          controller.selectedProductImages.value == images[index];
                       return ERoundImages(
                         boxFit: BoxFit.contain,
                         border: Border.all(
-                            color: imageSelected
-                                ? EColors.primaryColor
-                                : Colors.transparent),
+                            color: imageSelected ? EColors.primaryColor : Colors.transparent),
                         width: 80,
                         isNetworkImage: true,
                         imageUrl: images[index],
                         padding: const EdgeInsets.all(ESizes.sm),
                         bg: Colors.white60,
-                        onPressed: () => controller
-                            .selectedProductImages.value = images[index],
+                        onPressed: () => controller.selectedProductImages.value = images[index],
                       );
                     },
                   ),
@@ -114,3 +112,4 @@ class EProductImageSlider extends StatelessWidget {
     );
   }
 }
+

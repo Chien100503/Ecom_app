@@ -3,29 +3,45 @@ import 'package:ecom_app/common/widgets/texts/section_heading.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../shop/controllers/product/checkout_controller.dart';
 
 class BillingAddressSection extends StatelessWidget {
   const BillingAddressSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CheckoutController());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ESectionHeading(
           title: 'Payment method',
           titleButton: 'Change',
-          onPressed: (){},
+          onPressed: () => controller.selectPaymentMethod(context),
         ),
         const SizedBox(height: ESizes.defaultBetweenItem),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const ERoundImages(imageUrl: EImages.paypal, bg: Colors.transparent),
-            Text('Paypal', style: Theme.of(context).textTheme.bodyLarge),
-          ],
+        Obx(
+          ()=> Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ERoundImages(
+                applyImageRadius: false,
+                boxFit: BoxFit.contain,
+                height: 40,
+                width: 40,
+                imageUrl: controller.selectedPaymentMethod.value.image,
+                bg: Colors.transparent,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                controller.selectedPaymentMethod.value.name,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ],
+          ),
         ),
-        
       ],
     );
   }

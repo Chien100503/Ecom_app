@@ -9,15 +9,28 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../models/product_model.dart';
 
-class EBottomNavigationDetail extends StatelessWidget {
+class EBottomNavigationDetail extends StatefulWidget {
   const EBottomNavigationDetail({super.key, required this.product});
 
   final ProductModel product;
+
+  @override
+  _EBottomNavigationDetailState createState() => _EBottomNavigationDetailState();
+}
+
+class _EBottomNavigationDetailState extends State<EBottomNavigationDetail> {
+  late CartController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = CartController.instance;
+    _controller.updateAlreadyAddedProductCount(widget.product);
+  }
+
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
-    final controller = CartController.instance;
-    controller.updateAlreadyAddedProductCount(product);
 
     return Container(
       padding: const EdgeInsets.symmetric(
@@ -32,11 +45,11 @@ class EBottomNavigationDetail extends StatelessWidget {
             BoxShadow(offset: Offset(0, 0), blurRadius: 5, color: Colors.grey)
           ]),
       child: Obx(
-        () => Row(
+            () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Obx(
-              ()=> Row(
+                  ()=> Row(
                 children: [
                   ECircleIcon(
                     border: Border.all(width: 1, color: Colors.black),
@@ -45,13 +58,13 @@ class EBottomNavigationDetail extends StatelessWidget {
                     color: Colors.black,
                     width: 40,
                     height: 40,
-                    onPressed:()=> controller.productQuantityInCart.value < 1 ? null : controller.productQuantityInCart -= 1,
+                    onPressed:()=> _controller.productQuantityInCart.value < 1 ? null : _controller.productQuantityInCart -= 1,
                   ),
                   const SizedBox(
                     width: ESizes.defaultBetweenItem,
                   ),
                   Text(
-                    controller.productQuantityInCart.value.toString(),
+                    _controller.productQuantityInCart.value.toString(),
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(
@@ -64,13 +77,13 @@ class EBottomNavigationDetail extends StatelessWidget {
                     color: Colors.white,
                     width: 40,
                     height: 40,
-                    onPressed: () => controller.productQuantityInCart.value += 1,
+                    onPressed: () => _controller.productQuantityInCart.value += 1,
                   ),
                 ],
               ),
             ),
             ElevatedButton(
-              onPressed: controller.productQuantityInCart.value < 1 ? null : () => controller.addToCart(product),
+              onPressed: _controller.productQuantityInCart.value < 1 ? null : () => _controller.addToCart(widget.product),
               style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(ESizes.md),
                   backgroundColor: EColors.thirdColor,

@@ -1,5 +1,6 @@
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
+import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -20,6 +21,7 @@ class EAnimationLoaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = EHelperFunctions.isDarkMode(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -34,8 +36,8 @@ class EAnimationLoaderWidget extends StatelessWidget {
           showAction ?
               SizedBox(width: 250,child:  OutlinedButton(
                 onPressed: onActionPress,
-                style: OutlinedButton.styleFrom(backgroundColor: EColors.dark),
-                child: const Text('Cancel'),
+                style: OutlinedButton.styleFrom(backgroundColor:dark ? EColors.primaryColor : EColors.thirdColor),
+                child: Text(actionText!),
               ),) : const Text('no')
         ],
       ),

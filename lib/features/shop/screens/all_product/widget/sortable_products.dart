@@ -9,36 +9,56 @@ import '../../../../../common/widgets/products/products_card/product_cards_verti
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 
-class ESortableProducts extends StatelessWidget {
+class ESortableProducts extends StatefulWidget {
   const ESortableProducts({
-    super.key, required this.products,
+    super.key,
+    required this.products,
   });
 
   final List<ProductModel> products;
+
+  @override
+  _ESortableProductsState createState() => _ESortableProductsState();
+}
+
+class _ESortableProductsState extends State<ESortableProducts> {
+  AllProductController? _controller; // Use nullable type
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = Get.put(AllProductController());
+    _controller!.assignProducts(widget.products);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(AllProductController());
-    controller.assignProducts(products);
+    if (_controller == null) {
+      // Handle the scenario where the controller might still be initializing
+      return const Center(child: CircularProgressIndicator());
+    }
+
     return Column(
       children: [
         DropdownButtonFormField(
           decoration: const InputDecoration(
               prefixIcon: Icon(Iconsax.sort),
               fillColor: EColors.thirdColor),
-          value: controller.selectedSortOption.value,
+          value: _controller!.selectedSortOption.value,
           onChanged: (value) {
-            controller.sortProducts(value!);
+            _controller!.sortProducts(value!);
           },
-          items: ['Name','High Price', 'Low Price', 'Newest', 'Sale']
+          items: ['Name', 'High Price', 'Low Price', 'Newest', 'Sale']
               .map((option) =>
               DropdownMenuItem(value: option, child: Text(option)))
               .toList(),
         ),
         const SizedBox(height: ESizes.defaultBetweenSections),
         Obx(
-          ()=> EGridProductLayout(
-            itemCount: controller.products.length,
-            itemBuilder: (context, index) => EProductCardVertical(product: controller.products[index]),
+              () => EGridProductLayout(
+            itemCount: _controller!.products.length,
+            itemBuilder: (context, index) => EProductCardVertical(
+                product: _controller!.products[index]),
           ),
         )
       ],

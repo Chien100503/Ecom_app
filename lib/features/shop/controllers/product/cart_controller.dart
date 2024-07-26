@@ -79,7 +79,23 @@ class CartController extends GetxController {
     }
     updateCart();
   }
+  void removeSelectedItems(Set<CartItemModel> selectedItems) {
+    cartItems.removeWhere((item) => selectedItems.contains(item));
+    updateCart();
+  }
 
+
+  void removeItemFromCart(CartItemModel item) {
+    int index = cartItems.indexWhere((cartItem) =>
+    cartItem.productId == item.productId &&
+        cartItem.variationId == item.variationId);
+
+    if (index >= 0) {
+      cartItems.removeAt(index);
+      updateCart();
+      ECustomSnackBar.customToast(message: 'Product removed from the cart');
+    }
+  }
   void removeOneFromCart(CartItemModel item) {
     int index = cartItems.indexWhere((cartItem) => cartItem.productId == item.productId && cartItem.variationId == item.variationId);
 

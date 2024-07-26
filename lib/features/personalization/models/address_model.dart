@@ -29,15 +29,17 @@ class AddressModel {
   String get formattedPhoneNo => EFormatter.formatPhoneNumber(phoneNumber);
 
   static AddressModel empty() => AddressModel(
-      id: '',
-      name: '',
-      phoneNumber: '',
-      street: '',
-      ward: '',
-      country: '',
-      state: '',
-      city: '');
+    id: '',
+    name: '',
+    phoneNumber: '',
+    street: '',
+    ward: '',
+    country: '',
+    state: '',
+    city: '',
+  );
 
+  /// Convert AddressModel instance to JSON
   Map<String, dynamic> toJson() {
     return {
       'Id': id,
@@ -48,11 +50,12 @@ class AddressModel {
       'Country': country,
       'City': city,
       'State': state,
-      'DateTime': DateTime.now(),
+      'DateTime': date != null ? Timestamp.fromDate(date!) : null,
       'SelectedAddress': selectedAddress
     };
   }
 
+  /// Factory method to create an AddressModel from a Map
   factory AddressModel.fromMap(Map<String, dynamic> data) {
     return AddressModel(
       id: data['Id'] as String,
@@ -64,10 +67,11 @@ class AddressModel {
       city: data['City'] as String,
       state: data['State'] as String,
       selectedAddress: data['SelectedAddress'] as bool,
-      date: (data['DateTime'] as Timestamp).toDate(),
+      date: data['DateTime'] != null ? (data['DateTime'] as Timestamp).toDate() : null,
     );
   }
 
+  /// Factory method to create an AddressModel from a DocumentSnapshot
   factory AddressModel.fromSnapShot(DocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>;
     return AddressModel(
@@ -80,7 +84,7 @@ class AddressModel {
         city: data['City'] ?? '',
         state: data['State'] ?? '',
         selectedAddress: data['SelectedAddress'] as bool,
-        date: (data['DateTime'] as Timestamp).toDate());
+        date: data['DateTime'] != null ? (data['DateTime'] as Timestamp).toDate() : null);
   }
 
   @override

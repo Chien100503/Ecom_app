@@ -1,10 +1,16 @@
 import 'package:ecom_app/common/widgets/loader/loader.dart';
+import 'package:ecom_app/common/widgets/texts/section_heading.dart';
 import 'package:ecom_app/data/repositories/address/repository_address.dart';
 import 'package:ecom_app/features/personalization/models/address_model.dart';
+import 'package:ecom_app/features/personalization/screens/addresses/add_address.dart';
+import 'package:ecom_app/features/personalization/screens/addresses/widget/single_address.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
+import 'package:ecom_app/utils/constants/sizes.dart';
+import 'package:ecom_app/utils/helpers/cloud_helper_functions.dart';
 import 'package:ecom_app/utils/helpers/network_manager.dart';
 import 'package:ecom_app/utils/popups/full_screen_loader.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddressController extends GetxController {
@@ -98,6 +104,64 @@ class AddressController extends GetxController {
       ECustomSnackBar.showError(
           title: 'Address not found!', message: e.toString());
     }
+  }
+
+  Future<dynamic> selectNewAddressPopup(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true, // To allow the bottom sheet to expand to its full height
+      builder: (_) => SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(ESizes.lg),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const ESectionHeading(title: 'Select Address'),
+                FutureBuilder(
+                  future: getAllUserAddress(),
+                  builder: (_, snapshot) {
+                    final response = CloudHelperFunctions.checkMultiRecordState(
+                      snapshot: snapshot,
+                    );
+                    if (response != null) return response;
+
+                    return ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: MediaQuery.of(context).size.height * 0.5,
+                      ),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (_, index) => SingleAddress(
+                          address: snapshot.data![index],
+                          onTap: () async {
+                            await selectAddress(snapshot.data![index]);
+                            Get.back();
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: ESizes.defaultSpace * 2),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Get.to(() => const AddNewAddress()),
+                    child: const Text('Add new address'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   void resetFormField() {
