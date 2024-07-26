@@ -1,5 +1,7 @@
 import 'package:ecom_app/common/widgets/appbar/appbar.dart';
+import 'package:ecom_app/features/personalization/controllers/address/address_controller.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
+import 'package:ecom_app/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -12,6 +14,7 @@ class AddNewAddress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
+    final controller = AddressController.instance;
     return Scaffold(
       appBar: EAppBar(
         title: Text(
@@ -24,9 +27,12 @@ class AddNewAddress extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(ESizes.defaultSpace),
           child: Form(
+            key: controller.addressFormKey,
             child: Column(
               children: [
                 TextFormField(
+                  controller: controller.name,
+                  validator: (value) => EValidation.validateEmptyText('Name', value),
                   decoration: InputDecoration(
                     prefixIcon: Icon(Iconsax.user,
                         color:
@@ -42,6 +48,8 @@ class AddNewAddress extends StatelessWidget {
                   height: ESizes.inputBetweenFields,
                 ),
                 TextFormField(
+                  controller: controller.phoneNumber,
+                  validator: EValidation.validatePhoneNumber,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Iconsax.call,
                         color:
@@ -60,6 +68,8 @@ class AddNewAddress extends StatelessWidget {
                   children: [
                     Expanded(
                       child: TextFormField(
+                        controller: controller.street,
+                        validator: (value) => EValidation.validateEmptyText('Street', value),
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.edit_road,
                               color: dark
@@ -78,6 +88,8 @@ class AddNewAddress extends StatelessWidget {
                     ),
                     Expanded(
                       child: TextFormField(
+                        controller: controller.ward,
+                        validator: (value) => EValidation.validateEmptyText('Ward', value),
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.maps_home_work_outlined,
                               color: dark
@@ -97,6 +109,8 @@ class AddNewAddress extends StatelessWidget {
                   height: ESizes.inputBetweenFields,
                 ),
                 TextFormField(
+                  controller: controller.city,
+                  validator: (value) => EValidation.validateEmptyText('City', value),
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.location_city_outlined,
                         color:
@@ -112,6 +126,8 @@ class AddNewAddress extends StatelessWidget {
                   height: ESizes.inputBetweenFields,
                 ),
                 TextFormField(
+                  controller: controller.country,
+                  validator: (value) => EValidation.validateEmptyText('Country', value),
                   decoration: InputDecoration(
                     prefixIcon: Icon(Iconsax.global_search,
                         color:
@@ -127,7 +143,7 @@ class AddNewAddress extends StatelessWidget {
                 SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                        onPressed: () {}, child: const Text('Save')))
+                        onPressed: () => controller.addNewAddress(), child: const Text('Save')))
               ],
             ),
           ),

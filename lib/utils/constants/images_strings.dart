@@ -62,6 +62,11 @@ class EImages {
   static const String paypal = 'assets/images/paypal.png';
   static const String successAnimate = 'assets/images/success.json';
 
+  // Logo payment
+  static const String creditCard = 'assets/logos/creditCard.png';
+  static const String payOnPickup = 'assets/logos/payOnPickup.png';
+  static const String momo = 'assets/logos/momo.png';
+
   // Loader
   static const String loaderAnimation = 'assets/images/loader.json';
   static const String loaderAnimationOne = 'assets/images/animate.json';

@@ -16,7 +16,6 @@ class RepositoryCategories extends GetxController{
     try {
       final snapshot = await _db.collection('Categories').get();
       final list = snapshot.docs.map((document) => CategoryModels.fromSnapshot(document)).toList();
-      print('----------- ${list.length}');
       return list;
 
 

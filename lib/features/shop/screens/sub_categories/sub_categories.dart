@@ -4,7 +4,6 @@ import 'package:ecom_app/common/widgets/products/products_card/product_cards_hor
 import 'package:ecom_app/common/widgets/shimmer/horizontal_product_shimmer.dart';
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
 import 'package:ecom_app/features/shop/controllers/categories_controller.dart';
-import 'package:ecom_app/features/shop/models/product_model.dart';
 import 'package:ecom_app/features/shop/screens/all_product/all_product.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';

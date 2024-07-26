@@ -29,7 +29,7 @@ class ProductDetail extends StatelessWidget {
     final salePercentage = controller.calculateSalePercentage(product.price, product.salePrice);
     final dark = EHelperFunctions.isDarkMode(context);
     return Scaffold(
-      bottomNavigationBar: const EBottomNavigationDetail(),
+      bottomNavigationBar: EBottomNavigationDetail(product:product),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

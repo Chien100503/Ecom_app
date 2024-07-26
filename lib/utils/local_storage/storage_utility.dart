@@ -20,6 +20,9 @@ class ELocalStorage {
   Future<void> saveData<T>(String key, T value) async {
     await _storage.write(key, value);
   }
+  Future<void> writeData<T>(String key, T value) async {
+    await _storage.write(key, value);
+  }
 
   T? readData<T>(String key) {
     return _storage.read<T>(key);

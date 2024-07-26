@@ -98,7 +98,7 @@ Future<void> _refresh(){
                         itemBuilder: (_, index) => EProductCardVertical(
                           product: controller.featuredProducts[index],
                         ),
-                        itemCount: 4,
+                        itemCount: 6,
                       );
                     })
                   ],

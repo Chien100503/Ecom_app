@@ -5,6 +5,7 @@ import 'package:ecom_app/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:ecom_app/common/widgets/shimmer/shimmer_brand.dart';
 import 'package:ecom_app/common/widgets/tabbar/tabbar.dart';
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
+import 'package:ecom_app/features/checkout/cart/cart.dart';
 import 'package:ecom_app/features/shop/controllers/categories_controller.dart';
 import 'package:ecom_app/features/shop/controllers/product/brand_controller.dart';
 import 'package:ecom_app/features/shop/screens/all_brands/all_brand.dart';
@@ -39,7 +40,7 @@ class Store extends StatelessWidget {
           actions: [
             CartCounterIcon(
               icons: const Icon(Iconsax.shopping_bag),
-              onPressed: () {},
+              onPressed: () => Get.to(() => const CartScreen()),
               iconColor: dark ? Colors.white : EColors.primaryColor,
             ),
           ],

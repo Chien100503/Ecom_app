@@ -1,12 +1,12 @@
 class EPricingCaculator {
-  static double caculateTotalPrice(double productPrice, String location) {
+  static double calculateTotalPrice(double productPrice, String location) {
     double taxRate = getTaxRateForLocation(location);
     double taxAmount = productPrice * taxRate;
 
     double shippingCost = getShippingCost(location);
 
     double totalPrice = productPrice + taxAmount + shippingCost;
-    return totalPrice;
+    return totalPrice.roundToDouble();
   }
 
   static String caculateShippingCost(double productPrice, String location) {
