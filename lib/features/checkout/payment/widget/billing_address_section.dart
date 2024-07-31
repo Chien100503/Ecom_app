@@ -23,7 +23,7 @@ class BillingAddressSection extends StatelessWidget {
         ),
         const SizedBox(height: ESizes.defaultBetweenItem),
         Obx(
-          ()=> Row(
+          () => Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ERoundImages(

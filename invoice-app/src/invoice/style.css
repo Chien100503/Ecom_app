@@ -1,0 +1,49 @@
+/*
+Theme Name: Invoice V3
+Theme URI: https://templatesjungle.com/
+Author: TemplatesJungle
+Author URI: https://templatesjungle.com/
+Description: Invoice V3 is specially designed product packaged for Invoice.
+Version: 3.0
+*/
+
+/*--------------------------------------------------------------
+Styles
+--------------------------------------------------------------*/
+
+/* Fonts */
+:root {
+  --body-font: "Poppins", sans-serif;
+}
+
+/* Bootstrap Override */
+body {
+  --bs-font-sans-serif: "Poppins", sans-serif;
+  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-font-size: 1rem;
+  --bs-body-font-weight: 400;
+  --bs-body-line-height: 2;
+  --bs-body-color: #fdfdfd;
+  --bs-primary: #7533fa;
+  --bs-primary-rgb: 117, 51, 250;
+  --bs-border-color: #eeeeee;
+}
+
+/* Pattern Overlay
+------------------------------------------*/
+.pattern {
+  position: relative;
+}
+
+.pattern-overlay {
+  position: absolute;
+  z-index: -1;
+}
+
+.pattern .pattern-overlay .pattern-left {
+  left: 0;
+}
+
+.pattern .pattern-overlay.pattern-right {
+  right: 0;
+}

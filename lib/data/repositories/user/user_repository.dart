@@ -27,7 +27,7 @@ class UserRepository extends GetxController {
 
   Future<UserModel> fetchUserDetails() async {
     try {
-      final documentSnapshot = await _db.collection("Users").doc(RepositoriesAuthentication.instance.authUser?.uid).get();
+      final documentSnapshot = await _db.collection("Users").doc(RepositoriesAuthentication.instance.authUser!.uid).get();
       if (documentSnapshot.exists) {
         return UserModel.fromSnapshot(documentSnapshot);
       } else {
@@ -49,7 +49,7 @@ class UserRepository extends GetxController {
 
   Future<void> updateSingleField(Map<String, dynamic> json) async {
     try {
-      await _db.collection("Users").doc(RepositoriesAuthentication.instance.authUser?.uid).update(json);
+      await _db.collection("Users").doc(RepositoriesAuthentication.instance.authUser!.uid).update(json);
     } on FirebaseAuthException catch (e) {
       throw EFirebaseException(e.code).message;
     } catch (e) {
@@ -80,4 +80,3 @@ class UserRepository extends GetxController {
     }
   }
 }
-

@@ -20,6 +20,7 @@ class CartController extends GetxController {
     loadCartItems();
   }
 
+
   void addToCart(ProductModel product) {
     // quantity check
     if (productQuantityInCart.value < 1) {
@@ -209,6 +210,12 @@ class CartController extends GetxController {
         (item) => item.productId == productId && variationId == variationId,
         orElse: () => CartItemModel.empty());
     return foundItem.quantity;
+  }
+
+  Map<String, double> get cartProductDetails {
+    return {
+      for (var item in cartItems) item.title: item.price
+    };
   }
 
   void clearCart() {

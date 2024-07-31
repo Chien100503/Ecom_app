@@ -10,7 +10,6 @@ class UserModel {
   String phoneNumber;
   String profilePicture;
   String gender;
-  String birthYear;
 
   UserModel(
       {required this.id,
@@ -20,8 +19,7 @@ class UserModel {
       required this.email,
       required this.phoneNumber,
       required this.profilePicture,
-      required this.gender,
-      required this.birthYear});
+      required this.gender});
 
   // Helper function to get the full name
   String get fullName => '$firstName $lastName';
@@ -48,8 +46,7 @@ class UserModel {
       email: '',
       phoneNumber: '',
       profilePicture: '',
-      gender: '',
-      birthYear: 'yyyy/mm/dd');
+      gender: '');
 
   // Convert model to json structure for storing data in firebase
   Map<String, dynamic> toJson() {
@@ -60,8 +57,7 @@ class UserModel {
       'username': username,
       'phone': phoneNumber,
       'profilePicture': profilePicture,
-      'gender': gender,
-      'birthYear': birthYear,
+      'gender': gender
     };
   }
 
@@ -77,8 +73,7 @@ class UserModel {
           username: data['username'] ?? '',
           phoneNumber: data['phone'] ?? '',
           profilePicture: data['profilePicture'] ?? '',
-          gender: data['gender'] ?? '',
-          birthYear: data['birthYear'] ?? 0,);
+          gender: data['gender'] ?? '');
     } else {
       return UserModel.empty();
     }
@@ -102,8 +97,7 @@ class UserModel {
       username: username ?? this.username,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       profilePicture: profilePicture ?? this.profilePicture,
-      gender: gender ?? this.gender,
-      birthYear: birthYear ?? this.birthYear,
+      gender: gender ?? this.gender
     );
   }
 }

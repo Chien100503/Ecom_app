@@ -1,15 +1,21 @@
 import 'package:ecom_app/common/style/spacing_styles.dart';
 import 'package:ecom_app/features/authentication/screens/loggin/login.dart';
+import 'package:ecom_app/utils/constants/images_strings.dart';
+import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
+import 'package:lottie/lottie.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../utils/constants/texts_strings.dart';
-import '../../../utils/helpers/helper_functions.dart';
 
 class SuccessScreen extends StatelessWidget {
-  const SuccessScreen({super.key, required this.image, required this.title, required this.subTitle, required this.onPressed});
+  const SuccessScreen(
+      {super.key,
+      required this.image,
+      required this.title,
+      required this.subTitle,
+      required this.onPressed});
 
   final String image, title, subTitle;
   final VoidCallback onPressed;
@@ -22,16 +28,37 @@ class SuccessScreen extends StatelessWidget {
         child: Column(
           children: [
             // Image
-            Center(child: Image(image: AssetImage(image), width: EHelperFunctions.screenWidth() * 0.6,)),
+            // Center(child: Image(image: AssetImage(image), width: EHelperFunctions.screenWidth() * 0.6,)),
+            Center(
+                child: Lottie.asset(image,
+                    width: EHelperFunctions.screenWidth() * 0.6,
+                    repeat: false)),
 
-            const SizedBox(height: ESizes.defaultBetweenSections,),
+            const SizedBox(
+              height: ESizes.defaultBetweenSections,
+            ),
             // Title and subtitle
-            Text(title, style: Theme.of(context).textTheme.headlineMedium, textAlign: TextAlign.center,),
-            const SizedBox(height: ESizes.defaultBetweenItem,),
-            Text(subTitle, style: Theme.of(context).textTheme.labelMedium, textAlign: TextAlign.center,),
-            const SizedBox(height: ESizes.defaultBetweenSections,),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.headlineMedium,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: ESizes.defaultBetweenItem,
+            ),
+            Text(
+              subTitle,
+              style: Theme.of(context).textTheme.labelMedium,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: ESizes.defaultBetweenSections,
+            ),
 
-            SizedBox(width: double.infinity, child: ElevatedButton(onPressed: () => Get.to(() => const LoginScreen()), child: const Text(ETexts.eContinue))),
+            SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                    onPressed: onPressed, child: const Text(ETexts.eContinue))),
           ],
         ),
       ),

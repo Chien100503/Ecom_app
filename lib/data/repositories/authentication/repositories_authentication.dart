@@ -19,7 +19,7 @@ class RepositoriesAuthentication extends GetxController {
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
 
-  User get authUser => _auth.currentUser!;
+  User? get authUser => _auth.currentUser;
 
   @override
   void onReady() {
@@ -38,7 +38,7 @@ class RepositoriesAuthentication extends GetxController {
         Get.offAll(() => const NavigationMenu());
       } else {
         Get.offAll(
-          () => VerifyEmailScreen(
+              () => VerifyEmailScreen(
             email: _auth.currentUser?.email,
           ),
         );

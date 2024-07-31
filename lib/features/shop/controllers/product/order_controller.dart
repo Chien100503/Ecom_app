@@ -16,7 +16,6 @@ import 'package:get/get.dart';
 class OrderController extends GetxController {
   static OrderController get instance => Get.find();
 
-  // variables
   final cartController = CartController.instance;
   final addressController = Get.put(AddressController());
   final checkoutController = CheckoutController.instance;
@@ -37,8 +36,7 @@ class OrderController extends GetxController {
       EFullScreenLoader.openLoadingDialog(
           'Processing your order', EImages.loaderAnimation);
 
-      final userId = RepositoriesAuthentication.instance.authUser.uid;
-
+      final userId = RepositoriesAuthentication.instance.authUser!.uid;
       if (userId.isEmpty) return;
 
       final order = OrderModel(

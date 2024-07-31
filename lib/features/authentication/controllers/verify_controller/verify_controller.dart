@@ -21,13 +21,28 @@ class VerifyController extends GetxController {
 
   sendEmailVerify() async {
     try {
+      print("Sending email verification...");
       await RepositoriesAuthentication.instance.sendEmailVerify();
       ECustomSnackBar.showSuccess(
-          title: 'Email rent',
-          message: 'Please check your inbox and verify your email');
+        title: 'Email sent',
+        message: 'Please check your inbox and verify your email',
+      );
       await RepositoriesAuthentication.instance.screenRedirect();
     } catch (e) {
-      ECustomSnackBar.showError(title: 'Oh Snap', message: e.toString());
+      print('======================');
+      print('Error occurred during email verification: $e');
+      print('======================');
+      if (e is FirebaseException) {
+        ECustomSnackBar.showError(
+          title: 'Firebase Error',
+          message: e.message ?? 'Unknown error occurred',
+        );
+      } else {
+        ECustomSnackBar.showError(
+          title: 'Oh Snap',
+          message: e.toString(),
+        );
+      }
     }
   }
 

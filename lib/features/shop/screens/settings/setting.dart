@@ -5,6 +5,7 @@ import 'package:ecom_app/common/widgets/texts/section_heading.dart';
 import 'package:ecom_app/features/checkout/cart/cart.dart';
 import 'package:ecom_app/features/checkout/order/order.dart';
 import 'package:ecom_app/features/personalization/screens/addresses/address.dart';
+import 'package:ecom_app/features/shop/screens/profile/demo.dart';
 import 'package:ecom_app/features/shop/screens/profile/profile.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
@@ -18,7 +19,6 @@ import '../../../../data/repositories/authentication/repositories_authentication
 
 class Setting extends StatelessWidget {
   const Setting({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +113,7 @@ class Setting extends StatelessWidget {
                   ),
                   const Divider(),
                   ESettingMenuTitle(
-                    onTap: () {},
+                    onTap: () => Get.to(() => DemoPaymentStripe()),
                     title: 'Notification',
                     subTitle: 'Set any kind of notification message',
                     icon: Icon(
