@@ -9,13 +9,17 @@ class NetworkManager extends GetxController {
   static NetworkManager get instance => Get.find();
 
   final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _subscription;
+  late StreamSubscription _subscription;
   final Rx<ConnectivityResult> _connectionResult = ConnectivityResult.none.obs;
 
   @override
   void onInit() {
     super.onInit();
-    _subscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    _subscription = _connectivity.onConnectivityChanged.listen((List<ConnectivityResult> results) {
+      if (results.isNotEmpty) {
+        _updateConnectionStatus(results.first);
+      }
+    });
   }
 
   @override
@@ -24,21 +28,17 @@ class NetworkManager extends GetxController {
     _subscription.cancel();
   }
 
-  Future<void> _updateConnectionStatus(ConnectivityResult result) async{
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
     _connectionResult.value = result;
-    if(_connectionResult.value == ConnectivityResult.none) {
+    if (_connectionResult.value == ConnectivityResult.none) {
       ECustomSnackBar.showWarning(title: 'No internet connection');
     }
   }
 
-  Future<bool> isConnected() async{
+  Future<bool> isConnected() async {
     try {
       final result = await _connectivity.checkConnectivity();
-      if (result == ConnectivityResult.none) {
-        return false;
-      } else {
-        return true;
-      }
+      return result != ConnectivityResult.none;
     } on PlatformException catch (_) {
       return false;
     }

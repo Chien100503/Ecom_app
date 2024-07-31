@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Invoice Dashboard</title>
+</head>
+<body>
+  <h1>Invoice Dashboard</h1>
+  <form id="invoice-form">
+    <label for="to">Recipient Email:</label>
+    <input type="email" id="to" name="to" required>
+    <br>
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject" name="subject" required>
+    <br>
+    <label for="htmlContent">Invoice Content (HTML):</label>
+    <textarea id="htmlContent" name="htmlContent" rows="10" cols="50" required></textarea>
+    <br>
+    <button type="submit">Send Invoice</button>
+  </form>
+  <script>
+    document.getElementById('invoice-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const to = document.getElementById('to').value;
+      const subject = document.getElementById('subject').value;
+      const htmlContent = document.getElementById('htmlContent').value;
+
+      const response = await fetch('/api/send-invoice', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ to, subject, htmlContent }),
+      });
+
+      const result = await response.text();
+      alert(result);
+    });
+  </script>
+</body>
+</html>

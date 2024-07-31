@@ -5,25 +5,34 @@ import 'package:ecom_app/common/widgets/products/cart/cart_items.dart';
 import 'package:ecom_app/features/checkout/payment/widget/billing_address_section.dart';
 import 'package:ecom_app/features/checkout/payment/widget/billing_amount_section.dart';
 import 'package:ecom_app/features/checkout/payment/widget/billing_payment_section.dart';
-import 'package:ecom_app/features/checkout/payment/widget/payment_success.dart';
 import 'package:ecom_app/features/shop/controllers/product/cart_controller.dart';
+import 'package:ecom_app/features/shop/controllers/product/order_controller.dart';
+import 'package:ecom_app/features/shop/controllers/product/stripe_controller.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:ecom_app/utils/helpers/pricing_caculator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/widgets/products/cart/coupon_code.dart';
-import '../../shop/controllers/product/order_controller.dart';
+import '../../shop/controllers/product/checkout_controller.dart';
 
-class PaymentScreen extends StatelessWidget {
+class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
 
   @override
+  State<PaymentScreen> createState() => _PaymentScreenState();
+}
+
+class _PaymentScreenState extends State<PaymentScreen> {
+  final cartController = CartController.instance;
+  final orderController = Get.put(OrderController());
+  final checkoutController = CheckoutController.instance;
+
+  @override
   Widget build(BuildContext context) {
-    final cartController = Get.put(CartController());
     final subtotal = cartController.totalCartPrice.value;
-    final orderController = Get.put(OrderController());
     final totalAmount = EPricingCaculator.calculateTotalPrice(subtotal, 'VN');
+    final stripeController = Get.put(StripeController());
 
     return Scaffold(
       appBar: const EAppBar(
@@ -35,8 +44,25 @@ class PaymentScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(ESizes.defaultSpace),
           child: ElevatedButton(
-            onPressed: subtotal > 0 ? () => orderController.processOrder(totalAmount) : () => ECustomSnackBar.showWarning(title: 'Empty cart', message: 'Add items in the cart to proceed'),
-            child:  Text('Payment \$ $totalAmount'),
+            onPressed: subtotal > 0
+                ? () {
+                    final selectedPaymentMethod = checkoutController
+                        .selectedPaymentMethod.value.name
+                        .toLowerCase();
+                    if (selectedPaymentMethod == 'credit card') {
+                      stripeController.stripeMakePayment(totalAmount);
+                    } else if (selectedPaymentMethod == 'pay on pickup') {
+                      orderController.processOrder(totalAmount);
+                    } else {
+                      ECustomSnackBar.showWarning(
+                          title: 'Invalid payment method',
+                          message: 'Please select a valid payment method');
+                    }
+                  }
+                : () => ECustomSnackBar.showWarning(
+                    title: 'Empty cart',
+                    message: 'Add items in the cart to proceed'),
+            child: Text('Payment \$ $totalAmount'),
           ),
         ),
       ),
@@ -47,7 +73,6 @@ class PaymentScreen extends StatelessWidget {
             children: [
               ECartItems(
                 showAddRemoveButton: false,
-
                 isEditing: false,
                 selectedItems: {},
               ),

@@ -153,11 +153,6 @@ class _ProfileState extends State<Profile> {
                 subName: controller.user.value.gender,
                 onPressed: () => Get.to(() => const GenderSelectionScreen()),
               ),
-              EProfileMenu(
-                title: 'Birthday',
-                subName: controller.user.value.birthYear.toString(),
-                onPressed: () => Get.to(() => const BirthYearSelectionScreen()),
-              ),
               const SizedBox(height: 10),
               Divider(
                 color: dark ? EColors.thirdColor : EColors.primaryColor,
