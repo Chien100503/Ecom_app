@@ -14,7 +14,6 @@ class UserRepository extends GetxController {
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-
   Future<void> saveUserRecord(UserModel user) async {
     try {
       await _db.collection("Users").doc(user.id).set(user.toJson());
@@ -37,6 +36,7 @@ class UserRepository extends GetxController {
       rethrow;
     }
   }
+
   Future<void> updateUserDetails(UserModel updateUser) async {
     try {
       await _db.collection("Users").doc(updateUser.id).update(updateUser.toJson());
@@ -69,6 +69,11 @@ class UserRepository extends GetxController {
 
   Future<String> uploadImage(String path, XFile image) async {
     try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        throw 'User not authenticated';
+      }
+
       final ref = FirebaseStorage.instance.ref(path).child(image.name);
       await ref.putFile(File(image.path));
       final downloadUrl = await ref.getDownloadURL();
@@ -76,7 +81,7 @@ class UserRepository extends GetxController {
     } on FirebaseAuthException catch (e) {
       throw EFirebaseException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Something went wrong. Please try again: $e';
     }
   }
 }

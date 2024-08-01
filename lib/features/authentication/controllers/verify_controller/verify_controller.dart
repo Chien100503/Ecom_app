@@ -73,7 +73,7 @@ class VerifyController extends GetxController {
     if (currentUser != null && currentUser.emailVerified) {
       Get.off(
         () => SuccessScreen(
-          image: EImages.success,
+          image: EImages.successAnimate,
           title: ETexts.yourAccountCreateTitle,
           subTitle: ETexts.yourAccountCreateSubTitle,
           onPressed: () => RepositoriesAuthentication.instance.screenRedirect(),
