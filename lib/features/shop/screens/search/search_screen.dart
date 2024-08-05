@@ -1,11 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecom_app/common/widgets/loader/animation_loader.dart';
-import 'package:ecom_app/features/shop/screens/product_details/product_detail.dart';
+import 'package:ecom_app/common/widgets/layouts/grid_layout.dart';
+import 'package:ecom_app/common/widgets/products/products_card/product_cards_vertical.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_app/utils/constants/colors.dart';
-import 'package:ecom_app/features/shop/models/product_model.dart';
 import 'package:get/get.dart';
+import 'package:ecom_app/features/shop/models/product_model.dart';
+
+import '../../../../common/widgets/appbar/appbar.dart';
+import '../../../../common/widgets/loader/animation_images_gif.dart';
+import '../../controllers/search_controller.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key, this.query = '', this.product});
@@ -19,14 +22,16 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
-  late String _searchQuery;
+  final ProductSearchController _searchControllerInstance =
+      Get.put(ProductSearchController());
 
   @override
   void initState() {
     super.initState();
-    _searchQuery =
-        widget.query.isNotEmpty ? widget.query : widget.product?.title ?? '';
-    _searchController.text = _searchQuery;
+    _searchController.text = widget.query.isNotEmpty
+        ? widget.query.toLowerCase()
+        : widget.product?.title.toLowerCase() ?? '';
+    _searchControllerInstance.onSearchChanged(_searchController.text);
   }
 
   @override
@@ -35,74 +40,42 @@ class _SearchScreenState extends State<SearchScreen> {
     super.dispose();
   }
 
-  void _onSearchChanged(String value) {
-    setState(() {
-      _searchQuery = value;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: EColors.accent,
+      appBar: EAppBar(
+        showBackArrow: true,
         title: TextField(
           controller: _searchController,
-          onChanged: _onSearchChanged,
-          decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide.none,
-              ),
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-              filled: true,
-              fillColor: EColors.thirdColor,
-              hintText: 'Search...',
-              suffixIcon: const Icon(Icons.search)),
+          onChanged: _searchControllerInstance.onSearchChanged,
         ),
       ),
-      body: _searchQuery.isEmpty
-          ? const EAnimationLoader(
-              text: 'Please enter a search query to find products',
-              animation: EImages.loaderAnimationOne)
-          : StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('Products')
-                  .where('Title', isGreaterThanOrEqualTo: _searchQuery)
-                  .where('Title', isLessThanOrEqualTo: '$_searchQuery\uf8ff')
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (snapshot.hasError) {
-                  return const Center(child: Text('Something went wrong.'));
-                }
-                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return const Center(child: Text('No products found.'));
-                }
-                return ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    var data = snapshot.data!.docs[index].data() as Map<String, dynamic>;
-                    var product = ProductModel.fromJson(data);
-                    return ListTile(
-                      title: Text(product.title),
-                      subtitle: Text('Price: \$${product.price.toString()}'),
-                      leading: SizedBox(
-                        width: 50, // Specify the width
-                        height: 50, // Specify the height
-                        child: product.thumbnail.isNotEmpty
-                            ? Image.network(product.thumbnail, fit: BoxFit.cover)
-                            : const Icon(Icons.image, size: 50),
-                      ),
-                      onTap: () => Get.to(() => ProductDetail(product: product)),
-                    );
-                  },
-                );
-              },
-            ),
+      body: Obx(() {
+        if (_searchControllerInstance.searchQuery.isEmpty) {
+          return const EAnimationImageGif(
+              text: 'Please enter keywords to find products!',
+              animation: EImages.search);
+        } else if (_searchControllerInstance.filteredProducts.isEmpty) {
+          return const Center(
+              child: EAnimationImageGif(
+                  text: 'No products found!',
+                  animation: EImages.searchNoFound));
+        } else {
+          return ListView.builder(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            itemCount: _searchControllerInstance.filteredProducts.length,
+            itemBuilder: (context, index) {
+              final products = _searchControllerInstance.filteredProducts;
+              final product = products[index];
+              return EGridProductLayout(
+                itemCount: products.length,
+                itemBuilder: (_, index) =>
+                    EProductCardVertical(product: product),
+              );
+            },
+          );
+        }
+      }),
     );
   }
 }

@@ -1,9 +1,7 @@
 import 'package:ecom_app/common/widgets/custom_shape/containers/round_container.dart';
 import 'package:ecom_app/features/shop/controllers/product/checkout_controller.dart';
 import 'package:ecom_app/features/shop/models/payment_method_model.dart';
-import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
-import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -15,10 +13,9 @@ class EPaymentTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = EHelperFunctions.isDarkMode(context);
     final controller = CheckoutController.instance;
     return ListTile(
-      contentPadding: EdgeInsets.all(0),
+      contentPadding: const EdgeInsets.all(0),
       onTap: (){
         controller.selectedPaymentMethod.value = paymentMethod;
         Get.back();

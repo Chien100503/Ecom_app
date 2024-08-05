@@ -19,9 +19,7 @@ class UserController extends GetxController {
   static UserController get instance => Get.find();
 
   final profileLoading = false.obs;
-  Rx<UserModel> user = UserModel
-      .empty()
-      .obs;
+  Rx<UserModel> user = UserModel.empty().obs;
 
   final hidePassword = false.obs;
   final userRepository = Get.put(UserRepository());
@@ -58,21 +56,19 @@ class UserController extends GetxController {
       if (user.value.id.isEmpty) {
         if (userCredentials != null) {
           // Convert name to first and last name
-          final nameParts =
-          UserModel.nameParts(userCredentials.user!.displayName ?? '');
-          final username = UserModel.generateUsername(
-              userCredentials.user!.displayName ?? '');
+          final nameParts = UserModel.nameParts(userCredentials.user!.displayName ?? '');
+          final username = UserModel.generateUsername(userCredentials.user!.displayName ?? '');
 
           // Map data
           final user = UserModel(
-            id: userCredentials.user!.uid,
-            firstName: nameParts[0],
-            lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
-            username: username,
-            email: userCredentials.user!.email ?? '',
-            phoneNumber: userCredentials.user!.phoneNumber ?? '',
-            profilePicture: userCredentials.user!.photoURL ?? '',
-            gender: ''
+              id: userCredentials.user!.uid,
+              firstName: nameParts[0],
+              lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
+              username: username,
+              email: userCredentials.user!.email ?? '',
+              phoneNumber: userCredentials.user!.phoneNumber ?? '',
+              profilePicture: userCredentials.user!.photoURL ?? '',
+              gender: ''
           );
           // Save user data
           await userRepository.saveUserRecord(user);
@@ -101,8 +97,7 @@ class UserController extends GetxController {
       ),
       cancel: ElevatedButton(
         onPressed: () => Navigator.of(Get.overlayContext!).pop(),
-        style:
-        const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.grey)),
+        style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.grey)),
         child: const Text('Cancel'),
       ),
     );
@@ -110,15 +105,10 @@ class UserController extends GetxController {
 
   void deleteUserAccount() async {
     try {
-      EFullScreenLoader.openLoadingDialog(
-          'Processing', EImages.loaderAnimation);
+      EFullScreenLoader.openLoadingDialog('Processing', EImages.loaderAnimation);
 
       final auth = RepositoriesAuthentication.instance;
-      final provider =
-          auth.authUser!
-              .providerData
-              .map((e) => e.providerId)
-              .first;
+      final provider = auth.authUser!.providerData.map((e) => e.providerId).first;
 
       if (provider.isNotEmpty) {
         if (provider == 'google.com') {
@@ -138,8 +128,7 @@ class UserController extends GetxController {
 
   Future<void> reAuthenticateEmailAndPasswordUser() async {
     try {
-      EFullScreenLoader.openLoadingDialog(
-          'Processing...', EImages.loaderAnimation);
+      EFullScreenLoader.openLoadingDialog('Processing...', EImages.loaderAnimation);
 
       // Check network connectivity
       final isConnected = await NetworkManager.instance.isConnected();
@@ -157,8 +146,7 @@ class UserController extends GetxController {
         return;
       }
 
-      await RepositoriesAuthentication.instance
-          .reAuthenticateWithEmailAndPassword(
+      await RepositoriesAuthentication.instance.reAuthenticateWithEmailAndPassword(
           verifyEmail.text.trim(), verifyPassword.text.trim());
       await RepositoriesAuthentication.instance.deleteAccount();
 
@@ -174,10 +162,11 @@ class UserController extends GetxController {
   uploadProfilePicture() async {
     try {
       final image = await ImagePicker().pickImage(
-        source: ImageSource.gallery,
-        imageQuality: 70,
-        maxHeight: 512,
-        maxWidth: 512);
+          source: ImageSource.gallery,
+          imageQuality: 70,
+          maxHeight: 512,
+          maxWidth: 512
+      );
       if (image != null) {
         final imageUrl = await userRepository.uploadImage(
             'Users/Images/Profile', image);
@@ -192,9 +181,9 @@ class UserController extends GetxController {
             title: 'Good!', message: 'Your profile picture has been changed');
       }
     } catch (e) {
+      print('------------------$e');
       ECustomSnackBar.showError(
-          title: 'Oh Snap!', message: 'Something went wrong $e');
+          title: 'Oh Snap!ssssss', message: 'Something went wrong: $e');
     }
   }
-
 }

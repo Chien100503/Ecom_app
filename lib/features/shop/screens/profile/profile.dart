@@ -6,7 +6,6 @@ import 'package:ecom_app/common/widgets/appbar/appbar.dart';
 import 'package:ecom_app/common/widgets/images/circle_images.dart';
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
 import 'package:ecom_app/features/personalization/controllers/user_controller.dart';
-import 'package:ecom_app/features/shop/screens/profile/widget/change_birth_year.dart';
 import 'package:ecom_app/features/shop/screens/profile/widget/change_gender.dart';
 import 'package:ecom_app/features/shop/screens/profile/widget/change_name.dart';
 import 'package:ecom_app/features/shop/screens/profile/widget/change_phone_number.dart';

@@ -1,3 +1,4 @@
+import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,13 +14,14 @@ class ESocialButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = EHelperFunctions.isDarkMode(context);
     final controller = Get.put(LoginController());
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           decoration: BoxDecoration(
-              border: Border.all(color: EColors.dark),
+              border: Border.all(color: dark ? EColors.thirdColor : EColors.primaryColor),
               borderRadius: BorderRadius.circular(100)),
           child: IconButton(
             onPressed: () => controller.googleSignIn(),
@@ -34,7 +36,7 @@ class ESocialButtons extends StatelessWidget {
         const SizedBox(width: ESizes.defaultBetweenItem),
         Container(
           decoration: BoxDecoration(
-              border: Border.all(color: EColors.dark),
+              border: Border.all(color: dark ? EColors.thirdColor : EColors.primaryColor),
               borderRadius: BorderRadius.circular(100)),
           child: IconButton(
             onPressed: () {},
