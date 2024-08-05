@@ -67,9 +67,16 @@ class EImages {
   static const String payOnPickup = 'assets/logos/payOnPickup.png';
   static const String momo = 'assets/logos/momo.png';
 
+  // search
+  static const String search = 'assets/images/search.gif';
+  static const String searchNoFound = 'assets/images/searchNoFound.gif';
+
   // Loader
   static const String loaderAnimation = 'assets/images/loader.json';
   static const String loaderAnimationOne = 'assets/images/animate.json';
   static const String emptyAnimation = 'assets/images/empty.json';
 
+  // icon system
+  static const String iconHome = 'assets/icons/icon_system/home.png';
+  static const String iconHomeOL = 'assets/icons/icon_system/home_ol.png';
 }

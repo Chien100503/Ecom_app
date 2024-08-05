@@ -1,5 +1,4 @@
 import 'package:ecom_app/common/widgets/layouts/grid_layout.dart';
-import 'package:ecom_app/common/widgets/loader/animation_loader.dart';
 import 'package:ecom_app/common/widgets/products/products_card/product_cards_vertical.dart';
 import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,8 @@ import 'package:ecom_app/utils/constants/colors.dart';
 import 'package:get/get.dart';
 import 'package:ecom_app/features/shop/models/product_model.dart';
 
+import '../../../../common/widgets/appbar/appbar.dart';
+import '../../../../common/widgets/loader/animation_images_gif.dart';
 import '../../controllers/search_controller.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -42,43 +43,34 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: EColors.accent,
+      appBar: EAppBar(
+        showBackArrow: true,
         title: TextField(
           controller: _searchController,
           onChanged: _searchControllerInstance.onSearchChanged,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide.none,
-            ),
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-            filled: true,
-            fillColor: EColors.thirdColor,
-            hintText: 'Tìm kiếm...',
-            suffixIcon: const Icon(Icons.search),
-          ),
         ),
       ),
       body: Obx(() {
         if (_searchControllerInstance.searchQuery.isEmpty) {
-          return const EAnimationLoader(
-              text: 'Vui lòng nhập từ khóa để tìm sản phẩm',
-              animation: EImages.loaderAnimationOne);
+          return const EAnimationImageGif(
+              text: 'Please enter keywords to find products!',
+              animation: EImages.search);
         } else if (_searchControllerInstance.filteredProducts.isEmpty) {
-          return const Center(child: Text('Không tìm thấy sản phẩm.'));
+          return const Center(
+              child: EAnimationImageGif(
+                  text: 'No products found!',
+                  animation: EImages.searchNoFound));
         } else {
           return ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             itemCount: _searchControllerInstance.filteredProducts.length,
             itemBuilder: (context, index) {
-              var product = _searchControllerInstance.filteredProducts[index];
+              final products = _searchControllerInstance.filteredProducts;
+              final product = products[index];
               return EGridProductLayout(
-                itemCount: _searchControllerInstance.filteredProducts.length,
-                itemBuilder: (_, index) => EProductCardVertical(
-                  product: _searchControllerInstance.filteredProducts[index],
-                ),
+                itemCount: products.length,
+                itemBuilder: (_, index) =>
+                    EProductCardVertical(product: product),
               );
             },
           );

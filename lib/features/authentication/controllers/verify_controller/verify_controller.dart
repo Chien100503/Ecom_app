@@ -21,42 +21,26 @@ class VerifyController extends GetxController {
 
   sendEmailVerify() async {
     try {
-      print("Sending email verification...");
       await RepositoriesAuthentication.instance.sendEmailVerify();
       ECustomSnackBar.showSuccess(
-        title: 'Email sent',
-        message: 'Please check your inbox and verify your email',
-      );
-      await RepositoriesAuthentication.instance.screenRedirect();
+          title: 'Email rent',
+          message: 'Please check your inbox and verify your email');
     } catch (e) {
-      print('======================');
-      print('Error occurred during email verification: $e');
-      print('======================');
-      if (e is FirebaseException) {
-        ECustomSnackBar.showError(
-          title: 'Firebase Error',
-          message: e.message ?? 'Unknown error occurred',
-        );
-      } else {
-        ECustomSnackBar.showError(
-          title: 'Oh Snap',
-          message: e.toString(),
-        );
-      }
+      ECustomSnackBar.showError(title: 'Oh Snap', message: e.toString());
     }
   }
 
   setTimerForAutoRedirect() {
     Timer.periodic(
       const Duration(seconds: 1),
-      (timer) async {
+          (timer) async {
         await FirebaseAuth.instance.currentUser?.reload();
         final user = FirebaseAuth.instance.currentUser;
         if (user?.emailVerified ?? false) {
           timer.cancel();
           Get.off(
-            () => SuccessScreen(
-              image: EImages.success,
+                () => SuccessScreen(
+              image: EImages.successAnimate,
               title: ETexts.yourAccountCreateTitle,
               subTitle: ETexts.yourAccountCreateSubTitle,
               onPressed: () =>
@@ -72,8 +56,8 @@ class VerifyController extends GetxController {
     final currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser != null && currentUser.emailVerified) {
       Get.off(
-        () => SuccessScreen(
-          image: EImages.successAnimate,
+            () => SuccessScreen(
+          image: EImages.success,
           title: ETexts.yourAccountCreateTitle,
           subTitle: ETexts.yourAccountCreateSubTitle,
           onPressed: () => RepositoriesAuthentication.instance.screenRedirect(),

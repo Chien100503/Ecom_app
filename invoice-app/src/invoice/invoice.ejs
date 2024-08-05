@@ -41,6 +41,7 @@
 
     .invoice-details {
       padding-left: 20px;
+      color: white;
     }
 
     .invoice-title {
@@ -127,8 +128,8 @@
             alt="Logo" />
         </div>
         <div class="mt-3 mt-sm-0">
-          <h3 class="font-weight-bold">Thanks for your purchase!</h3>
-          <h4 class="invoice-title">Fashion Bill</h4>
+          <h3 class="font-weight-bold bg-primary">Thanks for your purchase!</h3>
+          <h4 class="invoice-title bg-primary">Fashion Bill</h4>
           <div class="invoice-details">
             <p style="margin: 0">• Invoice No: <%= invoice_id %>
             </p>
@@ -147,6 +148,9 @@
           <ul style="list-style: none; padding: 0">
             <li>
               <%= customer_phone || 'N/A' %>
+            </li>
+            <li>
+              <%= customer_address || 'N/A' %>
             </li>
           </ul>
         </div>
@@ -171,7 +175,7 @@
             <th>Total</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody style="color: white">
           <% if (Array.isArray(items) && items.length> 0) { %> <% items.map((item, index)=> { %>
               <tr>
                 <td>

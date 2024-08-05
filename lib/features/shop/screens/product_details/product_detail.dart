@@ -26,10 +26,11 @@ class ProductDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = ProductController.instance;
-    final salePercentage = controller.calculateSalePercentage(product.price, product.salePrice);
+    final salePercentage = controller.calculateSalePercentage(
+        product.price, product.salePrice);
     final dark = EHelperFunctions.isDarkMode(context);
     return Scaffold(
-      bottomNavigationBar: EBottomNavigationDetail(product:product),
+      bottomNavigationBar: EBottomNavigationDetail(product: product),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +57,10 @@ class ProductDetail extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text('$salePercentage%',
-                          style: Theme.of(context).textTheme.labelSmall),
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .labelSmall),
                     ),
                   ),
                   const SizedBox(width: ESizes.defaultBetweenItem),
@@ -77,7 +81,10 @@ class ProductDetail extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: ESizes.defaultSpace, right: ESizes.defaultSpace),
               child: Text('• ${product.title}',
-                  style: Theme.of(context).textTheme.bodyLarge),
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .bodyLarge),
             ),
             const SizedBox(
               height: ESizes.defaultBetweenItem,
@@ -92,8 +99,15 @@ class ProductDetail extends StatelessWidget {
               child: Row(
                 children: [
                   Text('Status: ',
-                      style: Theme.of(context).textTheme.titleLarge),
-                  Text(controller.getProductStockStatus(product.stock), style: Theme.of(context).textTheme.bodyLarge)
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .titleLarge),
+                  Text(controller.getProductStockStatus(product.stock),
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .bodyLarge)
                 ],
               ),
             ),
@@ -105,14 +119,22 @@ class ProductDetail extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  ECircleImage(image: product.brand != null ? product.brand!.image : '', isNetworkImage: true, bg: EColors.thirdColor,),
+                  ECircleImage(
+                    image: product.brand != null ? product.brand!.image : '',
+                    isNetworkImage: true,
+                    bg: EColors.thirdColor,),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(product.brand != null ? product.brand!.name : '', style: Theme.of(context).textTheme.bodyLarge,),
-                        const Icon(Iconsax.verify5, size: 20, color: Colors.blueAccent,)
+                        Text(product.brand != null ? product.brand!.name : '',
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .bodyLarge,),
+                        const Icon(
+                          Iconsax.verify5, size: 20, color: Colors.blueAccent,)
                       ],
                     ),
                   ),
@@ -130,21 +152,6 @@ class ProductDetail extends StatelessWidget {
             ),
             // Options
             if(product.productType == ProductType.variable.toString())
-
-            Padding(
-              padding: const EdgeInsets.only(
-                left: ESizes.defaultSpace,
-                right: ESizes.defaultSpace,
-                bottom: ESizes.defaultSpace,
-              ),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Checkout'),
-                ),
-              ),
-            ),
             EDescription(description: product.description ?? '',),
 
             Divider(
@@ -165,9 +172,10 @@ class ProductDetail extends StatelessWidget {
                     showActionButton: false,
                   ),
                   IconButton(
-                    onPressed: () => Get.to(() => const ReviewAndRating(),
-                        duration: const Duration(milliseconds: 300),
-                        transition: Transition.rightToLeftWithFade),
+                    onPressed: () =>
+                        Get.to(() => const ReviewAndRating(),
+                            duration: const Duration(milliseconds: 300),
+                            transition: Transition.rightToLeftWithFade),
                     icon: Icon(
                       Icons.arrow_forward_ios_rounded,
                       color: dark ? EColors.thirdColor : EColors.primaryColor,

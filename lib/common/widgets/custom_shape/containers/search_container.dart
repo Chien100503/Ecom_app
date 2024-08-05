@@ -30,22 +30,25 @@ class ESearchContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
-    return InkWell(
-      onTap: () => Get.to(() => SearchScreen(
-        query: product?.title ?? '',
-        product: product,
-      ),
-          transition: Transition.cupertinoDialog,
-          duration: const Duration(milliseconds: 400)),
-      child: Padding(
-        padding: padding,
+    return Padding(
+      padding: padding,
+      child: GestureDetector(
+        onTap: () => Get.to(
+          () => SearchScreen(query: product?.title ?? '', product: product),
+          transition: Transition.rightToLeftWithFade,
+          duration: const Duration(milliseconds: 400),
+        ),
         child: Container(
           width: EDeviceUtils.getScreenWidth(context),
           padding: const EdgeInsets.all(ESizes.md),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(ESizes.borderRadiusLg),
-            border: showBorder ? Border.all(color: EColors.accent) : null,
-          ),
+              borderRadius: BorderRadius.circular(ESizes.borderRadiusLg),
+              border: showBorder ? Border.all(color: EColors.accent) : null,
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey, offset: Offset(0, 4), blurRadius: 5)
+              ]),
           child: Row(
             children: [
               const Icon(Iconsax.search_normal, color: EColors.accent),
@@ -60,7 +63,9 @@ class ESearchContainer extends StatelessWidget {
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                       ),
-                      speed: const Duration(milliseconds: 100),
+                      speed: const Duration(milliseconds: 200),
+                      cursor: '😊',
+                      curve: Curves.easeInOutBack,
                     ),
                   ],
                   isRepeatingAnimation: true,

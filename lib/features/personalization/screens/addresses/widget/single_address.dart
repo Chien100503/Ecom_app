@@ -9,10 +9,18 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class SingleAddress extends StatelessWidget {
-  const SingleAddress({super.key, required this.address, required this.onTap});
+  const SingleAddress({
+    super.key,
+    required this.address,
+    required this.onTap,
+    this.onEdit,
+    this.onDelete,
+  });
 
   final AddressModel address;
   final VoidCallback onTap;
+  final VoidCallback? onEdit;
+  final Function(String)? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +30,11 @@ class SingleAddress extends StatelessWidget {
     return Obx(() {
       final selectedAddressId = controller.selectedAddress.value.id;
       final selectedAddress = selectedAddressId == address.id;
-      return InkWell(
-        onTap: onTap,
+
+      return GestureDetector(
+        onLongPress: () {
+          _showOptionsDialog(context);
+        },
         child: ERoundContainer(
           padding: const EdgeInsets.all(ESizes.md),
           width: double.infinity,
@@ -58,21 +69,58 @@ class SingleAddress extends StatelessWidget {
                     '• ${address.street} - ${address.ward} - ${address.city} - ${address.country}',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .titleLarge,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: ESizes.defaultBetweenItem / 2),
                   Text('• ${address.phoneNumber}', maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleMedium,)
+                    style: Theme.of(context).textTheme.titleMedium,),
                 ],
-              )
+              ),
             ],
           ),
         ),
       );
     });
+  }
+
+  void _showOptionsDialog(BuildContext context) async {
+    final dark = EHelperFunctions.isDarkMode(context);
+
+    final result = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Options', style: TextStyle(color: dark ? EColors.thirdColor : EColors.primaryColor)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: Icon(Icons.edit, color: dark ? EColors.thirdColor : EColors.primaryColor),
+                title: Text('Edit'),
+                onTap: () {
+                  Navigator.of(context).pop('edit');
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.delete, color: dark ? EColors.thirdColor : EColors.primaryColor),
+                title: Text('Delete'),
+                onTap: () {
+                  Navigator.of(context).pop('delete');
+                },
+              ),
+            ],
+          ),
+          backgroundColor: dark ? EColors.primaryColor : Colors.white,
+          elevation: 4.0,
+        );
+      },
+    );
+
+    if (result == 'edit' && onEdit != null) {
+      onEdit!();
+    } else if (result == 'delete' && onDelete != null) {
+      onDelete!(address.id);
+    }
   }
 }

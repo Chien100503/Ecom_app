@@ -70,13 +70,11 @@ flutter:
   assets:
     - assets/fonts/
     - assets/images/
-    - assets/icons/
     - assets/logos/
     - assets/images/categories/
     - assets/images/onboarding/
     - assets/images/banner/
     - assets/images/products/
-    - assets/icons/brands/
 # ------------- LOCAL FONTS ---------------------- #
   fonts:
     - family: Poppins

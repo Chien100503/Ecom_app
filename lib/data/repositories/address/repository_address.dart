@@ -49,4 +49,32 @@ class RepositoryAddress extends GetxController {
       rethrow;
     }
   }
+
+  Future<void> editAddress(AddressModel address) async {
+    try {
+      final userId = RepositoriesAuthentication.instance.authUser!.uid;
+      await _db
+          .collection('Users')
+          .doc(userId)
+          .collection('Addresses')
+          .doc(address.id) // Assuming the address model has an ID field
+          .update(address.toJson());
+    } catch (e) {
+      throw 'Unable to update address. Please, try again later';
+    }
+  }
+  Future<void> deleteAddress(String addressId) async {
+    try {
+      final userId = RepositoriesAuthentication.instance.authUser!.uid;
+      await _db
+          .collection('Users')
+          .doc(userId)
+          .collection('Addresses')
+          .doc(addressId)
+          .delete();
+    } catch (e) {
+      throw 'Unable to delete address. Please, try again later';
+    }
+  }
 }
+

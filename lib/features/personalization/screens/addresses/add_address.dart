@@ -7,18 +7,37 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
+import '../../models/address_model.dart';
 
 class AddNewAddress extends StatelessWidget {
-  const AddNewAddress({super.key});
+  const AddNewAddress({
+    super.key,
+    this.initialAddress,
+    this.isEditing = false,
+  });
+
+  final AddressModel? initialAddress;
+  final bool isEditing;
 
   @override
   Widget build(BuildContext context) {
     final dark = EHelperFunctions.isDarkMode(context);
     final controller = AddressController.instance;
+
+    // Initialize controller fields with initialAddress if editing
+    if (isEditing && initialAddress != null) {
+      controller.name.text = initialAddress!.name;
+      controller.phoneNumber.text = initialAddress!.phoneNumber;
+      controller.street.text = initialAddress!.street;
+      controller.ward.text = initialAddress!.ward;
+      controller.city.text = initialAddress!.city;
+      controller.country.text = initialAddress!.country;
+    }
+
     return Scaffold(
       appBar: EAppBar(
         title: Text(
-          'Add address',
+          isEditing ? 'Edit Address' : 'Add Address',
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         showBackArrow: true,
@@ -36,7 +55,7 @@ class AddNewAddress extends StatelessWidget {
                   decoration: InputDecoration(
                     prefixIcon: Icon(Iconsax.user,
                         color:
-                            dark ? EColors.thirdColor : EColors.primaryColor),
+                        dark ? EColors.thirdColor : EColors.primaryColor),
                     label: Text('Name',
                         style: TextStyle(
                             color: dark
@@ -53,7 +72,7 @@ class AddNewAddress extends StatelessWidget {
                   decoration: InputDecoration(
                     prefixIcon: Icon(Iconsax.call,
                         color:
-                            dark ? EColors.thirdColor : EColors.primaryColor),
+                        dark ? EColors.thirdColor : EColors.primaryColor),
                     label: Text('Phone number',
                         style: TextStyle(
                             color: dark
@@ -114,7 +133,7 @@ class AddNewAddress extends StatelessWidget {
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.location_city_outlined,
                         color:
-                            dark ? EColors.thirdColor : EColors.primaryColor),
+                        dark ? EColors.thirdColor : EColors.primaryColor),
                     label: Text('City',
                         style: TextStyle(
                             color: dark
@@ -131,7 +150,7 @@ class AddNewAddress extends StatelessWidget {
                   decoration: InputDecoration(
                     prefixIcon: Icon(Iconsax.global_search,
                         color:
-                            dark ? EColors.thirdColor : EColors.primaryColor),
+                        dark ? EColors.thirdColor : EColors.primaryColor),
                     label: Text('Country',
                         style: TextStyle(
                             color: dark
@@ -143,7 +162,7 @@ class AddNewAddress extends StatelessWidget {
                 SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                        onPressed: () => controller.addNewAddress(), child: const Text('Save')))
+                        onPressed: () => controller.addNewAddress(), child: Text(isEditing ? 'Update' : 'Save')))
               ],
             ),
           ),

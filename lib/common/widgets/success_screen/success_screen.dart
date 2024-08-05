@@ -1,9 +1,6 @@
 import 'package:ecom_app/common/style/spacing_styles.dart';
-import 'package:ecom_app/features/authentication/screens/loggin/login.dart';
-import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:ecom_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'package:lottie/lottie.dart';
 import '../../../utils/constants/sizes.dart';

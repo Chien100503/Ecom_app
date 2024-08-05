@@ -163,6 +163,70 @@ class AddressController extends GetxController {
       ),
     );
   }
+// Edit an existing address
+  Future<void> editAddress(AddressModel address) async {
+    try {
+      EFullScreenLoader.openLoadingDialog(
+          'Updating address ...', EImages.loaderAnimation);
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        EFullScreenLoader.stopLoading();
+        return;
+      }
+      if (!addressFormKey.currentState!.validate()) {
+        EFullScreenLoader.stopLoading();
+        return;
+      }
+
+      // Update address details
+      final updatedAddress = AddressModel(
+        id: address.id,
+        name: name.text.trim(),
+        phoneNumber: phoneNumber.text.trim(),
+        street: street.text.trim(),
+        ward: ward.text.trim(),
+        country: country.text.trim(),
+        city: city.text.trim(),
+        state: '',
+        selectedAddress: address.selectedAddress, // Preserve selected status
+      );
+
+      await addressRepository.editAddress(updatedAddress);
+
+      EFullScreenLoader.stopLoading();
+      ECustomSnackBar.showSuccess(
+          title: 'Updated!', message: 'Your address has been updated successfully');
+      refreshData.toggle();
+      Navigator.of(Get.context!).pop();
+    } catch (e) {
+      EFullScreenLoader.stopLoading();
+      ECustomSnackBar.showError(
+          title: 'Update failed!', message: e.toString());
+    }
+  }
+
+  // Delete an address
+  Future<void> deleteAddress(String addressId) async {
+    try {
+      EFullScreenLoader.openLoadingDialog(
+          'Deleting address ...', EImages.loaderAnimation);
+      await addressRepository.deleteAddress(addressId);
+
+      // Reset selected address if it was deleted
+      if (selectedAddress.value.id == addressId) {
+        selectedAddress.value = AddressModel.empty();
+      }
+
+      EFullScreenLoader.stopLoading();
+      ECustomSnackBar.showSuccess(
+          title: 'Deleted!', message: 'Address has been deleted successfully');
+      refreshData.toggle();
+    } catch (e) {
+      EFullScreenLoader.stopLoading();
+      ECustomSnackBar.showError(
+          title: 'Deletion failed!', message: e.toString());
+    }
+  }
 
   void resetFormField() {
     name.clear();

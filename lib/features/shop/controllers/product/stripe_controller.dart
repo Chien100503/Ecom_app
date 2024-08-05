@@ -20,19 +20,6 @@ class StripeController extends GetxController {
   final productController = ProductController.instance;
   final addressController = AddressController.instance;
 
-  String get combinedAddress {
-    return [
-      addressController.street.text.trim(),
-      addressController.ward.text.trim(),
-      addressController.city.text.trim(),
-      addressController.country.text.trim(),
-    ].where((item) => item.isNotEmpty).join(', ');
-  }
-
-  // Convert the combined address to a list
-  List<String> get addressArray {
-    return combinedAddress.split(', ');
-  }
 
   Map<String, dynamic> createNameProductJson() {
     final productDetails = cartController.cartProductDetails;
@@ -126,6 +113,14 @@ class StripeController extends GetxController {
       final orders = await orderController.fetchUserOrder();
       final orderDetails = orders.firstWhere((o) => o.userId == userId);
 
+      final address = orderDetails.address;
+      final customerAddress = [
+        address?.street,
+        address?.ward,
+        address?.city,
+        address?.country,
+      ];
+
       await http.post(
         Uri.parse('http://192.168.52.191:3000/send-invoice'),
         headers: {
@@ -139,7 +134,7 @@ class StripeController extends GetxController {
           'customer_phone': orderDetails.address?.phoneNumber,
           'amount_paid': totalAmount,
           'currency': 'USD',
-          'customer_address': combinedAddress,
+          'customer_address': customerAddress,
           'payment_status': 'Paid', // Assuming payment status
           'description': 'Order Payment', // Description or additional information
           'items': cartController.cartItems.map((item) => {
@@ -150,6 +145,7 @@ class StripeController extends GetxController {
           }).toList(),
         }),
       );
+
       orderController.processOrder(totalAmount);
     } catch (e) {
       debugPrint('Payment Sheet Presentation Error: ${e.toString()}');

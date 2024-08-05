@@ -51,6 +51,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         .toLowerCase();
                     if (selectedPaymentMethod == 'credit card') {
                       stripeController.stripeMakePayment(totalAmount);
+                    } else if (selectedPaymentMethod == 'momo') {
+                      ECustomSnackBar.showWarning(
+                          title: 'Sorry!',
+                          message: 'MOMO payment function is under development! Sorry for the inconvenience');
                     } else if (selectedPaymentMethod == 'pay on pickup') {
                       orderController.processOrder(totalAmount);
                     } else {

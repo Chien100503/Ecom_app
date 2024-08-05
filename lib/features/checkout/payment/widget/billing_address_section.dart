@@ -1,6 +1,5 @@
 import 'package:ecom_app/common/widgets/images/round_images.dart';
 import 'package:ecom_app/common/widgets/texts/section_heading.dart';
-import 'package:ecom_app/utils/constants/images_strings.dart';
 import 'package:ecom_app/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,7 +39,7 @@ class BillingAddressSection extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             ],
-          ),
+          )
         ),
       ],
     );
